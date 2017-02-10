@@ -8,25 +8,26 @@ import org.apache.log4j.*;
 /**
  * Created by Саша on 09.02.2017.
  */
-public class Utility extends UtilityScanner{
+public class Utility extends UtilityScanner {
 
     Logger log = Logger.getLogger(Utility.class);
 
     public String getPassword() {
 
         String password = getStringForPassword();
-        MessageDigest m = null;
+        String salt = "Random$SaltValue#WithSpecialCharacters12@$@4&#%^$*";
+        password = password + salt;
+        MessageDigest messageDigest = null;
         try {
-            m = MessageDigest.getInstance("MD5");
+            messageDigest  = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             log.error("Unexpected error", e);        }
-        m.reset();
-        m.update(password.getBytes());
-        byte[] digest = m.digest();
+        messageDigest .reset();
+        messageDigest .update(password.getBytes());
+        byte[] digest = messageDigest .digest();
         BigInteger bigInt = new BigInteger(1, digest);
         String hashPassword = bigInt.toString(16);
-        // Now we need to zero pad it if you actually want the full 32 chars.
         while (hashPassword.length() < 32) {
             hashPassword = "0" + hashPassword;
         }
