@@ -3,6 +3,7 @@ package edu.cursor.u21;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import org.apache.log4j.*;
 
 /**
@@ -19,14 +20,14 @@ public class Utility extends UtilityScanner implements MagicConstantsInterface {
         password = password + salt;
         MessageDigest messageDigest = null;
         try {
-            messageDigest  = MessageDigest.getInstance("MD5");
+            messageDigest = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             log.error("Unexpected error", e);
         }
-        messageDigest .reset();
-        messageDigest .update(password.getBytes());
-        byte[] digest = messageDigest .digest();
+        messageDigest.reset();
+        messageDigest.update(password.getBytes());
+        byte[] digest = messageDigest.digest();
         BigInteger bigInt1 = new BigInteger(1, digest);
         String hashPassword = bigInt1.toString(hashByte);
         while (hashPassword.length() < hexadecimalNumber) {
@@ -37,7 +38,7 @@ public class Utility extends UtilityScanner implements MagicConstantsInterface {
 
     private static String getStringForPassword() {
         String getPassword = sc.nextLine();
-        while (getPassword.length() < minLenghtPassword || maxLenghtPassword < getPassword.length()) {
+        while (getPassword.length() < minLengthPassword || maxLengthPassword < getPassword.length()) {
             System.out.println("Your password must be 5-15 characters.\n" +
                     "Try again:");
             getPassword = sc.nextLine();

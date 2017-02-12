@@ -7,6 +7,6 @@ public interface MagicConstantsInterface {
 
     int hexadecimalNumber = 32;
     int hashByte = 16;
-    int minLenghtPassword = 5;
-    int maxLenghtPassword = 15;
+    int minLengthPassword = 5;
+    int maxLengthPassword = 15;
 }
