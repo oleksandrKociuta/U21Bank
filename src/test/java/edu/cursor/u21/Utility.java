@@ -1,5 +1,8 @@
 package edu.cursor.u21;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,5 +47,33 @@ public class Utility extends UtilityScanner implements MagicConstantsInterface {
             getPassword = sc.nextLine();
         }
         return getPassword;
+    }
+
+    public static String checkForUniqueness(String seriesOfPassport) {
+        File file = new File("C://User.md");
+        
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String current;
+            boolean everythingIsOK;
+            while ((current = br.readLine()) != null) {
+                if (current.equals(seriesOfPassport)) {
+                    everythingIsOK = false;
+                    System.out.println("The user of with such  data already exist.\n" +
+                            "Please check your data!");
+                    System.out.println("\nDo you want to continue?? (yes,no)");
+                    String startOver = input.nextLine();
+                    if (startOver.equals("no")) {
+                        System.out.println("Bye");
+                    } else {
+                        System.out.println("Enter data series of passport:");
+                        checkForUniqueness(input1.next());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("An error in the input data", e);
+        }
+        return seriesOfPassport;
     }
 }
