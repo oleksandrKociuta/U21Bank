@@ -8,7 +8,7 @@ import org.apache.log4j.*;
 /**
  * Created by Саша on 09.02.2017.
  */
-public class Utility extends UtilityScanner {
+public class Utility extends UtilityScanner implements MagicConstantsInterface {
 
     Logger log = Logger.getLogger(Utility.class);
 
@@ -22,13 +22,14 @@ public class Utility extends UtilityScanner {
             messageDigest  = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            log.error("Unexpected error", e);        }
+            log.error("Unexpected error", e);
+        }
         messageDigest .reset();
         messageDigest .update(password.getBytes());
         byte[] digest = messageDigest .digest();
-        BigInteger bigInt = new BigInteger(1, digest);
-        String hashPassword = bigInt.toString(16);
-        while (hashPassword.length() < 32) {
+        BigInteger bigInt1 = new BigInteger(1, digest);
+        String hashPassword = bigInt1.toString(hashByte);
+        while (hashPassword.length() < hexadecimalNumber) {
             hashPassword = "0" + hashPassword;
         }
         return hashPassword;
@@ -36,7 +37,7 @@ public class Utility extends UtilityScanner {
 
     private static String getStringForPassword() {
         String getPassword = sc.nextLine();
-        while (getPassword.length() < 5 || 15 < getPassword.length()) {
+        while (getPassword.length() < minLenghtPassword || maxLenghtPassword < getPassword.length()) {
             System.out.println("Your password must be 5-15 characters.\n" +
                     "Try again:");
             getPassword = sc.nextLine();
