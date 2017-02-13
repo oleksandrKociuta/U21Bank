@@ -1,14 +1,15 @@
-package edu.cursor.u21;
+package edu.cursor.u21.Utils;
 
 import edu.cursor.u21.users.BankClient;
+import edu.cursor.u21.users.User;
 import org.apache.log4j.Logger;
 
-import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Created by Sabat on 12.02.2017.
  */
-public class Registration {
+public class Registration implements MagicConstantsInterface{
     public static Logger log = Logger.getLogger(Registration.class);
     public static void registration() {
         BankClient bankClient = new BankClient();
@@ -39,16 +40,20 @@ public class Registration {
             bankClient.setTelephoneNumber(Utility.getInt());
             break;
         }
-        try (FileOutputStream fileOutput = new FileOutputStream(bankClient.getLogin() + Utility.fileFormat)) {
-            ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
-            objectOutput.writeObject(bankClient);
-            objectOutput.close();
-            log.info("register user: "+bankClient.getLogin());
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-        }
 
+        ArrayList<User> usersList = (ArrayList<User>) Read.readFile(usersFilePath);
+        usersList.add(bankClient);
+        Write.writeFile(usersList);
+        System.out.println("Your personal info is added to BankSystem");
+
+//        try (FileOutputStream fileOutput = new FileOutputStream(bankClient.getLogin() + Utility.fileFormat)) {
+//            ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
+//            objectOutput.writeObject(bankClient);
+//            objectOutput.close();
+//            log.info("register user: "+bankClient.getLogin());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            log.error(e.getMessage());
+//        }
     }
 }
-

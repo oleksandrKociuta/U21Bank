@@ -1,15 +1,16 @@
-package edu.cursor.u21;
+package edu.cursor.u21.Utils;
 
-import java.io.*;
+import edu.cursor.u21.users.Admin.Admin;
+import edu.cursor.u21.users.BankClient;
+import edu.cursor.u21.users.User;
+import org.apache.log4j.Logger;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
-
-import edu.cursor.u21.users.Admin;
-import edu.cursor.u21.users.BankClient;
-import edu.cursor.u21.users.User;
-import org.apache.log4j.*;
 
 /**
  * Created by Саша on 09.02.2017.
@@ -129,4 +130,3 @@ public final class Utility implements MagicConstantsInterface {
         }
     }
 }
-

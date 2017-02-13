@@ -1,19 +1,19 @@
 package edu.cursor.u21.bankSystem;
 
-import edu.cursor.u21.Registration;
+import edu.cursor.u21.Utils.Registration;
 import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
 
-import static edu.cursor.u21.Utility.getInt;
-import static edu.cursor.u21.Utility.identifyUser;
+import static edu.cursor.u21.Utils.Utility.getInt;
+import static edu.cursor.u21.Utils.Utility.identifyUser;
 
 
 /**
  * Created by Kermit The Frog on 13.02.2017.
  */
 @NoArgsConstructor
-public class Menu {
-    public static Logger log = Logger.getLogger(Menu.class);
+public class MainMenu {
+    public static Logger log = Logger.getLogger(MainMenu.class);
     public void menu() {
         while (true) {
             System.out.print("\n1.Login in system U21Bank.\n2.Register in system U21Bank.\n3.Exit.\nChoose option - >> ");
@@ -31,7 +31,6 @@ public class Menu {
                     break;
                 default:
                     System.out.println("Bad input!! Repeat !!\n");
-
             }
         }
     }

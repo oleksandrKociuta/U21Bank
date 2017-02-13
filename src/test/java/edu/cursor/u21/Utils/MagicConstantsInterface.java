@@ -1,4 +1,4 @@
-package edu.cursor.u21;
+package edu.cursor.u21.Utils;
 
 /**
  * Created by Саша on 12.02.2017.
@@ -12,4 +12,5 @@ public interface MagicConstantsInterface {
     String adminClass = "Admin";
     String bankClientClass = "BankClient";
     String fileFormat = ".md";
+    String usersFilePath = "Users.md";
 }

@@ -1,9 +1,9 @@
 package edu.cursor.u21.users;
 
+import edu.cursor.u21.Utils.Roles;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.io.Serializable;
 
 /**
@@ -21,7 +21,7 @@ public class BankClient implements User, Serializable {
     private String DateOfBirth;
     private String SeriesOfPassport;
     private int telephoneNumber;
-
+    Roles role = Roles.USER;
     public void startSession() {
         BankClientMethods.bankClientMenu();
     }
