@@ -35,3 +35,9 @@
 2017-02-13 06:35:47 INFO  Registration:46 - register user: 11111
 2017-02-13 06:35:47 INFO  Menu:20 - start app
 2017-02-13 06:35:51 INFO  Menu:29 - exit
+2017-02-13 16:48:43 INFO  Menu:20 - start app
+2017-02-13 16:50:58 INFO  Registration:36 - register user: Maks
+2017-02-13 16:50:58 INFO  Menu:20 - start app
+2017-02-13 16:51:10 INFO  Utility:110 - log as user: Maks
+2017-02-13 16:51:10 INFO  Menu:20 - start app
+2017-02-13 16:51:27 INFO  Menu:29 - exit

@@ -1,11 +1,11 @@
 package edu.cursor.u21.bankSystem;
 
-import edu.cursor.u21.Registration;
+import edu.cursor.u21.util.Registration;
 import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
 
-import static edu.cursor.u21.Utility.getInt;
-import static edu.cursor.u21.Utility.identifyUser;
+import static edu.cursor.u21.util.Utility.getInt;
+import static edu.cursor.u21.util.Utility.identifyUser;
 
 
 /**
@@ -13,7 +13,7 @@ import static edu.cursor.u21.Utility.identifyUser;
  */
 @NoArgsConstructor
 public class Menu {
-    public static Logger log = Logger.getLogger(Menu.class);
+    private static Logger log = Logger.getLogger(Menu.class);
     public void menu() {
         while (true) {
             System.out.print("\n1.Login in system U21Bank.\n2.Register in system U21Bank.\n3.Exit.\nChoose option - >> ");

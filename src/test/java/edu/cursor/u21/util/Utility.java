@@ -1,4 +1,4 @@
-package edu.cursor.u21;
+package edu.cursor.u21.util;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -20,7 +20,7 @@ public final class Utility implements MagicConstantsInterface {
         throw new IllegalStateException();
     }
 
-    public static Logger log = Logger.getLogger(Utility.class);
+    private static Logger log = Logger.getLogger(Utility.class);
     public static Scanner sc = new Scanner(System.in);
 
     public static String getPassword() {
@@ -56,7 +56,7 @@ public final class Utility implements MagicConstantsInterface {
         return getPassword;
     }
 
-    public static boolean checkForUniqueness(String login) {
+    private static boolean checkForUniqueness(String login) {
         File file = new File(login + fileFormat);
         return file.exists();
 
@@ -122,7 +122,7 @@ public final class Utility implements MagicConstantsInterface {
     public static int getInt() {
         while (true) {
             String str = sc.nextLine();
-            if ((str.matches("-?[\\d]+"))) {
+            if ((str.matches("\\d+"))) {
                 return Integer.parseInt(str);
             }
             System.out.println("Wrong input! Repeat!");
@@ -148,5 +148,60 @@ public final class Utility implements MagicConstantsInterface {
 //            System.out.print("Oops");
 //        }
 //    }
+
+    public static String loginCheck() {
+        String login;
+        while (true) {
+            login = sc.nextLine();
+            if (!checkForUniqueness(login)) {
+                return login;
+            }
+            System.out.println("Login is already used !!! Repeat !");
+        }
+    }
+
+    public static int ageCheck() {
+        int age;
+        while (true) {
+            age = getInt();
+            if (age > adultHood) {
+                return age;
+            }
+            System.out.println("User must be upper 17 years old !! Repeat !");
+        }
+    }
+
+    public static String dateCheck() {
+        String dateOfBirth;
+        while (true) {
+            dateOfBirth = sc.nextLine();
+            if (dateOfBirth.matches(dayOfBirthReg)) {
+                return dateOfBirth;
+            }
+            System.out.println("Wrong Date Format!! Repeat!");
+        }
+    }
+
+    public static int telephoneNumberCheck() {
+        String telephoneNumber;
+        while (true) {
+            telephoneNumber = sc.nextLine();
+            if (telephoneNumber.matches(telephoneNumberReg)) {
+                return Integer.parseInt(telephoneNumber);
+            }
+            System.out.println("Wrong telephone input!! Repeat!");
+        }
+    }
+
+    public static String passportCheck() {
+        String passport;
+        while (true) {
+            passport = sc.nextLine();
+            if (passport.matches(passportReg)) {
+                return passport;
+            }
+            System.out.println("Wrong passport input!! Repeat!");
+        }
+    }
 }
 
