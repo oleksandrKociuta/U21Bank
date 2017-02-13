@@ -1,22 +1,29 @@
 package edu.cursor.u21;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Scanner;
 
+import edu.cursor.u21.users.Admin;
+import edu.cursor.u21.users.BankClient;
+import edu.cursor.u21.users.User;
 import org.apache.log4j.*;
 
 /**
  * Created by Саша on 09.02.2017.
  */
-public class Utility extends UtilityScanner implements MagicConstantsInterface {
+public final class Utility implements MagicConstantsInterface {
 
-    Logger log = Logger.getLogger(Utility.class);
+    private Utility() {
+        throw new IllegalStateException();
+    }
 
-    public String getPassword() {
+    public static Logger log = Logger.getLogger(Utility.class);
+    public static Scanner sc = new Scanner(System.in);
+
+    public static String getPassword() {
 
         String password = getStringForPassword();
         String salt = "Random$SaltValue#WithSpecialCharacters12@$@4&#%^$*";
@@ -49,31 +56,75 @@ public class Utility extends UtilityScanner implements MagicConstantsInterface {
         return getPassword;
     }
 
-    public static String checkForUniqueness(String seriesOfPassport) {
-        File file = new File("C://User.md");
-        
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String current;
-            boolean everythingIsOK;
-            while ((current = br.readLine()) != null) {
-                if (current.equals(seriesOfPassport)) {
-                    everythingIsOK = false;
-                    System.out.println("The user of with such  data already exist.\n" +
-                            "Please check your data!");
-                    System.out.println("\nDo you want to continue?? (yes,no)");
-                    String startOver = input.nextLine();
-                    if (startOver.equals("no")) {
-                        System.out.println("Bye");
-                    } else {
-                        System.out.println("Enter data series of passport:");
-                        checkForUniqueness(input1.next());
+    public static boolean checkForUniqueness(String login) {
+        File file = new File(login + fileFormat);
+        return file.exists();
+
+//        try {
+//                BufferedReader br = new BufferedReader(new FileReader(file));
+//                String current;
+//                boolean everythingIsOK;
+//                while ((current = br.readLine()) != null) {
+//                    if (current.equals(seriesOfPassport)) {
+//                        everythingIsOK = false;
+//                        System.out.println("The user of with such  data already exist.\n" +
+//                                "Please check your data!");
+//                        System.out.println("\nDo you want to continue?? (yes,no)");
+//                        String startOver = sc.nextLine();
+//                        if (startOver.equals("no")) {
+//                            System.out.println("Bye");
+//                        } else {
+//                            System.out.println("Enter data series of passport:");
+//                            checkForUniqueness(sc.next());
+//                        }
+//                    }
+//                }
+//        } catch (Exception e) {
+//            log.error("An error in the input data", e);
+//        }
+//        return seriesOfPassport;
+    }
+
+    public static User identifyUser() {
+        while (true) {
+            System.out.print("Enter User Login - > ");
+            String login = sc.nextLine();
+            System.out.print("Enter User Password - > ");
+            String password = getPassword();
+            if (!Utility.checkForUniqueness(login)) {
+                System.out.println("Bad User Data !!! ");
+                continue;
+            }
+            try (FileInputStream fileInput = new FileInputStream(login + fileFormat)) {
+                ObjectInputStream objectInput = new ObjectInputStream(fileInput);
+                User user = (User) objectInput.readObject();
+                if (user.getClass().getSimpleName().contains(adminClass)) {
+                    Admin admin = (Admin) user;
+                    if (admin.getPassword().equals(password)) {
+                        return admin;
+                    }
+                } else if (user.getClass().getSimpleName().contains(bankClientClass)) {
+                    BankClient bankClient = (BankClient) user;
+                    if (bankClient.getPassword().equals(password)) {
+                        return bankClient;
                     }
                 }
+                objectInput.close();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            log.error("An error in the input data", e);
+            System.out.println("Bad User's Login or Password !! Repeat! ");
         }
-        return seriesOfPassport;
+    }
+
+    public static int getInt() {
+        while (true) {
+            String str = sc.nextLine();
+            if ((str.matches("-?[\\d]+"))) {
+                return Integer.parseInt(str);
+            }
+            System.out.println("Wrong input! Repeat!");
+        }
     }
 }
+

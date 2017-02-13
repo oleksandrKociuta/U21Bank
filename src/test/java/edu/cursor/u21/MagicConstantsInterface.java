@@ -9,4 +9,7 @@ public interface MagicConstantsInterface {
     int hashByte = 16;
     int minLengthPassword = 5;
     int maxLengthPassword = 15;
+    String adminClass = "Admin";
+    String bankClientClass = "BankClient";
+    String fileFormat = ".md";
 }
