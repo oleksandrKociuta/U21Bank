@@ -101,13 +101,13 @@ public final class Utility implements MagicConstantsInterface {
                 if (user.getClass().getSimpleName().contains(adminClass)) {
                     Admin admin = (Admin) user;
                     if (admin.getPassword().equals(password)) {
-                        log.info("log as admin: "+login);
+                        log.info("log as admin: " + login);
                         return admin;
                     }
                 } else if (user.getClass().getSimpleName().contains(bankClientClass)) {
                     BankClient bankClient = (BankClient) user;
                     if (bankClient.getPassword().equals(password)) {
-                        log.info("log as user: "+login);
+                        log.info("log as user: " + login);
                         return bankClient;
                     }
                 }
@@ -128,5 +128,25 @@ public final class Utility implements MagicConstantsInterface {
             System.out.println("Wrong input! Repeat!");
         }
     }
+// ---- alex manikhin login implementation -----
+//    public void run() throws FileNotFoundException {
+//        String login = null;
+//        Scanner scan = new Scanner(new File(login + fileFormat));
+//        Scanner keyboard = new Scanner(System.in);
+//        login = scan.nextLine();
+//        String password = scan.nextLine();
+//
+//        System.out.println("login:");
+//        String inpUser = keyboard.nextLine();
+//
+//        System.out.println("password:");
+//        String inpPass = keyboard.nextLine();
+//
+//        if (inpUser.equals(login) && inpPass.equals(password)) {
+//            System.out.print("Welcome to the system" + login);
+//        } else {
+//            System.out.print("Oops");
+//        }
+//    }
 }
 
