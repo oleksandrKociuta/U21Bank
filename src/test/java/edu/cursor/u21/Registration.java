@@ -1,6 +1,7 @@
 package edu.cursor.u21;
 
 import edu.cursor.u21.users.BankClient;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 
@@ -8,7 +9,7 @@ import java.io.*;
  * Created by Sabat on 12.02.2017.
  */
 public class Registration {
-
+    public static Logger log = Logger.getLogger(Registration.class);
     public static void registration() {
         BankClient bankClient = new BankClient();
         while (true) {
@@ -42,8 +43,10 @@ public class Registration {
             ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
             objectOutput.writeObject(bankClient);
             objectOutput.close();
+            log.info("register user: "+bankClient.getLogin());
         } catch (IOException e) {
             e.printStackTrace();
+            log.error(e.getMessage());
         }
 
     }

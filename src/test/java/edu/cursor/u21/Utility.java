@@ -101,11 +101,13 @@ public final class Utility implements MagicConstantsInterface {
                 if (user.getClass().getSimpleName().contains(adminClass)) {
                     Admin admin = (Admin) user;
                     if (admin.getPassword().equals(password)) {
+                        log.info("log as admin: "+login);
                         return admin;
                     }
                 } else if (user.getClass().getSimpleName().contains(bankClientClass)) {
                     BankClient bankClient = (BankClient) user;
                     if (bankClient.getPassword().equals(password)) {
+                        log.info("log as user: "+login);
                         return bankClient;
                     }
                 }
