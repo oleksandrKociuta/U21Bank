@@ -70,8 +70,4 @@ class AdminMethods {
             }
         });
     }
-
-    static void main(String[] args) {
-
-    }
 }
