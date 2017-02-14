@@ -25,6 +25,10 @@ public class BankClient implements User, Serializable, Comparable<BankClient> {
     private String DateOfBirth;
     private String SeriesOfPassport;
     private int telephoneNumber;
+    private int account;
+    private int depositAccount;
+    private int creditAccount;
+    private int transferAccount;
     Roles role = Roles.USER;
     public void startSession(ArrayList arrayList) {
         BankClientMethods.bankClientMenu(arrayList);

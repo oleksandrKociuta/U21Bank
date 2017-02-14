@@ -45,18 +45,33 @@ class AdminMethods {
     }
 
     static void displayUsersAccounts(HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.forEach((k, v) -> System.out.printf(
+                "ID%s\tName%s\tSurname%s\tPhone Number%s\n",
+                v.getId(), v.getName(), v.getSurname(), v.getAccount()));
     }
 
-    public static void displayUsersDepositAccounts(HashMap<String, BankClient> listOfUsers) {
+    static void displayUsersDepositAccounts(HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.forEach((k, v) -> System.out.printf(
+                "ID%s\tName%s\tSurname%s\tPhone Number%s\n",
+                v.getId(), v.getName(), v.getSurname(), v.getDepositAccount()));
     }
 
-    public static void displayUsersCreditAccounts(HashMap<String, BankClient> listOfUsers) {
+    static void displayUsersCreditAccounts(HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.forEach((k, v) -> System.out.printf(
+                "ID%s\tName%s\tSurname%s\tPhone Number%s\n",
+                v.getId(), v.getName(), v.getSurname(), v.getCreditAccount()));
     }
 
-    public static void displayUserTransferAccount(String userId) {
+    static void displayUserTransferAccount(String userId, HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.forEach((String k, BankClient v) -> {
+            if (v.getId().equals(userId)) {
+                System.out.printf("ID%s\tName%s\tSurname%s\tAge%d\n",
+                        v.getId(), v.getName(), v.getSurname(), v.getTransferAccount());
+            }
+        });
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
 
     }
 }
