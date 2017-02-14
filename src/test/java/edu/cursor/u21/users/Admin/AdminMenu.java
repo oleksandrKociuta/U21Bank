@@ -1,7 +1,7 @@
 package edu.cursor.u21.users.Admin;
 
-import edu.cursor.u21.Utils.Read;
 import edu.cursor.u21.Utils.Utility;
+import edu.cursor.u21.users.User;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class AdminMenu {
         throw new IllegalStateException();
     }
 
-    public static void adminMenu() {
+    public static void adminMenu(ArrayList<User> listOfUsers) {
         System.out.println("Enter \n" +
                             "1 - for list of BankClients\n" +
                             "2 - for list of User operations (ID is needed to be entered)\n" +
@@ -24,10 +24,6 @@ public class AdminMenu {
             switch (Utility.getInt()) {
                 case 1:
                     System.out.println("BankClients id list:");
-                    ArrayList<Admin> al = (ArrayList<Admin>) Read.readFile("admin.md");
-                    System.out.println("\tLogin \tPassword \t\t\t\t\t\t\tRole");
-                    al.forEach(admin -> System.out.printf("\t%s \t%s \t%s\n",admin.getLogin(), admin.getPassword(), admin.getRole()));
-
                     break;
                 case 2:
                     System.out.printf("List of user operations. \n Enter User ID");

@@ -1,8 +1,12 @@
 package edu.cursor.u21.bankSystem;
 
+import edu.cursor.u21.Utils.MagicConstantsInterface;
+import edu.cursor.u21.Utils.Read;
 import edu.cursor.u21.Utils.Registration;
 import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
 
 import static edu.cursor.u21.Utils.Utility.getInt;
 import static edu.cursor.u21.Utils.Utility.identifyUser;
@@ -15,12 +19,13 @@ import static edu.cursor.u21.Utils.Utility.identifyUser;
 public class MainMenu {
     public static Logger log = Logger.getLogger(MainMenu.class);
     public void menu() {
+        ArrayList arrayListOfUsers = Read.readFile(MagicConstantsInterface.usersFilePath);
         while (true) {
             System.out.print("\n1.Login in system U21Bank.\n2.Register in system U21Bank.\n3.Exit.\nChoose option - >> ");
             log.info("start app");
             switch (getInt()) {
                 case 1:
-                    identifyUser().startSession();
+                    identifyUser().startSession(arrayListOfUsers);
                     break;
                 case 2:
                     Registration.registration();

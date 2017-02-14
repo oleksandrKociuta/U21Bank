@@ -1,6 +1,6 @@
 package edu.cursor.u21.Utils;
 
-import edu.cursor.u21.users.BankClient;
+import edu.cursor.u21.users.BankClient.BankClient;
 import edu.cursor.u21.users.User;
 import org.apache.log4j.Logger;
 

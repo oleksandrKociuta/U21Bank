@@ -16,8 +16,7 @@ public class Read {
         while (fileInputStream.available() >1){
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             list = (ArrayList) objectInputStream.readObject();
-            objectInputStream.close();
-            fileInputStream.close();}
+        }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e1) {
