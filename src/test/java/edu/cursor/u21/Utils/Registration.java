@@ -1,10 +1,7 @@
 package edu.cursor.u21.Utils;
 
 import edu.cursor.u21.users.BankClient.BankClient;
-import edu.cursor.u21.users.User;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
 
 /**
  * Created by Sabat on 12.02.2017.
@@ -41,10 +38,10 @@ public class Registration implements MagicConstantsInterface{
             break;
         }
 
-        ArrayList<User> usersList = (ArrayList<User>) Read.readFile(usersFilePath);
-        usersList.add(bankClient);
-        Write.writeFile(usersList);
-        System.out.println("Your personal info is added to BankSystem");
+//        ArrayList<User> usersList = (ArrayList<User>) Read.readFile(usersFilePath);
+//        usersList.add(bankClient);
+//        Write.writeFile(usersList);
+//        System.out.println("Your personal info is added to BankSystem");
 
 //        try (FileOutputStream fileOutput = new FileOutputStream(bankClient.getLogin() + Utility.fileFormat)) {
 //            ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);

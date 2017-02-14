@@ -3,7 +3,7 @@ package edu.cursor.u21.Utils;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by uiv on 12/8/16.
@@ -14,7 +14,7 @@ public class Write {
         throw new IllegalStateException();
     }
 
-    public static void writeFile(ArrayList adminList) {
+    public static void writeFile(HashMap adminList) {
 
         try (FileOutputStream fileOutputStream = new FileOutputStream(MagicConstantsInterface.usersFilePath, false);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {

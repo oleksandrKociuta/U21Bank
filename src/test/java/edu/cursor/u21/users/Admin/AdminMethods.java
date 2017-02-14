@@ -1,29 +1,62 @@
 package edu.cursor.u21.users.Admin;
 
-import edu.cursor.u21.Utils.MagicConstantsInterface;
-import edu.cursor.u21.Utils.Read;
 import edu.cursor.u21.users.BankClient.BankClient;
 
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
 class AdminMethods {
-   static void displayListOfUsersID(ArrayList<BankClient> listOfUsers) {
-        listOfUsers.forEach(
-                (BankClient user) -> System.out.println(user.getId()));
+    private AdminMethods() {
+        throw new IllegalStateException();
     }
-    static void filterByAge(int age, ArrayList<BankClient> listOfUsers){
-        listOfUsers.stream().filter(
-                (BankClient bankClient) -> bankClient.getAge()==age)
-                .forEach(System.out::println);
+
+    static void displayListOfUsers(HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.forEach((k, v) -> System.out.printf(
+                "ID%s\tName%s\tSurname%s\n",
+                v.getId(), v.getName(), v.getSurname()));
     }
-     public static void main(String[] args) {
-//        ArrayList<Admin> arrayList = new ArrayList<>();
-//        arrayList.add(new Admin("login", "pass", 152));
-//        arrayList.add(new Admin("login1", "pass1", 153));
-//        arrayList.add(new Admin("login2", "pass2", 154));
-//        arrayList.add(new Admin("login3", "pass3", 155));
-//        arrayList.add(new Admin("login4", "pass4", 156));
-//        Write.writeFile(arrayList);
-        ArrayList<BankClient> arrayList = Read.readFile(MagicConstantsInterface.usersFilePath);
-        arrayList.forEach(user -> System.out.println(user.getLogin()));
+
+    static void displayUsersPhoneNumbers(HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.forEach((k, v) -> System.out.printf(
+                "ID%s\tName%s\tSurname%s\tPhone Number%d\n",
+                v.getId(), v.getName(), v.getSurname(), v.getTelephoneNumber()));
+    }
+
+    static void displayUsersDateOfBirth(HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.forEach((k, v) -> System.out.printf(
+                "ID%s\tName%s\tSurname%s\tPhone Number%s\n",
+                v.getId(), v.getName(), v.getSurname(), v.getDateOfBirth()));
+    }
+
+    static void filterByAge(int age, HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.forEach((String k, BankClient v) -> {
+            if (v.getAge() == age) {
+                System.out.printf("ID%s\tName%s\tSurname%s\tAge%d\n",
+                        v.getId(), v.getName(), v.getSurname(), v.getAge());
+            }
+        });
+    }
+
+    static void sortBySurname(HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.entrySet().stream()
+                .sorted(Comparator.comparing(Map.Entry::getValue))
+                .forEach(v -> System.out.println(v.getValue().getSurname()));
+    }
+
+    static void displayUsersAccounts(HashMap<String, BankClient> listOfUsers) {
+    }
+
+    public static void displayUsersDepositAccounts(HashMap<String, BankClient> listOfUsers) {
+    }
+
+    public static void displayUsersCreditAccounts(HashMap<String, BankClient> listOfUsers) {
+    }
+
+    public static void displayUserTransferAccount(String userId) {
+    }
+
+    public static void main(String[] args) {
+
     }
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Kermit The Frog on 12.02.2017.
@@ -14,8 +15,8 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BankClient implements User, Serializable {
-    private long id;
+public class BankClient implements User, Serializable, Comparable<BankClient> {
+    private String id;
     private String login;
     private String password;
     private String name;
@@ -29,4 +30,13 @@ public class BankClient implements User, Serializable {
         BankClientMethods.bankClientMenu(arrayList);
     }
 
+    @Override
+    public int compareTo(BankClient o) {
+        return surname.compareTo(o.surname);
+    }
+
+    @Override
+    public void startSession(HashMap usersList) {
+
+    }
 }
