@@ -4,6 +4,7 @@ import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 import java.util.Scanner;
 
 import edu.cursor.u21.users.Admin;
@@ -22,6 +23,7 @@ public final class Utility implements MagicConstantsInterface {
 
     private static Logger log = Logger.getLogger(Utility.class);
     public static Scanner sc = new Scanner(System.in);
+    public static Random random = new Random();
 
     public static String getPassword() {
 
@@ -202,6 +204,23 @@ public final class Utility implements MagicConstantsInterface {
             }
             System.out.println("Wrong passport input!! Repeat!");
         }
+    }
+
+    private static int randomWithInterval(int min, int max){
+        return random.nextInt(max-min+one)+min;
+    }
+
+    public static String getSalt(){
+
+        int amountOfCharacter = randomWithInterval(minLengthSalt, maxLengthSalt);
+        char[] saltCh=new char[amountOfCharacter];
+
+        for (int i=0;i<saltCh.length;i++){
+            int ascii=randomWithInterval(asciiMinValue, asciiMaxValue);
+            saltCh[i] = Character.toChars(ascii)[0];
+        }
+        String salt = new String(saltCh);
+        return salt;
     }
 }
 

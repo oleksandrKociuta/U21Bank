@@ -16,4 +16,10 @@ public interface MagicConstantsInterface {
     String adminClass = "Admin";
     String bankClientClass = "BankClient";
     String fileFormat = ".md";
+    int minLengthSalt=8;
+    int maxLengthSalt=18;
+    int one=1;
+    int asciiMaxValue=126;
+    int asciiMinValue=33;
 }
+
