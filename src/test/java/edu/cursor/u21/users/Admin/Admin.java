@@ -1,5 +1,6 @@
 package edu.cursor.u21.users.Admin;
 
+import edu.cursor.u21.users.BankClient.BankClient;
 import edu.cursor.u21.users.Roles;
 import edu.cursor.u21.users.User;
 import lombok.Getter;
@@ -24,7 +25,7 @@ public class Admin implements Serializable, User {
         this.id = id;
     }
 
-    public void startSession(HashMap usersList) {
+    public void startSession(HashMap<String, BankClient> usersList) {
         AdminMenu.adminMenu(usersList);
     }
 }

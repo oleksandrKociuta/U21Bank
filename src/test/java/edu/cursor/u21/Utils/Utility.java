@@ -11,6 +11,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
+import java.util.Random;
+
 
 /**
  * Created by Саша on 09.02.2017.
@@ -23,6 +25,7 @@ public final class Utility implements MagicConstantsInterface {
 
     public static Logger log = Logger.getLogger(Utility.class);
     public static Scanner sc = new Scanner(System.in);
+    public static Random random = new Random();
 
     public static String getPassword() {
 
@@ -106,10 +109,10 @@ public final class Utility implements MagicConstantsInterface {
                         return admin;
                     }
                 } else if (user.getClass().getSimpleName().contains(bankClientClass)) {
-                    BankClient bankClient = (BankClient) user;
-                    if (bankClient.getPassword().equals(password)) {
+                    BankClient account = (BankClient) user;
+                    if (account.getPassword().equals(password)) {
                         log.info("log as user: "+login);
-                        return bankClient;
+                        return account;
                     }
                 }
                 objectInput.close();
@@ -128,5 +131,23 @@ public final class Utility implements MagicConstantsInterface {
             }
             System.out.println("Wrong input! Repeat!");
         }
+    }
+
+
+    private static int randomWithInterval(int min, int max){
+        return random.nextInt(max-min+one)+min;
+    }
+
+    public static String getSalt(){
+
+        int amountOfCharacter = randomWithInterval(minLengthSalt, maxLengthSalt);
+        char[] saltCh=new char[amountOfCharacter];
+
+        for (int i=0;i<saltCh.length;i++){
+            int ascii=randomWithInterval(asciiMinValue, asciiMaxValue);
+            saltCh[i] = Character.toChars(ascii)[0];
+        }
+        String salt = new String(saltCh);
+        return salt;
     }
 }

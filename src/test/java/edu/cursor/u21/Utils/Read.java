@@ -12,13 +12,13 @@ public class Read {
     }
 
     public static HashMap readFile(String path) {
-        HashMap list = new HashMap();
+        HashMap hashMap = new HashMap();
 
         try {
             FileInputStream fileInputStream = new FileInputStream(path);
         while (fileInputStream.available() >1){
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            list = (HashMap) objectInputStream.readObject();
+            hashMap = (HashMap) objectInputStream.readObject();
         }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -27,6 +27,6 @@ public class Read {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return list;
+        return hashMap;
     }
 }

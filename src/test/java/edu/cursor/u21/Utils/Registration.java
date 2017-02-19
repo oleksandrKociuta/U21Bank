@@ -9,32 +9,32 @@ import org.apache.log4j.Logger;
 public class Registration implements MagicConstantsInterface{
     public static Logger log = Logger.getLogger(Registration.class);
     public static void registration() {
-        BankClient bankClient = new BankClient();
+        BankClient account = new BankClient();
         while (true) {
             System.out.print("Enter your login - > ");
-            bankClient.setLogin(Utility.sc.nextLine());
-            if (Utility.checkForUniqueness(bankClient.getLogin())) {
+            account.setLogin(Utility.sc.nextLine());
+            if (Utility.checkForUniqueness(account.getLogin())) {
                 System.out.println("login in already use!!!");
                 continue;
             }
             System.out.print("Enter your password - > ");
-            bankClient.setPassword(Utility.getPassword());
+            account.setPassword(Utility.getPassword());
             System.out.print("Enter your name - > ");
-            bankClient.setName(Utility.sc.nextLine());
+            account.setName(Utility.sc.nextLine());
             System.out.print("Enter your surname - > ");
-            bankClient.setSurname(Utility.sc.nextLine());
+            account.setSurname(Utility.sc.nextLine());
             System.out.print("Enter your age - > ");
-            bankClient.setAge(Utility.getInt());
-            if (bankClient.getAge() < 18) {
+            account.setAge(Utility.getInt());
+            if (account.getAge() < 18) {
                 System.out.println("User must be adulthood. Upper 17 years old !!!");
                 continue;
             }
             System.out.print("Enter your Date Of Birth - > ");
-            bankClient.setDateOfBirth(Utility.sc.nextLine());
+            account.setDateOfBirth(Utility.sc.nextLine());
             System.out.print("Enter your SeriesOfPassport - > ");
-            bankClient.setSeriesOfPassport(Utility.sc.nextLine());
+            account.setSeriesOfPassport(Utility.sc.nextLine());
             System.out.print("Enter your Telephone Number - > ");
-            bankClient.setTelephoneNumber(Utility.getInt());
+            account.setTelephoneNumber(Utility.getInt());
             break;
         }
 
