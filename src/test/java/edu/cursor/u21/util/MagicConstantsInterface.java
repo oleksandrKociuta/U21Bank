@@ -21,5 +21,7 @@ public interface MagicConstantsInterface {
     int one=1;
     int asciiMaxValue=126;
     int asciiMinValue=33;
+    int asciiMaxNumber=57;
+    int asciiMinNumber=48;
 }
 
