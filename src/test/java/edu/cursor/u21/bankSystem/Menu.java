@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
 
 import static edu.cursor.u21.util.Utility.getInt;
-import static edu.cursor.u21.util.Utility.identifyUser;
 
 
 /**
@@ -20,7 +19,7 @@ public class Menu {
             log.info("start app");
             switch (getInt()) {
                 case 1:
-                    identifyUser().startSession();
+//                    identifyUser().startSession();
                     break;
                 case 2:
                     Registration.registration();

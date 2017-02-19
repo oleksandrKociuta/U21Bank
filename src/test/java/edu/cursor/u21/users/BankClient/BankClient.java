@@ -28,9 +28,6 @@ public class BankClient implements User, Serializable {
     private HashMap<String, Account> accountHashMap;
     Roles role = Roles.USER;
 
-    public BankClient() {
-     }
-
     public BankClient(String id, String login, String password, String name, String surname, int age, String dateOfBirth, String seriesOfPassport, int telephoneNumber) {
         this.id = id;
         this.login = login;

@@ -4,15 +4,15 @@ import edu.cursor.u21.users.Admin.Admin;
 import edu.cursor.u21.users.BankClient.BankClient;
 import edu.cursor.u21.users.User;
 import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Scanner;
 import java.util.Random;
-
+import java.util.Scanner;
 
 /**
  * Created by Саша on 09.02.2017.
@@ -23,7 +23,7 @@ public final class Utility implements MagicConstantsInterface {
         throw new IllegalStateException();
     }
 
-    public static Logger log = Logger.getLogger(Utility.class);
+    private static Logger log = Logger.getLogger(Utility.class);
     public static Scanner sc = new Scanner(System.in);
     public static Random random = new Random();
 
@@ -60,7 +60,7 @@ public final class Utility implements MagicConstantsInterface {
         return getPassword;
     }
 
-    public static boolean checkForUniqueness(String login) {
+    private static boolean checkForUniqueness(String login) {
         File file = new File(login + fileFormat);
         return file.exists();
 
@@ -105,14 +105,14 @@ public final class Utility implements MagicConstantsInterface {
                 if (user.getClass().getSimpleName().contains(adminClass)) {
                     Admin admin = (Admin) user;
                     if (admin.getPassword().equals(password)) {
-                        log.info("log as admin: "+login);
+                        log.info("log as admin: " + login);
                         return admin;
                     }
                 } else if (user.getClass().getSimpleName().contains(bankClientClass)) {
-                    BankClient account = (BankClient) user;
-                    if (account.getPassword().equals(password)) {
-                        log.info("log as user: "+login);
-                        return account;
+                    BankClient bankClient = (BankClient) user;
+                    if (bankClient.getPassword().equals(password)) {
+                        log.info("log as user: " + login);
+                        return bankClient;
                     }
                 }
                 objectInput.close();
@@ -126,13 +126,87 @@ public final class Utility implements MagicConstantsInterface {
     public static int getInt() {
         while (true) {
             String str = sc.nextLine();
-            if ((str.matches("-?[\\d]+"))) {
+            if ((str.matches("\\d+"))) {
                 return Integer.parseInt(str);
             }
             System.out.println("Wrong input! Repeat!");
         }
     }
+// ---- alex manikhin login implementation -----
+//    public void run() throws FileNotFoundException {
+//        String login = null;
+//        Scanner scan = new Scanner(new File(login + fileFormat));
+//        Scanner keyboard = new Scanner(System.in);
+//        login = scan.nextLine();
+//        String password = scan.nextLine();
+//
+//        System.out.println("login:");
+//        String inpUser = keyboard.nextLine();
+//
+//        System.out.println("password:");
+//        String inpPass = keyboard.nextLine();
+//
+//        if (inpUser.equals(login) && inpPass.equals(password)) {
+//            System.out.print("Welcome to the system" + login);
+//        } else {
+//            System.out.print("Oops");
+//        }
+//    }
 
+    public static String loginCheck() {
+        String login;
+        while (true) {
+            login = sc.nextLine();
+            if (!checkForUniqueness(login)) {
+                return login;
+            }
+            System.out.println("Login is already used !!! Repeat !");
+        }
+    }
+
+    public static int ageCheck() {
+        int age;
+        while (true) {
+            age = getInt();
+            if (age > adultHood) {
+                return age;
+            }
+            System.out.println("User must be upper 17 years old !! Repeat !");
+        }
+    }
+
+    public static String dateCheck() {
+        String dateOfBirth;
+        while (true) {
+            dateOfBirth = sc.nextLine();
+            if (dateOfBirth.matches(dayOfBirthReg)) {
+                return dateOfBirth;
+            }
+            System.out.println("Wrong Date Format!! Repeat!");
+        }
+    }
+
+    public static int telephoneNumberCheck() {
+        String telephoneNumber;
+        while (true) {
+            telephoneNumber = sc.nextLine();
+            if (telephoneNumber.matches(telephoneNumberReg)) {
+                return Integer.parseInt(telephoneNumber);
+            }
+            System.out.println("Wrong telephone input!! Repeat!");
+        }
+    }
+
+    public static String passportCheck() {
+        String passport;
+        while (true) {
+            passport = sc.nextLine();
+            if (passport.matches(passportReg)) {
+                return passport;
+            }
+            System.out.println("Wrong passport input!! Repeat!");
+        }
+    }
 
     private static int randomWithInterval(int min, int max){
         return random.nextInt(max-min+one)+min;

@@ -16,7 +16,7 @@ public class Write {
 
     public static void writeFile(HashMap adminList) {
 
-        try (FileOutputStream fileOutputStream = new FileOutputStream(edu.cursor.u21.Utils.MagicConstantsInterface.usersFilePath, false);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(MagicConstantsInterface.usersFilePath, false);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
              objectOutputStream.writeObject(adminList);
         } catch (IOException e) {

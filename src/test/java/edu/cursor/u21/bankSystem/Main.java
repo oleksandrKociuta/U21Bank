@@ -1,6 +1,6 @@
 package edu.cursor.u21.bankSystem;
 
-import edu.cursor.u21.Utils.MagicConstantsInterface;
+import edu.cursor.u21.util.MagicConstantsInterface;
 import edu.cursor.u21.util.Read;
 import edu.cursor.u21.util.Write;
 import edu.cursor.u21.users.Admin.AdminMenu;
