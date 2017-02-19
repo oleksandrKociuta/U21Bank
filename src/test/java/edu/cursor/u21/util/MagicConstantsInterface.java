@@ -22,6 +22,7 @@ public interface MagicConstantsInterface {
     int asciiMaxValue=126;
     int asciiMinValue=33;
     String usersFilePath = "Users.md";
-
+    int asciiMaxNumber=57;
+    int asciiMinNumber=48;
 }
 

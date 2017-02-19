@@ -216,12 +216,20 @@ public final class Utility implements MagicConstantsInterface {
 
         int amountOfCharacter = randomWithInterval(minLengthSalt, maxLengthSalt);
         char[] saltCh=new char[amountOfCharacter];
-
         for (int i=0;i<saltCh.length;i++){
             int ascii=randomWithInterval(asciiMinValue, asciiMaxValue);
             saltCh[i] = Character.toChars(ascii)[0];
         }
         String salt = new String(saltCh);
         return salt;
+    }
+    public static int getRandomInt(int amountNumber){
+
+        char[] saltCh=new char[amountNumber];
+        for (int i=0;i<saltCh.length;i++){
+            int ascii=randomWithInterval(asciiMinNumber, asciiMaxNumber);
+            saltCh[i] = Character.toChars(ascii)[0];
+        }
+        return Integer.parseInt(new String(saltCh));
     }
 }
