@@ -1,6 +1,6 @@
 package edu.cursor.u21.users.BankClient.Accounts;
 
-import edu.cursor.u21.Utils.Utility;
+import edu.cursor.u21.util.Utility;
 import edu.cursor.u21.users.BankClient.BankClient;
 
 import java.math.BigDecimal;

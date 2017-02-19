@@ -1,8 +1,8 @@
 package edu.cursor.u21.bankSystem;
 
 import edu.cursor.u21.Utils.MagicConstantsInterface;
-import edu.cursor.u21.Utils.Read;
-import edu.cursor.u21.Utils.Write;
+import edu.cursor.u21.util.Read;
+import edu.cursor.u21.util.Write;
 import edu.cursor.u21.users.Admin.AdminMenu;
 import edu.cursor.u21.users.BankClient.Accounts.Account;
 import edu.cursor.u21.users.BankClient.Accounts.Saving;

@@ -1,4 +1,4 @@
-package edu.cursor.u21.Utils;
+package edu.cursor.u21.util;
 
 import edu.cursor.u21.users.Admin.Admin;
 import edu.cursor.u21.users.BankClient.BankClient;

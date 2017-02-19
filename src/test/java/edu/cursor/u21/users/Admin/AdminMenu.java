@@ -1,11 +1,11 @@
 package edu.cursor.u21.users.Admin;
 
-import edu.cursor.u21.Utils.Utility;
+import edu.cursor.u21.util.Utility;
 import edu.cursor.u21.users.BankClient.BankClient;
 
 import java.util.HashMap;
 
-import static edu.cursor.u21.Utils.UtilityScanner.scanInt;
+import static edu.cursor.u21.util.UtilityScanner.scanInt;
 
 /**
  * Created by uiv on 2/12/17.

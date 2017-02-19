@@ -1,4 +1,4 @@
-package edu.cursor.u21.Utils;
+package edu.cursor.u21.util;
 
 import java.util.Scanner;
 

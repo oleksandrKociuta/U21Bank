@@ -1,4 +1,4 @@
-package edu.cursor.u21.Utils;
+package edu.cursor.u21.util;
 
 /**
  * Created by Саша on 12.02.2017.
@@ -22,4 +22,6 @@ public interface MagicConstantsInterface {
     int asciiMaxValue=126;
     int asciiMinValue=33;
     String usersFilePath = "Users.md";
+
 }
+
