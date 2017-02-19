@@ -22,8 +22,8 @@ public class Main {
     public static void main(String[] args) {
 //        MainMenu mainMenu = new MainMenu();
 //        mainMenu.menu();
-        BankClient user1 = new BankClient("user1", "sdds", "sss", "jfjf", "kfffld", 25, "jfjfjfj", "jfjjjfjf", 2626026);
-        BankClient user2 = new BankClient("user2", "sddddds", "ffdfsss", "jfjgggf", "kffggfld", 25, "jfjfjfffj", "jfjddjjfjf", 2626026);
+        BankClient user1 = new BankClient("user1", "sdds", "sss", "Petro", "Ivanov", 25, "jfjfjfj", "jfjjjfjf", 2626026);
+        BankClient user2 = new BankClient("user2", "sddddds", "ffdfsss", "Stepan", "Romaniv", 25, "jfjfjfffj", "jfjddjjfjf", 2626026);
         HashMap<String, BankClient> userMap = new HashMap<>();
         Account saving = new Saving(BigDecimal.valueOf(1000000), UAH);
         Account saving2 = new Saving(BigDecimal.valueOf(1000050), EUR);

@@ -27,6 +27,9 @@ public class BankClient implements User, Serializable {
     private int telephoneNumber;
     private HashMap<String, Account> accountHashMap;
     Roles role = Roles.USER;
+//This two constructors created for test. After Test please delete this constructors and uncomment NoArgConstructor annotation
+    public BankClient() {
+    }
 
     public BankClient(String id, String login, String password, String name, String surname, int age, String dateOfBirth, String seriesOfPassport, int telephoneNumber) {
         this.id = id;
@@ -45,5 +48,9 @@ public class BankClient implements User, Serializable {
     @Override
     public void startSession(HashMap<String,BankClient> usersList) {
         BankClientMethods.bankClientMenu(usersList);
+    }
+
+    public String toString() {
+        return getSurname() + " " + getName() ;
     }
 }

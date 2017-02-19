@@ -26,7 +26,8 @@ public class AdminMenu {
                 "7 - for list of Users DEPOSIT Accounts\n" +
                 "8 - for list of User TRANSFER Accounts\n" +
                 "9 - for list of User SAVING Accounts\n" +
-                "10 - for EXIT\n");
+                "10 - Print Bank Clients list sorted by username\n"+
+                "11 - for EXIT\n");
         boolean x = true;
         while (x) {
             switch (Utility.getInt()) {
@@ -68,6 +69,10 @@ public class AdminMenu {
                     AdminMethods.displayUserSavingAccount(listOfUsers);
                     break;
                 case 10:
+                    System.out.println("Print Bank Clients list sorted by username");
+                    AdminMethods.printBankClientsBySurname(listOfUsers);
+                    break;
+                case 11:
                     x = false;
                     System.out.println("Have a nice day!");
                     break;

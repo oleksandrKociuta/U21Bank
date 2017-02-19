@@ -19,7 +19,7 @@ public class AccountFactory {
         } else if (!(bankClient.getAccountHashMap().values() instanceof Transfer)) {
             bankClient.getAccountHashMap().put(Utility.getSalt(), new Transfer(balance, currency));
         } else {
-            System.out.printf("\nBankClient with ID %s already have transfer account. " +
+            System.out.printf("\nBankClient with ID %s already have transfer account. \n" +
                     "Or something went wrong.", bankClient.getId());
         }
     }
