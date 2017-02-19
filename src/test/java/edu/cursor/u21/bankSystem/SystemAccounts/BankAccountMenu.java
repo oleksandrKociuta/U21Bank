@@ -1,8 +1,6 @@
 package edu.cursor.u21.bankSystem.SystemAccounts;
 
 import edu.cursor.u21.util.Utility;
-import lombok.extern.log4j.Log4j;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
