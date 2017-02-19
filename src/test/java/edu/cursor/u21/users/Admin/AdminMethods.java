@@ -63,7 +63,7 @@ class AdminMethods {
     }
 
     static void displayUsersDepositAccounts(HashMap<String, BankClient> listOfUsers) {
-        System.out.println("ID\t\t\tName\t\t\tSurname\t\t\tAccount");
+        System.out.println("ID\t\t\tName\t\tSurname\t\t\tAccount");
         listOfUsers.forEach((k, v) -> System.out.printf(
                 "%s\t%s\t%s\t\t\n",
                 v.getId(), v.getName(), v.getSurname()));
@@ -73,7 +73,7 @@ class AdminMethods {
     }
 
     static void displayUsersCreditAccounts(HashMap<String, BankClient> listOfUsers) {
-        System.out.println("ID\t\t\tName\t\t\tSurname\t\t\tAccount");
+        System.out.println("ID\t\t\tName\t\tSurname\t\t\tAccount");
         listOfUsers.forEach((k, v) -> System.out.printf(
                 "%s\t%s\t%s\t\t\n",
                 v.getId(), v.getName(), v.getSurname()));
@@ -83,7 +83,7 @@ class AdminMethods {
     }
 
     static void displayUserTransferAccount(HashMap<String, BankClient> listOfUsers) {
-        System.out.println("ID\t\t\tName\t\t\tSurname\t\t\tAccount");
+        System.out.println("ID\t\t\tName\t\tSurname\t\t\tAccount");
         listOfUsers.forEach((k, v) -> System.out.printf(
                 "%s\t%s\t%s\t\t\n",
                 v.getId(), v.getName(), v.getSurname()));
@@ -93,7 +93,7 @@ class AdminMethods {
     }
 
     static void displayUserSavingAccount(HashMap<String, BankClient> listOfUsers) {
-        System.out.println("ID\t\t\tName\t\t\tSurname\t\t\tAccount");
+        System.out.println("ID\t\t\tName\t\tSurname\t\t\tAccount");
         listOfUsers.forEach((k, v) -> System.out.printf(
                 "%s\t%s\t%s\t\t\n",
                 v.getId(), v.getName(), v.getSurname()));

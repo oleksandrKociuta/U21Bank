@@ -1,6 +1,5 @@
 package edu.cursor.u21.users.BankClient.Accounts;
 
-import edu.cursor.u21.util.Utility;
 import edu.cursor.u21.users.BankClient.BankClient;
 
 import java.math.BigDecimal;
@@ -8,23 +7,38 @@ import java.math.BigDecimal;
 /**
  * Created by uiv on 2/16/17.
  */
-public class AccountFactory {
-    public static void createAccount(Account account, Currency currency, BigDecimal balance, BankClient bankClient) {
+class AccountFactory {
+    private AccountFactory(){throw new IllegalStateException();}
+    static void createAccount(Account account, Currency currency, BankClient bankClient) throws NullPointerException{
         if (account instanceof Credit) {
-            bankClient.getAccountHashMap().put(Utility.getSalt(), new Credit(currency));
-        } else if (account instanceof Deposit) {
-            bankClient.getAccountHashMap().put(Utility.getSalt(), new Deposit(balance, currency));
-        } else if (account instanceof Saving) {
-            bankClient.getAccountHashMap().put(Utility.getSalt(), new Saving(balance, currency));
+            Credit credit = new Credit();
+            credit.setCurrency(currency);
+            credit.setBalance(BigDecimal.valueOf(0));
+            credit.setAccountNumber(00000001);
+            bankClient.getAccountHashMap().put(credit.getAccountNumber(), credit);
+        } else if (account instanceof Deposit) {Deposit deposit = new Deposit();
+            deposit.setCurrency(currency);
+            deposit.setBalance(BigDecimal.valueOf(0));
+            deposit.setAccountNumber(00000002);
+            bankClient.getAccountHashMap().put(deposit.getAccountNumber(), deposit);
+        } else if (account instanceof Saving) {Saving saving = new Saving();
+            saving.setCurrency(currency);
+            saving.setBalance(BigDecimal.valueOf(0));
+            saving.setAccountNumber(00000003);
+            bankClient.getAccountHashMap().put(saving.getAccountNumber(), saving);
         } else if (!(bankClient.getAccountHashMap().values() instanceof Transfer)) {
-            bankClient.getAccountHashMap().put(Utility.getSalt(), new Transfer(balance, currency));
+            Transfer transfer = new Transfer();
+            transfer.setCurrency(currency);
+            transfer.setBalance(BigDecimal.valueOf(0));
+            transfer.setAccountNumber(00000004);
+            bankClient.getAccountHashMap().put(transfer.getAccountNumber(), transfer);
         } else {
             System.out.printf("\nBankClient with ID %s already have transfer account. \n" +
                     "Or something went wrong.", bankClient.getId());
         }
     }
 
-    public static void deleteAccount(Account account, BankClient bankClient){
-        bankClient.getAccountHashMap().values().remove(account);
+    static void deleteAccount(Integer integer, BankClient bankClient) throws NullPointerException{
+        bankClient.getAccountHashMap().remove(integer);
     }
 }

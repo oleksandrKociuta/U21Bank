@@ -1,41 +1,26 @@
 package edu.cursor.u21.users.BankClient.Accounts;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Created by uiv on 2/15/17.
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class Deposit implements Account, Serializable{
+    private Integer accountNumber;
     private BigDecimal balance;
     private StatusOfAccount status = StatusOfAccount.OPEN;
-    private Integer accountNumber;
     private Currency currency;
-    private Date creationDate;
-    private Date expDate;
-
-    private Deposit(){
-        throw new IllegalStateException();
-    }
-
-    public Deposit(Currency currency) {
-        this.setCurrency(currency);
-        this.setAccountNumber(0000000000000000);
-        this.setBalance(BigDecimal.valueOf(0));
-    }
-
-    public Deposit(BigDecimal balance, Currency currency) {
-        this.setCurrency(currency);
-        this.setAccountNumber(0000000000000000);
-        this.setBalance(balance);
-    }
-
+    private LocalDateTime creationDate;
+    private LocalDateTime expDate;
 
     @Override
     public void increaseAccount(BigDecimal bigDecimal) {
@@ -48,31 +33,38 @@ public class Deposit implements Account, Serializable{
     }
 
     @Override
-    public void decreaseAccount(Account account, BigDecimal bigDecimal) {
-        this.balance = this.balance.subtract(bigDecimal);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deposit deposit = (Deposit) o;
+        return Objects.equals(getAccountNumber(), deposit.getAccountNumber()) &&
+                getCurrency() == deposit.getCurrency();
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAccountNumber(), getCurrency());
+    }
+
+    @Override
+    public void decreaseAccount(Account account, BigDecimal bigDecimal) {
+        if (!this.status.equals(StatusOfAccount.CLOSED)){
+            this.setBalance(this.balance.subtract(bigDecimal));
+        }
+        else {
+            System.out.println("this account is closed");
+        }
+    }
 
     @Override
     public String toString() {
         return "Deposit{" +
-                "balance=" + balance +
+                "accountNumber=" + accountNumber +
+                ", balance=" + balance +
                 ", status=" + status +
-                ", accountNumber=" + accountNumber +
                 ", currency=" + currency +
                 ", creationDate=" + creationDate +
                 ", expDate=" + expDate +
                 '}';
     }
-
-    //
-//    @Override
-//    public Deposit createAccount(Currency currency) {
-//        return new Deposit(this.assignAccountNumber(), currency);
-//    }
-//
-//    @Override
-//    public void deleteAccount(Account account) {
-//
-//    }
 }
