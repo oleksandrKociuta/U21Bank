@@ -61,31 +61,55 @@ public final class Utility implements MagicConstantsInterface {
     private static boolean checkForUniqueness(String login) {
         File file = new File(login + fileFormat);
         return file.exists();
+    }
 
+//    public static void passportCheck() {
+//        String seriesOfPassport = sc.nextLine();
 //        try {
-//                BufferedReader br = new BufferedReader(new FileReader(file));
-//                String current;
-//                boolean everythingIsOK;
+//            BufferedReader br = new BufferedReader(new FileReader(file));
+//            boolean check = false;
+//            boolean check1 = false;
+//            String current;
+//            if (seriesOfPassport.matches(passportReg)) {
+//                check = true;
+//            } else {
+//                System.out.println("Wrong passport input!! Repeat!");
+//            }
+//            if (check == true) {
 //                while ((current = br.readLine()) != null) {
 //                    if (current.equals(seriesOfPassport)) {
-//                        everythingIsOK = false;
-//                        System.out.println("The user of with such  data already exist.\n" +
-//                                "Please check your data!");
-//                        System.out.println("\nDo you want to continue?? (yes,no)");
-//                        String startOver = sc.nextLine();
-//                        if (startOver.equals("no")) {
-//                            System.out.println("Bye");
-//                        } else {
-//                            System.out.println("Enter data series of passport:");
-//                            checkForUniqueness(sc.next());
-//                        }
+//                        System.out.println("The user of with such  data already exist.Please check your data!!!");
+//                        System.out.println("Enter again data:");
+//                        passportCheck();
+//                        check1 = true;
 //                    }
 //                }
+//            }
+//            if (!check & check1 == false) {
+//                passportCheck();
+//            }
 //        } catch (Exception e) {
 //            log.error("An error in the input data", e);
 //        }
-//        return seriesOfPassport;
-    }
+//    }
+//
+//    public static void loginCheck() throws Exception {
+//        String login = sc.nextLine();
+//        try{
+//        BufferedReader bufferedReader = new BufferedReader(new FileReader(file1));
+//        String current1;
+//        while ((current1 = bufferedReader.readLine()) != null) {
+//            if (current1.equals(login)) {
+//                System.out.println("Login is already used !!! Repeat !");
+//                System.out.println("Think of other login:");
+//                loginCheck();
+//            }
+//        }
+//    } catch (Exception e) {
+//        log.error("An error in the input data", e);
+//    }
+//    }
+
 
     public static User identifyUser() {
         while (true) {
