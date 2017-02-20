@@ -25,7 +25,7 @@ public class BankClient implements User, Serializable {
     private String DateOfBirth;
     private String SeriesOfPassport;
     private int telephoneNumber;
-    private HashMap<String, Account> accountHashMap;
+    private HashMap<Integer, Account> accountHashMap;
     Roles role = Roles.USER;
 //This two constructors created for test. After Test please delete this constructors and uncomment NoArgConstructor annotation
     public BankClient() {

@@ -13,51 +13,66 @@ public class AccountMenu {
 
     public static void accountMenu(BankClient bankClient) {
         System.out.println("Enter \n" +
-                "1 - for list of BankClient accounts\n" +
-                "2 - create Deposit account\n" +
-                "3 - create Credit account\n" +
-                "4 - create Saving account\n" +
-                "5 - create Transfer account\n" +
-                "6 - delete account\n" +
-                "7 -  " +
-                "8 -  " +
-                "9 - for list of For exit press 9");
-        while (true) {
+                "1 - for list of Your accounts\n" +
+                "2 - to create DEPOSIT account\n" +
+                "3 - to create CREDIT account\n" +
+                "4 - to create SAVING account\n" +
+                "5 - to create TRANSFER account\n" +
+                "6 - to delete account\n" +
+                "7 -  \n" +
+                "8 -  \n" +
+                "9 - for EXIT\n");
+        boolean x = true;
+        while (x) {
             switch (Utility.getInt()) {
                 case 1:
-                    System.out.println("BankClients list:");
-
+                    System.out.println("Your Accounts list:\n Account Number\t\t\t\t\t Account Type");
+                    bankClient.getAccountHashMap().forEach((k,v) -> System.out.println(k+ "\t\t" + v.toString()));
                     break;
                 case 2:
-                    System.out.printf("List of user operations. \n Enter User ID:");
-
+                    System.out.println("Choose currency for Credit: 1 - EUR, 2 - USD, 3 - PLN, 4 - UAH");
+                    if(Utility.getInt() == 1){
+                    AccountFactory.createAccount(new Credit(), Currency.EUR, bankClient);}
+                    else if(Utility.getInt() == 2){ AccountFactory.createAccount(new Credit(), Currency.USD, bankClient);}
+                    else if(Utility.getInt() == 3){ AccountFactory.createAccount(new Credit(), Currency.PLN, bankClient);}
+                    else { AccountFactory.createAccount(new Credit(), Currency.UAH, bankClient);}
                     break;
                 case 3:
-                    System.out.println("Users Phone Numbers");
-
+                    System.out.println("Choose currency for Deposit: 1 - EUR, 2 - USD, 3 - PLN, 4 - UAH");
+                    if(Utility.getInt() == 1){AccountFactory.createAccount(new Deposit(), Currency.EUR, bankClient);}
+                    else if(Utility.getInt() == 2){ AccountFactory.createAccount(new Deposit(), Currency.USD, bankClient);}
+                    else if(Utility.getInt() == 3){ AccountFactory.createAccount(new Deposit(), Currency.PLN, bankClient);}
+                    else { AccountFactory.createAccount(new Deposit(), Currency.UAH, bankClient);}
                     break;
                 case 4:
-                    System.out.println("Users date of birth");
+                    System.out.println("Choose currency for Saving account: 1 - EUR, 2 - USD, 3 - PLN, 4 - UAH");
+                    if(Utility.getInt() == 1){AccountFactory.createAccount(new Saving(), Currency.EUR, bankClient);}
+                    else if(Utility.getInt() == 2){ AccountFactory.createAccount(new Saving(), Currency.USD, bankClient);}
+                    else if(Utility.getInt() == 3){ AccountFactory.createAccount(new Saving(), Currency.PLN, bankClient);}
+                    else { AccountFactory.createAccount(new Saving(), Currency.UAH, bankClient);}
                     break;
-
                 case 5:
-                    System.out.println("Users Accounts");
+                    System.out.println("Choose currency for Transfer account: 1 - EUR, 2 - USD, 3 - PLN, 4 - UAH");
+                    if(Utility.getInt() == 1){AccountFactory.createAccount(new Transfer(), Currency.EUR, bankClient);}
+                    else if(Utility.getInt() == 2){ AccountFactory.createAccount(new Transfer(), Currency.USD, bankClient);}
+                    else if(Utility.getInt() == 3){ AccountFactory.createAccount(new Transfer(), Currency.PLN, bankClient);}
+                    else { AccountFactory.createAccount(new Transfer(), Currency.UAH, bankClient);}
                     break;
-
                 case 6:
-                    System.out.println("Users Credit Accounts");
+                    System.out.println("Enter the Account Number without spaces or symbols to Delete account\n");
+                    AccountFactory.deleteAccount(Utility.getInt(), bankClient);
                     break;
-
                 case 7:
-                    System.out.println("Users Deposit Accounts");
-                    break;
+                    System.out.println(" ");
 
+                    break;
                 case 8:
-                    System.out.println("User Transfer BankClient");
-                    break;
+                    System.out.println(" ");
 
+                    break;
                 case 9:
                     System.out.println("For exit press 9");
+                    x = false;
                     break;
                 default:
                     System.out.println("Wrong number!");
