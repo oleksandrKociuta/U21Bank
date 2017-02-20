@@ -24,6 +24,17 @@ public class Write {
             e.printStackTrace();
         }
     }
+
+    public static void writeBankFile(HashMap adminList) {
+
+        try (FileOutputStream fileOutputStream = new FileOutputStream(MagicConstantsInterface.BankFilePath, false);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            objectOutputStream.writeObject(adminList);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: ");
+            e.printStackTrace();
+        }
+    }
 }
 
 
