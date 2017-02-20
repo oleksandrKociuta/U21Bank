@@ -18,9 +18,14 @@ public class BankClient implements User, Serializable {
     private String name;
     private String surname;
     private int age;
+    private String id;
     private String DateOfBirth;
     private String SeriesOfPassport;
     private int telephoneNumber;
+    private int account;
+    private int depositAccount;
+    private int creditAccount;
+    private int transferAccount;
 
     public void startSession() {
         BankClientMethods.bankClientMenu();
