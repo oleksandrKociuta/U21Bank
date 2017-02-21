@@ -1,5 +1,6 @@
 package edu.cursor.u21.bankSystem;
 
+<<<<<<< HEAD
 import edu.cursor.u21.users.Admin.AdminMenu;
 import edu.cursor.u21.users.BankClient.Accounts.Account;
 import edu.cursor.u21.users.BankClient.Accounts.Saving;
@@ -9,6 +10,9 @@ import edu.cursor.u21.util.Read;
 import edu.cursor.u21.util.Write;
 
 import java.util.HashMap;
+=======
+import edu.cursor.u21.util.MagicConstantsInterface;
+>>>>>>> Development
 
 /**
  * Created by o.kociuta on 07.02.2017.

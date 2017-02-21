@@ -92,6 +92,7 @@ public final class Utility implements MagicConstantsInterface {
 //            log.error("An error in the input data", e);
 //        }
 //    }
+<<<<<<< HEAD
 
 //    public static void loginCheck()  {
 //        String login = sc.nextLine();
@@ -109,6 +110,26 @@ public final class Utility implements MagicConstantsInterface {
 //            log.error("An error in the input data", e);
 //        }
 //    }
+
+=======
+//
+    public static void loginCheck() {
+        String login = sc.nextLine();
+        try{
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file1));
+        String current1;
+        while ((current1 = bufferedReader.readLine()) != null) {
+            if (current1.equals(login)) {
+                System.out.println("Login is already used !!! Repeat !");
+                System.out.println("Think of other login:");
+                loginCheck();
+            }
+        }
+    } catch (Exception e) {
+        log.error("An error in the input data", e);
+    }
+    }
+>>>>>>> Development
 
 
     public static User identifyUser() {
@@ -175,16 +196,16 @@ public final class Utility implements MagicConstantsInterface {
 //        }
 //    }
 
-    public static String loginCheck() {
-        String login;
-        while (true) {
-            login = sc.nextLine();
-            if (!checkForUniqueness(login)) {
-                return login;
-            }
-            System.out.println("Login is already used !!! Repeat !");
-        }
-    }
+//    public static String loginCheck() {
+//        String login;
+//        while (true) {
+//            login = sc.nextLine();
+//            if (!checkForUniqueness(login)) {
+//                return login;
+//            }
+//            System.out.println("Login is already used !!! Repeat !");
+//        }
+//    }
 
     public static int ageCheck() {
         int age;
