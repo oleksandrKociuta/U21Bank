@@ -1,16 +1,16 @@
 package edu.cursor.u21.util;
 
+import edu.cursor.u21.users.Admin.Admin;
+import edu.cursor.u21.users.BankClient.BankClient;
+import edu.cursor.u21.users.User;
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import java.util.Scanner;
-
-import edu.cursor.u21.users.Admin;
-import edu.cursor.u21.users.BankClient;
-import edu.cursor.u21.users.User;
-import org.apache.log4j.*;
 
 /**
  * Created by Саша on 09.02.2017.
@@ -92,6 +92,26 @@ public final class Utility implements MagicConstantsInterface {
 //            log.error("An error in the input data", e);
 //        }
 //    }
+<<<<<<< HEAD
+
+//    public static void loginCheck()  {
+//        String login = sc.nextLine();
+//        try{
+//        BufferedReader bufferedReader = new BufferedReader(new FileReader(file1));
+//        String current1;
+//        while ((current1 = bufferedReader.readLine()) != null) {
+//            if (current1.equals(login)) {
+//                System.out.println("Login is already used !!! Repeat !");
+//                System.out.println("Think of other login:");
+//                loginCheck();
+//            }
+//        }
+//    } catch (Exception e) {
+//            log.error("An error in the input data", e);
+//        }
+//    }
+
+=======
 //
     public static void loginCheck() {
         String login = sc.nextLine();
@@ -109,6 +129,7 @@ public final class Utility implements MagicConstantsInterface {
         log.error("An error in the input data", e);
     }
     }
+>>>>>>> Development
 
 
     public static User identifyUser() {
@@ -238,7 +259,6 @@ public final class Utility implements MagicConstantsInterface {
 
         int amountOfCharacter = randomWithInterval(minLengthSalt, maxLengthSalt);
         char[] saltCh=new char[amountOfCharacter];
-
         for (int i=0;i<saltCh.length;i++){
             int ascii=randomWithInterval(asciiMinValue, asciiMaxValue);
             saltCh[i] = Character.toChars(ascii)[0];
@@ -246,5 +266,13 @@ public final class Utility implements MagicConstantsInterface {
         String salt = new String(saltCh);
         return salt;
     }
-}
+    public static int getRandomInt(int amountNumber){
 
+        char[] saltCh=new char[amountNumber];
+        for (int i=0;i<saltCh.length;i++){
+            int ascii=randomWithInterval(asciiMinNumber, asciiMaxNumber);
+            saltCh[i] = Character.toChars(ascii)[0];
+        }
+        return Integer.parseInt(new String(saltCh));
+    }
+}
