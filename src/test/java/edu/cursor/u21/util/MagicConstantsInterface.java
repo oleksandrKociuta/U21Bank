@@ -11,7 +11,7 @@ public interface MagicConstantsInterface {
     int maxLengthPassword = 15;
     int adultHood = 17;
     String dayOfBirthReg = "^\\d{2}-\\d{2}-\\d{4}$";
-    String telephoneNumberReg = "^\\d{10}$";
+    String telephoneNumberReg = "^(\\+?\\d{12)|\\d{10}$";
     String passportReg = "^[A-Z]{2}\\d{6}$";
     String adminClass = "Admin";
     String bankClientClass = "BankClient";
