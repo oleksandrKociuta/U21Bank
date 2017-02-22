@@ -1,10 +1,10 @@
 package edu.cursor.u21.users.Admin;
 
-import edu.cursor.u21.users.BankClient.Accounts.Credit;
-import edu.cursor.u21.users.BankClient.Accounts.Deposit;
-import edu.cursor.u21.users.BankClient.Accounts.Saving;
-import edu.cursor.u21.users.BankClient.Accounts.Transfer;
-import edu.cursor.u21.users.BankClient.BankClient;
+import edu.cursor.u21.users.bankClient.Accounts.Credit;
+import edu.cursor.u21.users.bankClient.Accounts.Deposit;
+import edu.cursor.u21.users.bankClient.Accounts.Saving;
+import edu.cursor.u21.users.bankClient.Accounts.Transfer;
+import edu.cursor.u21.users.bankClient.BankClient;
 
 import java.util.Comparator;
 import java.util.HashMap;

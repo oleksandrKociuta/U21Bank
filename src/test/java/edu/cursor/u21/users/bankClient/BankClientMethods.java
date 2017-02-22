@@ -1,4 +1,4 @@
-package edu.cursor.u21.users.BankClient;
+package edu.cursor.u21.users.bankClient;
 
 import java.util.HashMap;
 

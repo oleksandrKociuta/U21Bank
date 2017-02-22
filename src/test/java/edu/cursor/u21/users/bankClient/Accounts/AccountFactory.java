@@ -1,6 +1,6 @@
-package edu.cursor.u21.users.BankClient.Accounts;
+package edu.cursor.u21.users.bankClient.Accounts;
 
-import edu.cursor.u21.users.BankClient.BankClient;
+import edu.cursor.u21.users.bankClient.BankClient;
 
 import java.math.BigDecimal;
 
@@ -33,7 +33,7 @@ class AccountFactory {
             transfer.setAccountNumber(00000004);
             bankClient.getAccountHashMap().put(transfer.getAccountNumber(), transfer);
         } else {
-            System.out.printf("\nBankClient with ID %s already have transfer account. \n" +
+            System.out.printf("\nBankClient2 with ID %s already have transfer account. \n" +
                     "Or something went wrong.", bankClient.getId());
         }
     }

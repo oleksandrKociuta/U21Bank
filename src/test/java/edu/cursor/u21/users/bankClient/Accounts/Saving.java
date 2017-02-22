@@ -1,4 +1,4 @@
-package edu.cursor.u21.users.BankClient.Accounts;
+package edu.cursor.u21.users.bankClient.Accounts;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Credit implements Account, Serializable {
+public class Saving implements Account, Serializable{
     private Integer accountNumber;
     private BigDecimal balance;
     private StatusOfAccount status = StatusOfAccount.OPEN;
@@ -44,8 +44,22 @@ public class Credit implements Account, Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Saving saving = (Saving) o;
+        return Objects.equals(getAccountNumber(), saving.getAccountNumber()) &&
+                getCurrency() == saving.getCurrency();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAccountNumber(), getCurrency());
+    }
+
+    @Override
     public String toString() {
-        return "Credit{" +
+        return "Saving{" +
                 "accountNumber=" + accountNumber +
                 ", balance=" + balance +
                 ", status=" + status +
@@ -53,19 +67,5 @@ public class Credit implements Account, Serializable {
                 ", creationDate=" + creationDate +
                 ", expDate=" + expDate +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Credit credit = (Credit) o;
-        return Objects.equals(getAccountNumber(), credit.getAccountNumber()) &&
-                getCurrency() == credit.getCurrency();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getAccountNumber(), getCurrency());
     }
 }

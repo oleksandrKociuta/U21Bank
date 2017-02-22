@@ -1,5 +1,6 @@
 package edu.cursor.u21.bankSystem;
 
+import edu.cursor.u21.util.Login;
 import edu.cursor.u21.util.Registration;
 import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
@@ -12,6 +13,8 @@ import static edu.cursor.u21.util.Utility.getInt;
  */
 @NoArgsConstructor
 public class Menu {
+    private Login login = new Login();
+    private Registration registration = new Registration();
     private static Logger log = Logger.getLogger(Menu.class);
     public void menu() {
         while (true) {
@@ -19,10 +22,10 @@ public class Menu {
             log.info("start app");
             switch (getInt()) {
                 case 1:
-//                    identifyUser().startSession();
+                    login.logIn();
                     break;
                 case 2:
-                    Registration.registration();
+                    registration.registration();
                     break;
                 case 3:
                     log.info("exit");

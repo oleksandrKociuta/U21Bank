@@ -1,27 +1,26 @@
 package edu.cursor.u21.util;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import edu.cursor.u21.users.bankClient.BankClient;
+import lombok.NoArgsConstructor;
+
+import java.util.Map;
 
 /**
  * Created by alexandrmanikhin on 13.02.17.
  */
-
-class Login {
-    public void run() throws FileNotFoundException {
-        Scanner scan = new Scanner (new File("the\\dir\\myFile.extension"));
-        Scanner keyboard = new Scanner (System.in);
-        String user = scan.nextLine();
-        String pass = scan.nextLine();
-
-        String inpUser = keyboard.nextLine();
-        String inpPass = keyboard.nextLine();
-
-        if (inpUser.equals(user) && inpPass.equals(pass)) {
-            System.out.print("Welcome to the system" + user);
-        } else {
-            System.out.print("Oops");
+@NoArgsConstructor
+public class Login {
+    public BankClient logIn() {
+        Map<String, BankClient> list = WriteAndRead.readBankFile();
+        while (true) {
+            System.out.print("\nEnter Login - > ");
+            String login = UtilityScanner.sc.nextLine();
+            System.out.print("Enter password -> ");
+            String password = Utility.getPassword();
+            if (list.values().stream().anyMatch(e -> e.getLogin().equals(login)&& e.getPassword().equals(password))) {
+                return list.get(login);
+            }
+            System.out.println("Repeat !! Wrong Input !");
         }
     }
 }

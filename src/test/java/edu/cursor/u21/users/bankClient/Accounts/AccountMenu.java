@@ -1,7 +1,7 @@
-package edu.cursor.u21.users.BankClient.Accounts;
+package edu.cursor.u21.users.bankClient.Accounts;
 
 import edu.cursor.u21.util.Utility;
-import edu.cursor.u21.users.BankClient.BankClient;
+import edu.cursor.u21.users.bankClient.BankClient;
 
 /**
  * Created by uiv on 2/18/17.

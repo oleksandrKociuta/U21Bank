@@ -5,25 +5,23 @@ package edu.cursor.u21.util;
  */
 public interface MagicConstantsInterface {
 
-    int hexadecimalNumber = 32;
-    int hashByte = 16;
-    int minLengthPassword = 5;
-    int maxLengthPassword = 15;
-    int adultHood = 17;
-    String dayOfBirthReg = "^\\d{2}-\\d{2}-\\d{4}$";
-    String telephoneNumberReg = "^(\\+?\\d{12)|\\d{10}$";
-    String passportReg = "^[A-Z]{2}\\d{6}$";
-    String adminClass = "Admin";
-    String bankClientClass = "BankClient";
-    String fileFormat = ".md";
-    int minLengthSalt=8;
-    int maxLengthSalt=18;
-    int one=1;
-    int asciiMaxValue=126;
-    int asciiMinValue=33;
-    String usersFilePath = "Users.md";
-    String BankFilePath = "BankAccount.md";
-    int asciiMaxNumber=57;
-    int asciiMinNumber=48;
+    int HEXADECIMAL_NUMBER = 32;
+    int HASH_BYTE = 16;
+    int MIN_LENGTH_PASSWORD = 5;
+    int MAX_LENGTH_PASSWORD = 15;
+    int ADULT_HOOD = 17;
+    String DAY_OF_BIRTH_REG = "^\\d{2}-\\d{2}-\\d{4}$";
+    String TELEPHONE_NUMBER_REG = "^(\\+?\\d{12})|(\\d{10})$";
+    String PASSPORT_REG = "^[A-Z]{2}\\d{6}$";
+    int MIN_LENGTH_SALT =8;
+    int MAX_LENGTH_SALT =18;
+    int ONE =1;
+    int ASCII_MAX_VALUE =126;
+    int ASCII_MIN_VALUE =33;
+    String USERS_FILE_PATH = "Users.md";
+    String BANK_FILE_PATH = "BankAccount.md";
+    int ASCII_MAX_NUMBER =57;
+    int ASCII_MIN_NUMBER =48;
+    int MAX_AGE = 150;
 }
 

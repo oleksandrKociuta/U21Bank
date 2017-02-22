@@ -1,4 +1,4 @@
-package edu.cursor.u21.users.BankClient.Accounts;
+package edu.cursor.u21.users.bankClient.Accounts;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -15,13 +15,13 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Transfer implements Account, Serializable {
+public class Credit implements Account, Serializable {
     private Integer accountNumber;
     private BigDecimal balance;
     private StatusOfAccount status = StatusOfAccount.OPEN;
     private Currency currency;
-    private Date creationDate;
-    private Date expDate;
+    private LocalDateTime creationDate;
+    private LocalDateTime expDate;
 
     @Override
     public void increaseAccount(BigDecimal bigDecimal) {
@@ -45,7 +45,7 @@ public class Transfer implements Account, Serializable {
 
     @Override
     public String toString() {
-        return "Transfer{" +
+        return "Credit{" +
                 "accountNumber=" + accountNumber +
                 ", balance=" + balance +
                 ", status=" + status +
@@ -59,9 +59,9 @@ public class Transfer implements Account, Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Transfer transfer = (Transfer) o;
-        return Objects.equals(getAccountNumber(), transfer.getAccountNumber()) &&
-                getCurrency() == transfer.getCurrency();
+        Credit credit = (Credit) o;
+        return Objects.equals(getAccountNumber(), credit.getAccountNumber()) &&
+                getCurrency() == credit.getCurrency();
     }
 
     @Override

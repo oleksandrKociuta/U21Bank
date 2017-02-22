@@ -1,4 +1,4 @@
-package edu.cursor.u21.users.BankClient.Accounts;
+package edu.cursor.u21.users.bankClient.Accounts;
 
 import java.io.Serializable;
 

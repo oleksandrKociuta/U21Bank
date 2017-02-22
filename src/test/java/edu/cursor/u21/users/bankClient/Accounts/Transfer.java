@@ -1,11 +1,12 @@
-package edu.cursor.u21.users.BankClient.Accounts;
+package edu.cursor.u21.users.bankClient.Accounts;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -14,36 +15,22 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Deposit implements Account, Serializable{
+public class Transfer implements Account, Serializable {
     private Integer accountNumber;
     private BigDecimal balance;
     private StatusOfAccount status = StatusOfAccount.OPEN;
     private Currency currency;
-    private LocalDateTime creationDate;
-    private LocalDateTime expDate;
+    private Date creationDate;
+    private Date expDate;
 
     @Override
     public void increaseAccount(BigDecimal bigDecimal) {
         if (!this.status.equals(StatusOfAccount.CLOSED)){
-        this.setBalance(this.balance.add(bigDecimal));
+            this.setBalance(this.balance.add(bigDecimal));
         }
         else {
             System.out.println("this account is closed");
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Deposit deposit = (Deposit) o;
-        return Objects.equals(getAccountNumber(), deposit.getAccountNumber()) &&
-                getCurrency() == deposit.getCurrency();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getAccountNumber(), getCurrency());
     }
 
     @Override
@@ -58,7 +45,7 @@ public class Deposit implements Account, Serializable{
 
     @Override
     public String toString() {
-        return "Deposit{" +
+        return "Transfer{" +
                 "accountNumber=" + accountNumber +
                 ", balance=" + balance +
                 ", status=" + status +
@@ -66,5 +53,19 @@ public class Deposit implements Account, Serializable{
                 ", creationDate=" + creationDate +
                 ", expDate=" + expDate +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transfer transfer = (Transfer) o;
+        return Objects.equals(getAccountNumber(), transfer.getAccountNumber()) &&
+                getCurrency() == transfer.getCurrency();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAccountNumber(), getCurrency());
     }
 }

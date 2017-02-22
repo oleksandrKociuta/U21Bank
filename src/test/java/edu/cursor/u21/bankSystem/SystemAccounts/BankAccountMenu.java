@@ -1,13 +1,10 @@
 package edu.cursor.u21.bankSystem.SystemAccounts;
 
-import edu.cursor.u21.users.BankClient.Accounts.Account;
 import edu.cursor.u21.util.MagicConstantsInterface;
 import edu.cursor.u21.util.Read;
 import edu.cursor.u21.util.Utility;
-import edu.cursor.u21.util.Write;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Oleksandr on 19.02.2017.
@@ -16,7 +13,7 @@ public class BankAccountMenu {
 
     public static void BankAccountMenu(){
 
-    HashMap<Character,DoAccount> accountMap = Read.readFile(MagicConstantsInterface.BankFilePath);
+    HashMap<Character,DoAccount> accountMap = Read.readFile(MagicConstantsInterface.BANK_FILE_PATH);
         System.out.println("choose bank account: c-credit, d-deposit, t-transfer");
         char ch = Utility.sc.nextLine().toLowerCase().charAt(0);
         while (ch!='c'||ch!='d'||ch!='t'){
