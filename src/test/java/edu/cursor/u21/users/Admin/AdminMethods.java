@@ -33,7 +33,7 @@ class AdminMethods {
         System.out.println("Name\t\t\tSurname\t\t\tDate of Birth");
         listOfUsers.forEach((k, v) -> System.out.printf(
                 "%s\t\t\t%s\t\t\t%s\n",
-                 v.getName(), v.getSurname(), v.getDateOfBirth()));
+                v.getName(), v.getSurname(), v.getDateOfBirth()));
     }
 
     static void filterByAge(int age, HashMap<String, BankClient> listOfUsers) {
@@ -41,7 +41,7 @@ class AdminMethods {
         listOfUsers.values().forEach(v -> {
             if (v.getAge() == age) {
                 System.out.printf("%s\t\t\t%s\t\t\t%d\n",
-                         v.getName(), v.getSurname(), v.getAge());
+                        v.getName(), v.getSurname(), v.getAge());
             }
         });
     }
@@ -53,9 +53,10 @@ class AdminMethods {
                 .forEach(System.out::println);
     }
 
-    static void displayUsersAccounts(HashMap<String, BankClient> listOfUsers) {
+    static void displayUsersAccountsNumbers(HashMap<String, BankClient> listOfUsers) {
+        System.out.println("ID \t\t\tName \tSurname \tAccounts");
         listOfUsers.values().forEach(v -> System.out.printf(
-                "ID%s\tName%s\tSurname%s\tAccounts%s\n",
+                "%s\t%s\t%s\t%s\n",
                 v.getId(), v.getName(), v.getSurname(), v.getAccountHashMap()
                         .keySet()
                         .toString()
@@ -63,42 +64,35 @@ class AdminMethods {
     }
 
     static void displayUsersDepositAccounts(HashMap<String, BankClient> listOfUsers) {
-        System.out.println("ID\t\t\tName\t\tSurname\t\t\tAccount");
-        listOfUsers.forEach((k, v) -> System.out.printf(
-                "%s\t%s\t%s\t\t\n",
-                v.getId(), v.getName(), v.getSurname()));
-        listOfUsers.values().forEach(v -> v.getAccountHashMap().values().stream()
-                .filter(a -> (a instanceof Deposit))
-                .collect(Collectors.toList()).forEach(account -> System.out.println(account.toString())));
+        listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
+                .filter(v -> v instanceof Deposit).sorted()
+                .forEach(z -> System.out.println(bankClient.toString() + "\t" + z.toString())));
     }
 
     static void displayUsersCreditAccounts(HashMap<String, BankClient> listOfUsers) {
-        System.out.println("ID\t\t\tName\t\tSurname\t\t\tAccount");
-        listOfUsers.forEach((k, v) -> System.out.printf(
-                "%s\t%s\t%s\t\t\n",
-                v.getId(), v.getName(), v.getSurname()));
-        listOfUsers.values().forEach(v -> v.getAccountHashMap().values().stream()
-                .filter(a -> (a instanceof Credit))
-                .collect(Collectors.toList()).forEach(account -> System.out.println(account.toString())));
+        listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
+                .filter(v -> v instanceof Credit)
+                .forEach(z -> System.out.println(bankClient.toString() + "\t" + z.toString())));
     }
 
-    static void displayUserTransferAccount(HashMap<String, BankClient> listOfUsers) {
-        System.out.println("ID\t\t\tName\t\tSurname\t\t\tAccount");
-        listOfUsers.forEach((k, v) -> System.out.printf(
-                "%s\t%s\t%s\t\t\n",
-                v.getId(), v.getName(), v.getSurname()));
-        listOfUsers.values().forEach(v -> v.getAccountHashMap().values().stream()
-                .filter(a -> (a instanceof Transfer))
-                .collect(Collectors.toList()).forEach(account -> System.out.println(account.toString())));
+    static void displayUsersTransferAccounts(HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
+                .filter(v -> v instanceof Transfer)
+                .forEach(z -> System.out.println(bankClient.toString() + "\t" + z.toString())));
     }
 
-    static void displayUserSavingAccount(HashMap<String, BankClient> listOfUsers) {
-        System.out.println("ID\t\t\tName\t\tSurname\t\t\tAccount");
-        listOfUsers.forEach((k, v) -> System.out.printf(
-                "%s\t%s\t%s\t\t\n",
-                v.getId(), v.getName(), v.getSurname()));
-        listOfUsers.values().forEach(v -> v.getAccountHashMap().values().stream()
-                        .filter(a -> (a instanceof Saving))
-                        .collect(Collectors.toList()).forEach(account -> System.out.println(account.toString())));
+    static void displayUsersSavingAccounts(HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
+                .filter(v -> v instanceof Saving)
+                .forEach(z -> System.out.println(bankClient.toString() + "\t" + z.toString())));
+    }
+
+    private static void displayBankClientAccounts(BankClient bankClient) {
+        System.out.println(bankClient.getId() + "\t" + bankClient.toString());
+        bankClient.getAccountHashMap().forEach((t, u) -> System.out.println("Account ID: " + t.toString() + "\t" + u.toString()));
+    }
+
+    static void displayDetailUsersAccounts(HashMap<String, BankClient> listOfUsers) {
+        listOfUsers.values().forEach(AdminMethods::displayBankClientAccounts);
     }
 }

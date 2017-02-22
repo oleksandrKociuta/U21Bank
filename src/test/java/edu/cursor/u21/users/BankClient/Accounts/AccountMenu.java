@@ -59,7 +59,7 @@ public class AccountMenu {
                     else { AccountFactory.createAccount(new Transfer(), Currency.UAH, bankClient);}
                     break;
                 case 6:
-                    System.out.println("Enter the Account Number without spaces or symbols to Delete account\n");
+                    System.out.println("Enter Account Number without spaces or symbols to Delete account");
                     AccountFactory.deleteAccount(Utility.getInt(), bankClient);
                     break;
                 case 7:

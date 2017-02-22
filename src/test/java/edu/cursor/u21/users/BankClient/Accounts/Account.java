@@ -11,7 +11,4 @@ public interface Account {
     BigDecimal getBalance() ;
     void setBalance(BigDecimal balance);
     Integer getAccountNumber();
-//    Account createAccount(Currency currency);
-//    void deleteAccount(Account account);
-
 }
