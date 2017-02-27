@@ -15,42 +15,62 @@ class AdminMethods {
         throw new IllegalStateException();
     }
 
-    static void displayListOfUsers(HashMap<String, BankClient> listOfUsers) throws NullPointerException {
-        System.out.println("ID\t\t\tName\t\t\tSurname");
-        listOfUsers.forEach((k, v) -> System.out.printf(
-                "%s\t\t\t%s\t\t\t%s\n",
-                v.getId(), v.getName(), v.getSurname()));
+    static void displayListOfUsers(HashMap<String, BankClient> listOfUsers) {
+        try {
+            System.out.println("ID\t\t\tName\t\t\tSurname");
+            listOfUsers.forEach((k, v) -> System.out.printf(
+                    "%s\t\t\t%s\t\t\t%s\n",
+                    v.getId(), v.getName(), v.getSurname()));
+        } catch (NullPointerException e) {
+            System.out.println("No data to display");
+        }
     }
 
-    static void displayUsersPhoneNumbers(HashMap<String, BankClient> listOfUsers) throws NullPointerException {
-        System.out.println("Name\t\t\tSurname\t\t\tPhone");
-        listOfUsers.forEach((k, v) -> System.out.printf(
-                "%s\t\t\t%s\t\t\t%s\n",
-                v.getName(), v.getSurname(), v.getTelephoneNumber()));
+    static void displayUsersPhoneNumbers(HashMap<String, BankClient> listOfUsers) {
+        try {
+            System.out.println("Name\t\t\tSurname\t\t\tPhone");
+            listOfUsers.forEach((k, v) -> System.out.printf(
+                    "%s\t\t\t%s\t\t\t%s\n",
+                    v.getName(), v.getSurname(), v.getTelephoneNumber()));
+        } catch (NullPointerException e) {
+            System.out.println("No data to display");
+        }
     }
 
-    static void displayUsersDateOfBirth(HashMap<String, BankClient> listOfUsers) throws NullPointerException {
-        System.out.println("Name\t\t\tSurname\t\t\tDate of Birth");
-        listOfUsers.forEach((k, v) -> System.out.printf(
-                "%s\t\t\t%s\t\t\t%s\n",
-                v.getName(), v.getSurname(), v.getDateOfBirth()));
+    static void displayUsersDateOfBirth(HashMap<String, BankClient> listOfUsers) {
+        try {
+            System.out.println("Name\t\t\tSurname\t\t\tDate of Birth");
+            listOfUsers.forEach((k, v) -> System.out.printf(
+                    "%s\t\t\t%s\t\t\t%s\n",
+                    v.getName(), v.getSurname(), v.getDateOfBirth()));
+        } catch (NullPointerException e) {
+            System.out.println("No data to display");
+        }
     }
 
-    static void filterByAge(int age, HashMap<String, BankClient> listOfUsers) throws NullPointerException {
-        System.out.println("Name\t\t\tSurname\t\t\tAge");
-        listOfUsers.values().forEach(v -> {
-            if (v.getAge() == age) {
-                System.out.printf("%s\t\t\t%s\t\t\t%d\n",
-                        v.getName(), v.getSurname(), v.getAge());
-            }
-        });
+    static void filterByAge(int age, HashMap<String, BankClient> listOfUsers) {
+        try {
+            System.out.println("Name\t\t\tSurname\t\t\tAge");
+            listOfUsers.values().forEach(v -> {
+                if (v.getAge() == age) {
+                    System.out.printf("%s\t\t\t%s\t\t\t%d\n",
+                            v.getName(), v.getSurname(), v.getAge());
+                }
+            });
+        } catch (NullPointerException e) {
+            System.out.println("No data to display");
+        }
     }
 
-    static void printBankClientsBySurname(HashMap<String, BankClient> listOfUsers) throws NullPointerException {
-        listOfUsers.values().stream()
-                .sorted(Comparator.comparing(BankClient::getSurname))
-                .collect(Collectors.toList())
-                .forEach(System.out::println);
+    static void printBankClientsBySurname(HashMap<String, BankClient> listOfUsers) {
+        try {
+            listOfUsers.values().stream()
+                    .sorted(Comparator.comparing(BankClient::getSurname))
+                    .collect(Collectors.toList())
+                    .forEach(System.out::println);
+        } catch (NullPointerException e) {
+            System.out.println("No data to display");
+        }
     }
 
     static void displayUsersAccountsNumbers(HashMap<String, BankClient> listOfUsers) {
@@ -77,7 +97,7 @@ class AdminMethods {
         }
     }
 
-    static void displayUsersCreditAccounts(HashMap<String, BankClient> listOfUsers) throws NullPointerException {
+    static void displayUsersCreditAccounts(HashMap<String, BankClient> listOfUsers) {
         try {
             listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
                     .filter(v -> v instanceof Credit)
@@ -87,7 +107,7 @@ class AdminMethods {
         }
     }
 
-    static void displayUsersTransferAccounts(HashMap<String, BankClient> listOfUsers) throws NullPointerException {
+    static void displayUsersTransferAccounts(HashMap<String, BankClient> listOfUsers) {
         try {
             listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
                     .filter(v -> v instanceof Transfer)
@@ -97,7 +117,7 @@ class AdminMethods {
         }
     }
 
-    static void displayUsersSavingAccounts(HashMap<String, BankClient> listOfUsers) throws NullPointerException {
+    static void displayUsersSavingAccounts(HashMap<String, BankClient> listOfUsers) {
         try {
             listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
                     .filter(v -> v instanceof Saving)
@@ -107,9 +127,13 @@ class AdminMethods {
         }
     }
 
-    private static void displayBankClientAccounts(BankClient bankClient) throws NullPointerException {
-        System.out.println(bankClient.getId() + "\t" + bankClient.toString());
-        bankClient.getAccountHashMap().forEach((t, u) -> System.out.println("Account ID: " + t + "\t" + u.toString()));
+    private static void displayBankClientAccounts(BankClient bankClient) {
+        try {
+            System.out.println(bankClient.getId() + "\t" + bankClient.toString());
+            bankClient.getAccountHashMap().forEach((t, u) -> System.out.println("Account ID: " + t + "\t" + u.toString()));
+        } catch (NullPointerException e) {
+            System.out.println("No data to display");
+        }
     }
 
     static void displayDetailUsersAccounts(HashMap<String, BankClient> listOfUsers) {

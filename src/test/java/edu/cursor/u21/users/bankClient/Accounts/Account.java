@@ -7,7 +7,8 @@ import java.math.BigDecimal;
  */
 public interface Account {
     void increaseAccount(BigDecimal bigDecimal);
-    void decreaseAccount(Account account, BigDecimal bigDecimal);
+
+    void decreaseAccount(BigDecimal bigDecimal);
     BigDecimal getBalance() ;
     void setBalance(BigDecimal balance);
 

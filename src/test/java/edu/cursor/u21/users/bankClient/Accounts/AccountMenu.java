@@ -27,7 +27,11 @@ public class AccountMenu {
             switch (Utility.getInt()) {
                 case 1:
                     System.out.println("Your Accounts list:\n Account Number\t\t\t\t\t Account Type");
-                    bankClient.getAccountHashMap().forEach((k, v) -> System.out.println(k + "\t\t" + v.toString()));
+                    try {
+                        bankClient.getAccountHashMap().forEach((k, v) -> System.out.println(k + "\t\t" + v.toString()));
+                    } catch (NullPointerException e) {
+                        System.out.println("You don't have any accounts(deposit, credit, saving or transfer)");
+                    }
                     break;
                 case 2:
                     System.out.println("Choose currency for Credit: 1 - EUR, 2 - USD, 3 - PLN, 4 - UAH");
@@ -44,11 +48,12 @@ public class AccountMenu {
                     break;
                 case 3:
                     System.out.println("Choose currency for Deposit: 1 - EUR, 2 - USD, 3 - PLN, 4 - UAH");
-                    if (Utility.getInt() == 1) {
+                    int operator1 = Utility.getInt();
+                    if (operator1 == 1) {
                         AccountFactory.createAccount(new Deposit(), Currency.EUR, bankClient);
-                    } else if (Utility.getInt() == 2) {
+                    } else if (operator1 == 2) {
                         AccountFactory.createAccount(new Deposit(), Currency.USD, bankClient);
-                    } else if (Utility.getInt() == 3) {
+                    } else if (operator1 == 3) {
                         AccountFactory.createAccount(new Deposit(), Currency.PLN, bankClient);
                     } else {
                         AccountFactory.createAccount(new Deposit(), Currency.UAH, bankClient);
@@ -56,11 +61,12 @@ public class AccountMenu {
                     break;
                 case 4:
                     System.out.println("Choose currency for Saving account: 1 - EUR, 2 - USD, 3 - PLN, 4 - UAH");
-                    if (Utility.getInt() == 1) {
+                    int operator2 = Utility.getInt();
+                    if (operator2 == 1) {
                         AccountFactory.createAccount(new Saving(), Currency.EUR, bankClient);
-                    } else if (Utility.getInt() == 2) {
+                    } else if (operator2 == 2) {
                         AccountFactory.createAccount(new Saving(), Currency.USD, bankClient);
-                    } else if (Utility.getInt() == 3) {
+                    } else if (operator2 == 3) {
                         AccountFactory.createAccount(new Saving(), Currency.PLN, bankClient);
                     } else {
                         AccountFactory.createAccount(new Saving(), Currency.UAH, bankClient);
@@ -68,11 +74,12 @@ public class AccountMenu {
                     break;
                 case 5:
                     System.out.println("Choose currency for Transfer account: 1 - EUR, 2 - USD, 3 - PLN, 4 - UAH");
-                    if (Utility.getInt() == 1) {
+                    int operator3 = Utility.getInt();
+                    if (operator3 == 1) {
                         AccountFactory.createAccount(new Transfer(), Currency.EUR, bankClient);
-                    } else if (Utility.getInt() == 2) {
+                    } else if (operator3 == 2) {
                         AccountFactory.createAccount(new Transfer(), Currency.USD, bankClient);
-                    } else if (Utility.getInt() == 3) {
+                    } else if (operator3 == 3) {
                         AccountFactory.createAccount(new Transfer(), Currency.PLN, bankClient);
                     } else {
                         AccountFactory.createAccount(new Transfer(), Currency.UAH, bankClient);
@@ -99,7 +106,6 @@ public class AccountMenu {
                     });
                     break;
                 case 9:
-                    System.out.println("For exit press 9");
                     x = false;
                     break;
                 default:

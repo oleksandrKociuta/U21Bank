@@ -48,7 +48,7 @@ public class Deposit implements Account, Serializable{
     }
 
     @Override
-    public void decreaseAccount(Account account, BigDecimal bigDecimal) {
+    public void decreaseAccount(BigDecimal bigDecimal) {
         if (!this.status.equals(StatusOfAccount.CLOSED)){
             this.setBalance(this.balance.subtract(bigDecimal));
         }

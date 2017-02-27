@@ -1,5 +1,6 @@
 package edu.cursor.u21.users.bankClient.Accounts;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"balance", "currency"})
 public class Credit implements Account, Serializable {
     private String accountNumber;
     private BigDecimal balance;
@@ -34,7 +36,7 @@ public class Credit implements Account, Serializable {
     }
 
     @Override
-    public void decreaseAccount(Account account, BigDecimal bigDecimal) {
+    public void decreaseAccount(BigDecimal bigDecimal) {
         if (!this.status.equals(StatusOfAccount.CLOSED)){
             this.setBalance(this.balance.subtract(bigDecimal));
         }
