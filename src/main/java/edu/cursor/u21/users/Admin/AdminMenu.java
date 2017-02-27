@@ -17,7 +17,6 @@ public class AdminMenu {
 
     public static void adminMenu(HashMap<String, BankClient> listOfUsers) {
         System.out.println("Enter \n" +
-<<<<<<< HEAD:src/main/java/edu/cursor/u21/users/Admin/AdminMenu.java
                 "1 - for list of BankClients\n" +
                 "2 - for list of User operations (ID is needed to be entered)\n" +
                 "3 - for list of Users Phone Numbers\n" +
@@ -29,20 +28,6 @@ public class AdminMenu {
                 "9 - for list of User SAVING Accounts\n" +
                 "10 - Print Bank Clients list sorted by username\n" +
                 "11 - for EXIT\n");
-=======
-                "1 - for a list of BankClients\n" +
-                "2 - to filter Bank Clients by age (Age is needed to be entered)\n" +
-                "3 - for a list of Users Phone Numbers\n" +
-                "4 - for a list of Users date of birth\n" +
-                "5 - for a list of Users Accounts\n" +
-                "6 - for a list of Users CREDIT Accounts\n" +
-                "7 - for a list of Users DEPOSIT Accounts\n" +
-                "8 - for a list of User TRANSFER Accounts\n" +
-                "9 - for a list of User SAVING Accounts\n" +
-                "10 - Print Bank Clients list sorted by username\n" +
-                "11 - to display detail Bank Clients accounts\n" +
-                "12 - for EXIT\n");
->>>>>>> 86cacdbd4bbf943542a6050d1bc5f86645130ea5:src/test/java/edu/cursor/u21/users/Admin/AdminMenu.java
         boolean x = true;
         while (x) {
             switch (Utility.getInt()) {
@@ -51,13 +36,8 @@ public class AdminMenu {
                     AdminMethods.displayListOfUsers(listOfUsers);
                     break;
                 case 2:
-<<<<<<< HEAD:src/main/java/edu/cursor/u21/users/Admin/AdminMenu.java
                     System.out.printf("List of user operations. \n " +
                             "Enter User age to filter by:");
-=======
-                    System.out.printf("Filter Bank Clients by age. \n " +
-                            "Enter age to filter by:");
->>>>>>> 86cacdbd4bbf943542a6050d1bc5f86645130ea5:src/test/java/edu/cursor/u21/users/Admin/AdminMenu.java
                     AdminMethods.filterByAge(scanInt(), listOfUsers);
                     break;
                 case 3:
