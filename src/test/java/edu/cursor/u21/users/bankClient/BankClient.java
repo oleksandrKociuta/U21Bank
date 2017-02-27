@@ -33,7 +33,7 @@ public class BankClient implements User, Serializable {
     private int depositAccount;
     private int creditAccount;
     private int transferAccount;
-    private Map<Integer, Account> accountHashMap;
+    private Map<String, Account> accountHashMap;
     Roles role = Roles.USER;
 
     @Override

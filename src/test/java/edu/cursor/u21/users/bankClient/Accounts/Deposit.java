@@ -3,6 +3,7 @@ package edu.cursor.u21.users.bankClient.Accounts;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 public class Deposit implements Account, Serializable{
-    private Integer accountNumber;
+    private String accountNumber;
     private BigDecimal balance;
     private StatusOfAccount status = StatusOfAccount.OPEN;
     private Currency currency;

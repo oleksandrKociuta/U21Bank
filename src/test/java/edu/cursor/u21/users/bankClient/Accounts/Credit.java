@@ -16,7 +16,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 public class Credit implements Account, Serializable {
-    private Integer accountNumber;
+    private String accountNumber;
     private BigDecimal balance;
     private StatusOfAccount status = StatusOfAccount.OPEN;
     private Currency currency;

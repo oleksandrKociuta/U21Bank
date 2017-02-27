@@ -1,7 +1,7 @@
 package edu.cursor.u21.users.bankClient.Accounts;
 
-import edu.cursor.u21.util.Utility;
 import edu.cursor.u21.users.bankClient.BankClient;
+import edu.cursor.u21.util.Utility;
 
 /**
  * Created by uiv on 2/18/17.
@@ -31,11 +31,12 @@ public class AccountMenu {
                     break;
                 case 2:
                     System.out.println("Choose currency for Credit: 1 - EUR, 2 - USD, 3 - PLN, 4 - UAH");
-                    if (Utility.getInt() == 1) {
+                    int operator = Utility.getInt();
+                    if (operator == 1) {
                         AccountFactory.createAccount(new Credit(), Currency.EUR, bankClient);
-                    } else if (Utility.getInt() == 2) {
+                    } else if (operator == 2) {
                         AccountFactory.createAccount(new Credit(), Currency.USD, bankClient);
-                    } else if (Utility.getInt() == 3) {
+                    } else if (operator == 3) {
                         AccountFactory.createAccount(new Credit(), Currency.PLN, bankClient);
                     } else {
                         AccountFactory.createAccount(new Credit(), Currency.UAH, bankClient);
@@ -78,14 +79,14 @@ public class AccountMenu {
                     }
                     break;
                 case 6:
-                    System.out.println("Enter the Account Number without spaces or symbols to Delete account\n");
-                    AccountFactory.deleteAccount(Utility.getInt(), bankClient);
+                    System.out.println("Enter the Account Number without spaces to Delete account\n");
+                    AccountFactory.deleteAccount(Utility.sc.nextLine(), bankClient);
                     break;
                 case 7:
                     System.out.println("Information on deposit account\n");
                     bankClient.getAccountHashMap().values().forEach(a -> {
                         if (a instanceof Deposit) {
-                            a.toString();
+                            System.out.println(a.toString());
                         }
                     });
                     break;
@@ -93,7 +94,7 @@ public class AccountMenu {
                     System.out.println("Information on credit account\n");
                     bankClient.getAccountHashMap().values().forEach(a -> {
                         if (a instanceof Credit) {
-                            a.toString();
+                            System.out.println(a.toString());
                         }
                     });
                     break;

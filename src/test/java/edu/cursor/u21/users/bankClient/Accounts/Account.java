@@ -10,7 +10,8 @@ public interface Account {
     void decreaseAccount(Account account, BigDecimal bigDecimal);
     BigDecimal getBalance() ;
     void setBalance(BigDecimal balance);
-    Integer getAccountNumber();
+
+    String getAccountNumber();
 //    Account createAccount(Currency currency);
 //    void deleteAccount(Account account);
 

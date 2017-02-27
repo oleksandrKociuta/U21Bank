@@ -1,19 +1,16 @@
 package edu.cursor.u21.bankSystem;
 
-import edu.cursor.u21.users.Roles;
-import edu.cursor.u21.users.bankClient.BankClient;
-import edu.cursor.u21.util.WriteAndRead;
-
-import java.util.HashMap;
-import java.util.Map;
+import edu.cursor.u21.users.Admin.AdminMenu;
+import edu.cursor.u21.util.MagicConstantsInterface;
+import edu.cursor.u21.util.Read;
 
 /**
  * Created by o.kociuta on 07.02.2017.
  */
 public class Main {
     public static void main(String[] args) {
-        Menu mainMenu = new Menu();
-        mainMenu.menu();
+//        Menu mainMenu = new Menu();
+//        mainMenu.menu();
 //        Map<String, BankClient> list = new HashMap<>();
 //        BankClient b = new BankClient();
 //        b.setLogin("Admin_Test");
@@ -26,6 +23,6 @@ public class Main {
 //        list.put("Admin_Test", b);
 //        WriteAndRead.writeBankFile(list);
 // IF you want to add some administrators;
-
+        AdminMenu.adminMenu(Read.readFile(MagicConstantsInterface.USERS_FILE_PATH));
     }
 }
