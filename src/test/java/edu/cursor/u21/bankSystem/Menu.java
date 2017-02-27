@@ -13,9 +13,10 @@ import static edu.cursor.u21.util.Utility.getInt;
  */
 @NoArgsConstructor
 public class Menu {
+    private static Logger log = Logger.getLogger(Menu.class);
     private Login login = new Login();
     private Registration registration = new Registration();
-    private static Logger log = Logger.getLogger(Menu.class);
+
     public void menu() {
         while (true) {
             System.out.print("\n1.Login in system U21Bank.\n2.Register in system U21Bank.\n3.Exit.\nChoose option - >> ");

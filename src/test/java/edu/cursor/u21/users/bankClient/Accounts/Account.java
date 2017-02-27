@@ -9,7 +9,9 @@ public interface Account {
     void increaseAccount(BigDecimal bigDecimal);
 
     void decreaseAccount(BigDecimal bigDecimal);
-    BigDecimal getBalance() ;
+
+    BigDecimal getBalance();
+
     void setBalance(BigDecimal balance);
 
     String getAccountNumber();

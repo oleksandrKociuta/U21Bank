@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class Transfer implements Serializable, DoAccount{
+public class Transfer implements Serializable, DoAccount {
 
     //private static Transfer instance;
     private int uah;
@@ -19,7 +19,7 @@ public class Transfer implements Serializable, DoAccount{
     private int pln;
     private int eur;
 
-    public Transfer(){
+    public Transfer() {
     }
 
 //    public static Transfer getInstance(){
@@ -31,6 +31,6 @@ public class Transfer implements Serializable, DoAccount{
 
     @Override
     public void getAmountOfMoney() {
-        System.out.println("In transfer account bank have:\n"+uah+" UAH\n"+usd+" USD\n"+pln+" PLN\n"+eur+" EUR");
+        System.out.println("In transfer account bank have:\n" + uah + " UAH\n" + usd + " USD\n" + pln + " PLN\n" + eur + " EUR");
     }
 }

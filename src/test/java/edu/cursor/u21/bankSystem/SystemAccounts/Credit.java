@@ -19,7 +19,7 @@ public class Credit implements Serializable, DoAccount {
     private int pln;
     private int eur;
 
-    public Credit(){
+    public Credit() {
     }
 
 //    public static Credit getInstance(){
@@ -32,6 +32,6 @@ public class Credit implements Serializable, DoAccount {
 
     @Override
     public void getAmountOfMoney() {
-        System.out.println("In credit account bank have:\n"+uah+" UAH\n"+usd+" USD\n"+pln+" PLN\n"+eur+" EUR");
+        System.out.println("In credit account bank have:\n" + uah + " UAH\n" + usd + " USD\n" + pln + " PLN\n" + eur + " EUR");
     }
 }

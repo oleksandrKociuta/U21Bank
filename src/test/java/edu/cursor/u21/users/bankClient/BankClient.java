@@ -20,6 +20,7 @@ import java.util.Map;
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"dateOfBirth", "account", "depositAccount", "creditAccount", "transferAccount", "role", "accountHashMap"})
 public class BankClient implements User, Serializable {
+    Roles role = Roles.USER;
     private String login;
     private String password;
     private String name;
@@ -34,14 +35,13 @@ public class BankClient implements User, Serializable {
     private int creditAccount;
     private int transferAccount;
     private Map<String, Account> accountHashMap;
-    Roles role = Roles.USER;
 
     @Override
-    public void startSession(HashMap<String,BankClient> usersList) {
+    public void startSession(HashMap<String, BankClient> usersList) {
         BankClientMethods.bankClientMenu(usersList);
     }
 
     public String toString() {
-        return getSurname() + " " + getName() ;
+        return getSurname() + " " + getName();
     }
 }

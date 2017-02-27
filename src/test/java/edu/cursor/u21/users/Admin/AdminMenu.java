@@ -26,7 +26,7 @@ public class AdminMenu {
                 "7 - for a list of Users DEPOSIT Accounts\n" +
                 "8 - for a list of User TRANSFER Accounts\n" +
                 "9 - for a list of User SAVING Accounts\n" +
-                "10 - Print Bank Clients list sorted by username\n"+
+                "10 - Print Bank Clients list sorted by username\n" +
                 "11 - to display detail Bank Clients accounts\n" +
                 "12 - for EXIT\n");
         boolean x = true;

@@ -10,15 +10,15 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-public class Deposit implements Serializable, DoAccount{
+public class Deposit implements Serializable, DoAccount {
 
-   //private static Deposit instance;
+    //private static Deposit instance;
     private int uah;
     private int usd;
     private int pln;
     private int eur;
 
-    public Deposit(){
+    public Deposit() {
     }
 
 //    public static Deposit getInstance(){
@@ -30,6 +30,6 @@ public class Deposit implements Serializable, DoAccount{
 
     @Override
     public void getAmountOfMoney() {
-        System.out.println("In deposit account bank have:\n"+uah+" UAH\n"+usd+" USD\n"+pln+" PLN\n"+eur+" EUR");
+        System.out.println("In deposit account bank have:\n" + uah + " UAH\n" + usd + " USD\n" + pln + " PLN\n" + eur + " EUR");
     }
 }

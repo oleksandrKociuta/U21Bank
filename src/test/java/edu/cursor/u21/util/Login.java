@@ -17,7 +17,7 @@ public class Login {
             String login = UtilityScanner.sc.nextLine();
             System.out.print("Enter password -> ");
             String password = Utility.getPassword();
-            if (list.values().stream().anyMatch(e -> e.getLogin().equals(login)&& e.getPassword().equals(password))) {
+            if (list.values().stream().anyMatch(e -> e.getLogin().equals(login) && e.getPassword().equals(password))) {
                 return list.get(login);
             }
             System.out.println("Repeat !! Wrong Input !");
