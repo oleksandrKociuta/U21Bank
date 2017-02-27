@@ -118,6 +118,7 @@
 2017-02-22 15:23:25 INFO  Menu:22 - start app
 2017-02-22 15:23:48 INFO  Menu:22 - start app
 2017-02-22 15:23:57 INFO  Menu:31 - exit
+<<<<<<< HEAD
 2017-02-23 20:48:52 INFO  Menu:22 - start app
 2017-02-23 20:54:45 INFO  Menu:22 - start app
 2017-02-23 20:57:21 INFO  Menu:22 - start app
@@ -149,3 +150,7 @@
 2017-02-27 16:28:00 INFO  Menu:28 - start app
 2017-02-27 16:28:19 INFO  Menu:28 - start app
 2017-02-27 16:29:36 INFO  Menu:42 - exit
+=======
+2017-02-27 13:06:59 INFO  Menu:22 - start app
+2017-02-27 13:07:11 INFO  Menu:31 - exit
+>>>>>>> 86cacdbd4bbf943542a6050d1bc5f86645130ea5

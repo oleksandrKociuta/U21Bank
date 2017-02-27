@@ -1,5 +1,6 @@
 package edu.cursor.u21.users.bankClient.Accounts;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,7 +8,6 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * Created by uiv on 2/15/17.
@@ -15,8 +15,9 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"balance", "currency"})
 public class Credit implements Account, Serializable {
-    private Integer accountNumber;
+    private String accountNumber;
     private BigDecimal balance;
     private StatusOfAccount status = StatusOfAccount.OPEN;
     private Currency currency;
@@ -25,20 +26,18 @@ public class Credit implements Account, Serializable {
 
     @Override
     public void increaseAccount(BigDecimal bigDecimal) {
-        if (!this.status.equals(StatusOfAccount.CLOSED)){
+        if (!this.status.equals(StatusOfAccount.CLOSED)) {
             this.setBalance(this.balance.add(bigDecimal));
-        }
-        else {
+        } else {
             System.out.println("this account is closed");
         }
     }
 
     @Override
-    public void decreaseAccount(Account account, BigDecimal bigDecimal) {
-        if (!this.status.equals(StatusOfAccount.CLOSED)){
+    public void decreaseAccount(BigDecimal bigDecimal) {
+        if (!this.status.equals(StatusOfAccount.CLOSED)) {
             this.setBalance(this.balance.subtract(bigDecimal));
-        }
-        else {
+        } else {
             System.out.println("this account is closed");
         }
     }
@@ -53,19 +52,5 @@ public class Credit implements Account, Serializable {
                 ", creationDate=" + creationDate +
                 ", expDate=" + expDate +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Credit credit = (Credit) o;
-        return Objects.equals(getAccountNumber(), credit.getAccountNumber()) &&
-                getCurrency() == credit.getCurrency();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getAccountNumber(), getCurrency());
     }
 }

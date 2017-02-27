@@ -9,9 +9,9 @@ public class UtilityScanner {
 
     public static Scanner sc = new Scanner(System.in);
 
-    public  static int scanInt(){
+    public static int scanInt() {
         Scanner scanner = new Scanner(System.in);
-        while(!scanner.hasNextInt()){
+        while (!scanner.hasNextInt()) {
             System.out.println("Wrong choice, repeat:");
             scanner.nextLine();
         }

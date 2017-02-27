@@ -16,10 +16,10 @@ public class Read {
 
         try {
             FileInputStream fileInputStream = new FileInputStream(path);
-        while (fileInputStream.available() >1){
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            hashMap = (HashMap) objectInputStream.readObject();
-        }
+            while (fileInputStream.available() > 1) {
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                hashMap = (HashMap) objectInputStream.readObject();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e1) {

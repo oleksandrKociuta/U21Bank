@@ -19,9 +19,13 @@ import static edu.cursor.u21.util.Utility.getInt;
  */
 @NoArgsConstructor
 public class Menu {
+    private static Logger log = Logger.getLogger(Menu.class);
     private Login login = new Login();
     private Registration registration = new Registration();
+<<<<<<< HEAD:src/main/java/edu/cursor/u21/bankSystem/Menu.java
     private static Logger log = Logger.getLogger(Menu.class);
+=======
+>>>>>>> 86cacdbd4bbf943542a6050d1bc5f86645130ea5:src/test/java/edu/cursor/u21/bankSystem/Menu.java
 
     public void menu() {
         while (true) {

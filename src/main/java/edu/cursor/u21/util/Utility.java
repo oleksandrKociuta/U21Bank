@@ -15,13 +15,13 @@ import java.util.Scanner;
  */
 public final class Utility implements MagicConstantsInterface {
 
+    public static Scanner sc = new Scanner(System.in);
+    private static Logger log = Logger.getLogger(Utility.class);
+    private static Random random = new Random();
+
     private Utility() {
         throw new IllegalStateException();
     }
-
-    private static Logger log = Logger.getLogger(Utility.class);
-    public static Scanner sc = new Scanner(System.in);
-    private static Random random = new Random();
 
     public static String getPassword() {
 
