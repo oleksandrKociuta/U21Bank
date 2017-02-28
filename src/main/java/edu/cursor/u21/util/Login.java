@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
 
+import static edu.cursor.u21.util.Utility.getStringForPassword;
+
 /**
  * Created by alexandrmanikhin on 13.02.17.
  */
@@ -24,7 +26,7 @@ public class Login {
             System.out.print("\nEnter Login - > ");
             String login = UtilityScanner.sc.nextLine();
             System.out.print("Enter password -> ");
-            String password = Utility.getPassword();
+            String password = Utility.getPassword(getStringForPassword());
             if (list.values().stream().anyMatch(e -> e.getLogin().equals(login) && e.getPassword().equals(password))) {
                 return list.get(login);
             }

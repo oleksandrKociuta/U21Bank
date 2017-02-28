@@ -23,9 +23,9 @@ public final class Utility implements MagicConstantsInterface {
         throw new IllegalStateException();
     }
 
-    public static String getPassword() {
+    public static String getPassword(String stringForPassword) {
 
-        String password = getStringForPassword();
+        String password = stringForPassword;
         String salt = "Random$SaltValue#WithSpecialCharacters12@$@4&#%^$*";
         password = password + salt;
         MessageDigest messageDigest = null;
@@ -46,14 +46,14 @@ public final class Utility implements MagicConstantsInterface {
         return hashPassword;
     }
 
-    private static String getStringForPassword() {
-        String getPassword = sc.nextLine();
-        while (getPassword.length() < MIN_LENGTH_PASSWORD || MAX_LENGTH_PASSWORD < getPassword.length()) {
+    public static String getStringForPassword() {
+        String stringForPassword = sc.nextLine();
+        while (stringForPassword.length() < MIN_LENGTH_PASSWORD || MAX_LENGTH_PASSWORD < stringForPassword.length()) {
             System.out.println("Your password must be 5-15 characters.\n" +
                     "Try again:");
-            getPassword = sc.nextLine();
+            stringForPassword = sc.nextLine();
         }
-        return getPassword;
+        return stringForPassword;
     }
 
     public static int getInt() {
