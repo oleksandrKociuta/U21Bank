@@ -1,0 +1,44 @@
+2017-02-12 13:19:35 INFO  Menu:16 - Start program
+2017-02-12 13:19:43 INFO  LogIn:24 - Log in system
+2017-02-12 15:50:33 INFO  Menu:16 - Start program
+2017-02-12 15:50:35 INFO  LogIn:24 - Log in system
+2017-02-12 15:51:48 INFO  Menu:16 - Start program
+2017-02-12 15:51:50 INFO  LogIn:24 - Log in system
+2017-02-12 15:53:01 INFO  Menu:16 - Start program
+2017-02-12 15:53:03 INFO  LogIn:24 - Log in system
+2017-02-12 15:53:24 INFO  Menu:16 - Start program
+2017-02-12 15:53:28 INFO  LogIn:24 - Log in system
+2017-02-12 15:54:20 INFO  Menu:16 - Start program
+2017-02-12 15:54:22 INFO  LogIn:24 - Log in system
+2017-02-12 15:54:44 INFO  Menu:16 - Start program
+2017-02-12 15:54:48 INFO  LogIn:24 - Log in system
+2017-02-12 15:55:19 INFO  Menu:16 - Start program
+2017-02-12 15:55:20 INFO  LogIn:24 - Log in system
+2017-02-12 15:55:57 INFO  Menu:16 - Start program
+2017-02-12 15:55:59 INFO  LogIn:24 - Log in system
+2017-02-12 15:57:06 INFO  Menu:16 - Start program
+2017-02-12 15:57:08 INFO  LogIn:24 - Log in system
+2017-02-12 15:57:55 INFO  Menu:16 - Start program
+2017-02-12 15:57:57 INFO  LogIn:24 - Log in system
+2017-02-12 16:04:45 INFO  Menu:14 - Start program
+2017-02-12 16:04:46 INFO  LogIn:24 - Log in system
+2017-02-12 16:05:29 INFO  Menu:14 - Start program
+2017-02-12 16:05:31 INFO  LogIn:24 - Log in system
+2017-02-13 06:14:15 INFO  Menu:20 - start app
+2017-02-13 06:14:57 INFO  Registration:46 - register user: 123456
+2017-02-13 06:14:57 INFO  Menu:20 - start app
+2017-02-13 06:15:34 INFO  Menu:20 - start app
+2017-02-13 06:15:43 INFO  Utility:110 - log as user: 123456
+2017-02-13 06:15:43 INFO  Menu:20 - start app
+2017-02-13 06:15:51 INFO  Menu:29 - exit
+2017-02-13 06:33:18 INFO  Menu:20 - start app
+2017-02-13 06:35:47 INFO  Registration:46 - register user: 11111
+2017-02-13 06:35:47 INFO  Menu:20 - start app
+2017-02-13 06:35:51 INFO  Menu:29 - exit
+2017-02-13 16:48:43 INFO  Menu:20 - start app
+2017-02-13 16:50:58 INFO  Registration:36 - register user: Maks
+2017-02-13 16:50:58 INFO  Menu:20 - start app
+2017-02-13 16:51:10 INFO  Utility:110 - log as user: Maks
+2017-02-13 16:51:10 INFO  Menu:20 - start app
+2017-02-13 16:51:27 INFO  Menu:29 - exit
+2017-02-13 18:31:36 INFO  Menu:20 - start app
