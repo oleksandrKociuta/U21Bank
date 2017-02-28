@@ -24,9 +24,9 @@ public class Menu {
     private static Logger log = Logger.getLogger(Menu.class);
 
     public void menu() {
+        log.info("start app");
         while (true) {
-            System.out.print("\n1.Login in system U21Bank.\n2.Register in system U21Bank.\n3.Exit.\nChoose option - >> ");
-            log.info("start app");
+            System.out.print("\n1. Sign in system U21Bank.\n2.Sign up system U21Bank.\n3.Exit.\nChoose option - >> ");
             switch (getInt()) {
                 case 1:
                     BankClient bankClient = login.logIn();
