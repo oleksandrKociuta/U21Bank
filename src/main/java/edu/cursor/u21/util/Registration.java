@@ -6,6 +6,8 @@ import edu.cursor.u21.users.bankClient.BankClient;
 import java.util.Map;
 import java.util.UUID;
 
+import static edu.cursor.u21.util.Utility.getStringForPassword;
+
 /**
  * Created by Sabat on 12.02.2017.
  */
@@ -19,7 +21,7 @@ public class Registration {
         System.out.print("\nEnter your login - > ");
         bankClient.setLogin(Utility.loginCheck());
         System.out.print("Enter your password - > ");
-        bankClient.setPassword(Utility.getPassword());
+        bankClient.setPassword(Utility.getPassword(getStringForPassword()));
         System.out.print("Enter your name - > ");
         bankClient.setName(Utility.sc.nextLine());
         System.out.print("Enter your surname - > ");

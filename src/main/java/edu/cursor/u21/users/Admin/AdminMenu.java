@@ -21,11 +21,11 @@ public class AdminMenu {
                 "2 - for list of User operations (ID is needed to be entered)\n" +
                 "3 - for list of Users Phone Numbers\n" +
                 "4 - for list of Users date of birth\n" +
-                "5 - for list of Users Accounts\n" +
-                "6 - for list of Users CREDIT Accounts\n" +
-                "7 - for list of Users DEPOSIT Accounts\n" +
-                "8 - for list of User TRANSFER Accounts\n" +
-                "9 - for list of User SAVING Accounts\n" +
+                "5 - for list of Users Account\n" +
+                "6 - for list of Users CREDIT Account\n" +
+                "7 - for list of Users DEPOSIT Account\n" +
+                "8 - for list of User TRANSFER Account\n" +
+                "9 - for list of User SAVING Account\n" +
                 "10 - Print Bank Clients list sorted by username\n" +
                 "11 - for EXIT\n");
         boolean x = true;
@@ -49,23 +49,23 @@ public class AdminMenu {
                     AdminMethods.displayUsersDateOfBirth(listOfUsers);
                     break;
                 case 5:
-                    System.out.println("Bank Clients Accounts Numbers");
+                    System.out.println("Bank Clients Account Numbers");
                     AdminMethods.displayUsersAccountsNumbers(listOfUsers);
                     break;
                 case 6:
-                    System.out.println("Bank Clients Credit Accounts");
+                    System.out.println("Bank Clients Credit Account");
                     AdminMethods.displayUsersCreditAccounts(listOfUsers);
                     break;
                 case 7:
-                    System.out.println("Bank Clients Deposit Accounts");
+                    System.out.println("Bank Clients Deposit Account");
                     AdminMethods.displayUsersDepositAccounts(listOfUsers);
                     break;
                 case 8:
-                    System.out.println("Bank Clients Transfer Accounts");
+                    System.out.println("Bank Clients Transfer Account");
                     AdminMethods.displayUsersTransferAccounts(listOfUsers);
                     break;
                 case 9:
-                    System.out.println("Bank Clients Saving Accounts");
+                    System.out.println("Bank Clients Saving Account");
                     AdminMethods.displayUsersSavingAccounts(listOfUsers);
                     break;
                 case 10:

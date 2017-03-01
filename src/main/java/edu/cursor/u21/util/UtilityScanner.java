@@ -17,4 +17,12 @@ public class UtilityScanner {
         }
         return scanner.nextInt();
     }
+    public static int scanNumberFromZeroToThree() {
+        int n = Utility.getInt();
+        while (!(n == 0 | n ==  1 | n== 2 |n== 3)) {
+            System.out.println("Enter number from 0 to 3");
+            n = Utility.getInt();
+        }
+        return n;
+    }
 }
