@@ -11,15 +11,17 @@ public class UtilityTest {
     @Test
     public void successHashingUsersPassword() throws Exception {
         assertEquals(
-                "If Password 'Love15', hashcode must be 'd2e950fcbe6a858a613de11e17426461'",
+                "If Password 'love15', hashcode must be 'd2e950fcbe6a858a613de11e17426461'",
                 "d2e950fcbe6a858a613de11e17426461",
                 Utility.getPassword("love15"));
     }
 
-    @Test
-    public void getInt() throws Exception {
-
-
+    @Test(timeout = 3000)
+    public void successConvertingStringToInt() throws Exception {
+        String str = "10";
+        assertEquals(
+                10,
+                Utility.getInt());
     }
 
     @Test
@@ -44,16 +46,6 @@ public class UtilityTest {
 
     @Test
     public void passportCheck() throws Exception {
-
-    }
-
-    @Test
-    public void getSalt() throws Exception {
-
-    }
-
-    @Test
-    public void getRandomInt() throws Exception {
 
     }
 
