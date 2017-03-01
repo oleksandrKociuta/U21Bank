@@ -1,9 +1,6 @@
 package edu.cursor.u21.users.Admin;
 
-import edu.cursor.u21.users.bankClient.Accounts.Credit;
-import edu.cursor.u21.users.bankClient.Accounts.Deposit;
-import edu.cursor.u21.users.bankClient.Accounts.Saving;
-import edu.cursor.u21.users.bankClient.Accounts.Transfer;
+import edu.cursor.u21.users.bankClient.Accounts.Account;
 import edu.cursor.u21.users.bankClient.BankClient;
 
 import java.util.Comparator;
@@ -66,7 +63,7 @@ class AdminMethods {
 
     static void displayUsersAccountsNumbers(HashMap<String, BankClient> listOfUsers) {
         try {
-            System.out.println("ID \t\t\tName \tSurname \tAccounts");
+            System.out.println("ID \t\t\tName \tSurname \tAccount");
             listOfUsers.values().forEach(v -> System.out.printf(
                     "%s\t%s\t%s\t%s\n",
                     v.getId(), v.getName(), v.getSurname(), v.getAccountHashMap()
@@ -81,47 +78,47 @@ class AdminMethods {
     static void displayUsersDepositAccounts(HashMap<String, BankClient> listOfUsers) {
         try {
             listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
-                    .filter(v -> v instanceof Deposit).sorted()
+                    .filter(v -> v instanceof Account).sorted()
                     .forEach(z -> System.out.println(bankClient.toString() + "\t" + z.toString())));
         } catch (NullPointerException e) {
-            System.out.println("Not enough data: some Deposit Accounts doesn't contain full information.");
+            System.out.println("Not enough data: some Deposit Account doesn't contain full information.");
         }
     }
 
     static void displayUsersCreditAccounts(HashMap<String, BankClient> listOfUsers) {
         try {
             listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
-                    .filter(v -> v instanceof Credit)
+                    .filter(v -> v instanceof Account)
                     .forEach(z -> System.out.println(bankClient.toString() + "\t" + z.toString())));
         } catch (NullPointerException e) {
-            System.out.println("Not enough data: some Credit Accounts doesn't contain full information.");
+            System.out.println("Not enough data: some Credit Account doesn't contain full information.");
         }
     }
 
     static void displayUsersTransferAccounts(HashMap<String, BankClient> listOfUsers) {
         try {
             listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
-                    .filter(v -> v instanceof Transfer)
+                    .filter(v -> v instanceof Account)
                     .forEach(z -> System.out.println(bankClient.toString() + "\t" + z.toString())));
         } catch (NullPointerException e) {
-            System.out.println("Not enough data: some Transfer Accounts doesn't contain full information.");
+            System.out.println("Not enough data: some Transfer Account doesn't contain full information.");
         }
     }
 
     static void displayUsersSavingAccounts(HashMap<String, BankClient> listOfUsers) {
         try {
             listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
-                    .filter(v -> v instanceof Saving)
+                    .filter(v -> v instanceof Account)
                     .forEach(z -> System.out.println(bankClient.toString() + "\t" + z.toString())));
         } catch (NullPointerException e) {
-            System.out.println("Not enough data: some Saving Accounts doesn't contain full information.");
+            System.out.println("Not enough data: some Saving Account doesn't contain full information.");
         }
     }
 
     private static void displayBankClientAccounts(BankClient bankClient) {
         try {
             System.out.println(bankClient.getId() + "\t" + bankClient.toString());
-            bankClient.getAccountHashMap().forEach((t, u) -> System.out.println("Account ID: " + t + "\t" + u.toString()));
+            bankClient.getAccountHashMap().forEach((t, u) -> System.out.println("AccountInterface ID: " + t + "\t" + u.toString()));
         } catch (NullPointerException e) {
             System.out.println("No data to display");
         }
@@ -131,7 +128,7 @@ class AdminMethods {
         try {
             listOfUsers.values().forEach(AdminMethods::displayBankClientAccounts);
         } catch (NullPointerException e) {
-            System.out.println("Some Accounts doesn't contain full information.");
+            System.out.println("Some Account doesn't contain full information.");
         }
     }
 }
