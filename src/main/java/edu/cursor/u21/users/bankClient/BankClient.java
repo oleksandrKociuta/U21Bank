@@ -2,7 +2,7 @@ package edu.cursor.u21.users.bankClient;
 
 import edu.cursor.u21.users.Roles;
 import edu.cursor.u21.users.User;
-import edu.cursor.u21.users.bankClient.Accounts.Account;
+import edu.cursor.u21.users.bankClient.Accounts.AccountInterface;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,7 +34,7 @@ public class BankClient implements User, Serializable {
     private int depositAccount;
     private int creditAccount;
     private int transferAccount;
-    private Map<String, Account> accountHashMap;
+    private Map<String, AccountInterface> accountHashMap;
 
     @Override
     public void startSession(HashMap<String, BankClient> usersList) {

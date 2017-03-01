@@ -2,49 +2,40 @@ package edu.cursor.u21.users.bankClient.Accounts;
 
 import edu.cursor.u21.users.bankClient.BankClient;
 import edu.cursor.u21.util.Utility;
+import org.apache.log4j.Logger;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
- * Created by uiv on 2/16/17.
+ * Created by vk on 2/16/17.
  */
 class AccountFactory {
     private AccountFactory() {
         throw new IllegalStateException();
     }
 
-    static void createAccount(Account account, Currency currency, BankClient bankClient) throws NullPointerException {
-        if (account instanceof Credit) {
-            Credit credit = new Credit();
-            credit.setCurrency(currency);
-            credit.setBalance(BigDecimal.valueOf(0));
-            credit.setAccountNumber(Utility.getSalt());
-            bankClient.getAccountHashMap().put(credit.getAccountNumber(), credit);
-        } else if (account instanceof Deposit) {
-            Deposit deposit = new Deposit();
-            deposit.setCurrency(currency);
-            deposit.setBalance(BigDecimal.valueOf(0));
-            deposit.setAccountNumber(Utility.getSalt());
-            bankClient.getAccountHashMap().put(deposit.getAccountNumber(), deposit);
-        } else if (account instanceof Saving) {
-            Saving saving = new Saving();
-            saving.setCurrency(currency);
-            saving.setBalance(BigDecimal.valueOf(0));
-            saving.setAccountNumber(Utility.getSalt());
-            bankClient.getAccountHashMap().put(saving.getAccountNumber(), saving);
-        } else if (!(bankClient.getAccountHashMap().values() instanceof Transfer)) {
-            Transfer transfer = new Transfer();
-            transfer.setCurrency(currency);
-            transfer.setBalance(BigDecimal.valueOf(0));
-            transfer.setAccountNumber(Utility.getSalt());
-            bankClient.getAccountHashMap().put(transfer.getAccountNumber(), transfer);
-        } else {
-            System.out.printf("\nBankClient2 with ID %s already have transfer account. \n" +
-                    "Or something went wrong.", bankClient.getId());
-        }
-    }
+    private static Logger log = Logger.getLogger(AccountFactory.class);
 
-    static void deleteAccount(String accountNumber, BankClient bankClient) throws NullPointerException {
+    static void createNewAccount(BankClient bankClient, AccountType accountType, Currency currency) {
+        Account<AccountType, Currency> account = new Account<>();
+        account.setCurrency(currency);
+        account.setAccountNumber(Utility.getSalt());
+        account.setAccountType(accountType);
+        account.setCreationDate(LocalDateTime.now());
+
+            bankClient.getAccountHashMap().values().forEach(ac -> {
+                if (ac.getAccountType().equals(AccountType.TRANSFER)) {
+                    System.out.println("You already have Transfer Account");
+                } else {
+                    bankClient.getAccountHashMap().put(account.getAccountNumber(), account);
+                    System.out.printf("Your %s Account successfully created", accountType);
+                    log.info("New " + accountType + " Account created by " + bankClient.getId());
+                }
+            });
+        }
+
+
+    static void deleteAccount(BankClient bankClient, String accountNumber) {
         bankClient.getAccountHashMap().remove(accountNumber);
     }
 }
