@@ -1,12 +1,11 @@
 package edu.cursor.u21.users.bankClient.Accounts;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * Created by vk on 2/28/17.
@@ -14,14 +13,14 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Account<T,C> implements AccountInterface {
+public class Account implements AccountInterface {
     private String accountNumber;
     private AccountType accountType;
-    @Setter(AccessLevel.PRIVATE) private BigDecimal balance = BigDecimal.valueOf(0);
-    private StatusOfAccount status = StatusOfAccount.OPEN;
+    private BigDecimal balance;
+    private StatusOfAccount status;
     private Currency currency;
-    private LocalDateTime creationDate;
-    private LocalDateTime expDate;
+    private LocalDate creationDate;
+    private LocalDate expDate;
 
     @Override
     public void increaseBalance(BigDecimal bigDecimal) {
@@ -44,13 +43,13 @@ public class Account<T,C> implements AccountInterface {
     @Override
     public String toString() {
         return "Account{" +
-                "accountNumber='" + accountNumber + '\'' +
-                ", accountType=" + accountType +
-                ", balance=" + balance +
-                ", status=" + status +
-                ", currency=" + currency +
-                ", creationDate=" + creationDate +
-                ", expDate=" + expDate +
+                "\n accountType = " + accountType +
+                ",\n accountNumber = '" + accountNumber + '\'' +
+                ",\n balance = " + balance +
+                ",\n status = " + status +
+                ",\n currency = " + currency +
+                ",\n creationDate = " + creationDate +
+                ",\n expDate = " + expDate +
                 '}';
     }
 }

@@ -4,11 +4,6 @@ import edu.cursor.u21.users.bankClient.BankClient;
 import edu.cursor.u21.util.Utility;
 import edu.cursor.u21.util.UtilityScanner;
 
-import java.util.HashMap;
-
-import static edu.cursor.u21.users.bankClient.Accounts.AccountType.CREDIT;
-import static edu.cursor.u21.users.bankClient.Accounts.Currency.EUR;
-
 /**
  * Created by uiv on 2/18/17.
  */
@@ -23,16 +18,16 @@ public class AccountMenu {
         while (x) {
             System.out.println("Enter \n" +
                     "1 - for list of Your accounts\n" +
-                    "2 - to create NEW Account account\n" +
+                    "2 - to create NEW Account\n" +
                     "6 - to delete account\n" +
                     "9 - for EXIT\n");
             switch (Utility.getInt()) {
                 case 1:
-                    System.out.println("Your Accounts list:\n Account Number\t\t\t\t\t Account Type");
+                    System.out.println("Your Accounts:");
                     if (bankClient.getAccountHashMap().isEmpty()) {
                         System.out.println("You don't have any accounts(deposit, credit, saving or transfer)");
                     } else {
-                        bankClient.getAccountHashMap().forEach((k, v) -> System.out.println(k + "\t\t" + v.toString()));
+                        bankClient.getAccountHashMap().forEach((k, v) -> System.out.println(v.toString()));
                     }
                     break;
                 case 2:
@@ -44,11 +39,11 @@ public class AccountMenu {
                     AccountType[] accountTypesArray = AccountType.values();
                     int accountType = UtilityScanner.scanNumberFromZeroToThree();
 
-                    AccountFactory.createNewAccount(bankClient, accountTypesArray[accountType], currencies[currency]);
+                    new AccountFactory().getNewAccount(bankClient, accountTypesArray[accountType], currencies[currency]);
                     break;
                 case 6:
                     System.out.println("Enter the Account Number without spaces to Delete account\n");
-                    AccountFactory.deleteAccount(bankClient, Utility.sc.nextLine());
+                    new AccountFactory().deleteAccount(bankClient, Utility.sc.nextLine());
                     break;
                 case 9:
                     x = false;
@@ -61,12 +56,14 @@ public class AccountMenu {
 
     public static void main(String[] args) {
         BankClient bankClient = new BankClient();
-        bankClient.setAccountHashMap(new HashMap<>());
-        AccountFactory.createNewAccount(bankClient, CREDIT, EUR);
-        System.out.println(bankClient.getAccountHashMap().isEmpty());
-        bankClient.getAccountHashMap().values().forEach(account -> {
-                System.out.println(account.toString());
-        });
+//        AccountFactory accountFactory = new AccountFactory();
+//        Account account = accountFactory.getNewAccount(bankClient, CREDIT, EUR);
+//        bankClient.getAccountHashMap().put(account.getAccountNumber(), account);
+//        System.out.println(bankClient.getAccountHashMap().isEmpty());
+//
+//        bankClient.getAccountHashMap().values().forEach(ac -> {
+//                System.out.println(ac.toString());
+//        });
         AccountMenu.accountMenu(bankClient);
     }
 }

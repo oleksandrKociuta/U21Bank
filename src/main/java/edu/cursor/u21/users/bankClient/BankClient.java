@@ -18,7 +18,7 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"dateOfBirth", "account", "depositAccount", "creditAccount", "transferAccount", "role", "accountHashMap"})
+@EqualsAndHashCode(exclude = {"dateOfBirth", "role", "accountHashMap"})
 public class BankClient implements User, Serializable {
     Roles role = Roles.USER;
     private String login;
@@ -30,11 +30,7 @@ public class BankClient implements User, Serializable {
     private String dateOfBirth;
     private String seriesOfPassport;
     private String telephoneNumber;
-    private int account;
-    private int depositAccount;
-    private int creditAccount;
-    private int transferAccount;
-    private Map<String, AccountInterface> accountHashMap;
+    private Map<String, AccountInterface> accountHashMap = new HashMap<>();
 
     @Override
     public void startSession(HashMap<String, BankClient> usersList) {
