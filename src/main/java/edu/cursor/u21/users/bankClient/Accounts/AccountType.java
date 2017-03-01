@@ -14,6 +14,6 @@ public enum AccountType {
     private String value;
 
     AccountType(String value) {
-      this.value = value;
+        this.value = value;
     }
 }

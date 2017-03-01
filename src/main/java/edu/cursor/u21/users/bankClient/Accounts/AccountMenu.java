@@ -1,8 +1,14 @@
 package edu.cursor.u21.users.bankClient.Accounts;
 
+import edu.cursor.u21.users.Admin.AdminMenu;
 import edu.cursor.u21.users.bankClient.BankClient;
 import edu.cursor.u21.util.Utility;
 import edu.cursor.u21.util.UtilityScanner;
+
+import java.util.HashMap;
+
+import static edu.cursor.u21.users.bankClient.Accounts.AccountType.CREDIT;
+import static edu.cursor.u21.users.bankClient.Accounts.Currency.EUR;
 
 /**
  * Created by uiv on 2/18/17.
@@ -55,15 +61,18 @@ public class AccountMenu {
     }
 
     public static void main(String[] args) {
+        HashMap<String, BankClient> mapOfUsers = new HashMap<>();
         BankClient bankClient = new BankClient();
-//        AccountFactory accountFactory = new AccountFactory();
-//        Account account = accountFactory.getNewAccount(bankClient, CREDIT, EUR);
-//        bankClient.getAccountHashMap().put(account.getAccountNumber(), account);
-//        System.out.println(bankClient.getAccountHashMap().isEmpty());
-//
-//        bankClient.getAccountHashMap().values().forEach(ac -> {
-//                System.out.println(ac.toString());
-//        });
-        AccountMenu.accountMenu(bankClient);
+        mapOfUsers.put("key", bankClient);
+        AccountFactory accountFactory = new AccountFactory();
+        Account account = accountFactory.getNewAccount(bankClient, CREDIT, EUR);
+        bankClient.getAccountHashMap().put(account.getAccountNumber(), account);
+        System.out.println(bankClient.getAccountHashMap().isEmpty());
+
+        bankClient.getAccountHashMap().values().forEach(ac -> {
+            System.out.println(ac.toString());
+        });
+//        AccountMenu.accountMenu(bankClient);
+        AdminMenu.adminMenu(mapOfUsers);
     }
 }

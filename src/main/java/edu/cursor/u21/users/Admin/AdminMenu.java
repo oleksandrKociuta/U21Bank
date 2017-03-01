@@ -16,65 +16,51 @@ public class AdminMenu {
     }
 
     public static void adminMenu(HashMap<String, BankClient> listOfUsers) {
-        System.out.println("Enter \n" +
-                "1 - for list of BankClients\n" +
-                "2 - for list of User operations (ID is needed to be entered)\n" +
-                "3 - for list of Users Phone Numbers\n" +
-                "4 - for list of Users date of birth\n" +
-                "5 - for list of Users Account\n" +
-                "6 - for list of Users CREDIT Account\n" +
-                "7 - for list of Users DEPOSIT Account\n" +
-                "8 - for list of User TRANSFER Account\n" +
-                "9 - for list of User SAVING Account\n" +
-                "10 - Print Bank Clients list sorted by username\n" +
-                "11 - for EXIT\n");
+        AdminMethods adminMethods = new AdminMethods();
         boolean x = true;
         while (x) {
+            System.out.println("\nEnter \n" +
+                    "1 - for list of BankClients\n" +
+                    "2 - for list of User operations (ID is needed to be entered)\n" +
+                    "3 - for list of Users Phone Numbers\n" +
+                    "4 - for list of Users date of birth\n" +
+                    "5 - for list of Users Account\n" +
+                    "7 - for list of Users Accounts\n" +
+                    "10 - Print Bank Clients list sorted by username\n" +
+                    "11 - for EXIT\n");
             switch (Utility.getInt()) {
                 case 1:
                     System.out.println("BankClients list:");
-                    AdminMethods.displayListOfUsers(listOfUsers);
+                    adminMethods.displayListOfUsers(listOfUsers);
                     break;
                 case 2:
                     System.out.printf("List of user operations. \n " +
                             "Enter User age to filter by:");
-                    AdminMethods.filterByAge(scanInt(), listOfUsers);
+                    adminMethods.filterByAge(scanInt(), listOfUsers);
                     break;
                 case 3:
                     System.out.println("Bank Clients Phone Numbers");
-                    AdminMethods.displayUsersPhoneNumbers(listOfUsers);
+                    adminMethods.displayUsersPhoneNumbers(listOfUsers);
                     break;
                 case 4:
                     System.out.println("Bank Clients date of birth");
-                    AdminMethods.displayUsersDateOfBirth(listOfUsers);
+                    adminMethods.displayUsersDateOfBirth(listOfUsers);
                     break;
                 case 5:
                     System.out.println("Bank Clients Account Numbers");
-                    AdminMethods.displayUsersAccountsNumbers(listOfUsers);
-                    break;
-                case 6:
-                    System.out.println("Bank Clients Credit Account");
-                    AdminMethods.displayUsersCreditAccounts(listOfUsers);
+                    adminMethods.displayUsersAccountNumbers(listOfUsers);
                     break;
                 case 7:
                     System.out.println("Bank Clients Deposit Account");
-                    AdminMethods.displayUsersDepositAccounts(listOfUsers);
-                    break;
-                case 8:
-                    System.out.println("Bank Clients Transfer Account");
-                    AdminMethods.displayUsersTransferAccounts(listOfUsers);
-                    break;
-                case 9:
-                    System.out.println("Bank Clients Saving Account");
-                    AdminMethods.displayUsersSavingAccounts(listOfUsers);
+                    adminMethods.displayUsersAccounts(listOfUsers);
                     break;
                 case 10:
                     System.out.println("Print Bank Clients list sorted by username");
-                    AdminMethods.printBankClientsBySurname(listOfUsers);
+                    adminMethods.printBankClientsBySurname(listOfUsers);
                     break;
                 case 11:
                     System.out.println("Display detail Bank Clients accounts");
-                    AdminMethods.displayDetailUsersAccounts(listOfUsers);
+                    adminMethods.displayDetailUsersAccounts(listOfUsers);
                     break;
                 case 12:
                     x = false;

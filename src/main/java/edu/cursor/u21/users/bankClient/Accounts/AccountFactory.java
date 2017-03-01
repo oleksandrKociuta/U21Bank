@@ -35,7 +35,7 @@ class AccountFactory {
             log.info("New " + accountType + " Account created by " + bankClient.getId());
         } else {
             System.out.println("Can't create new account. Something went wrong.");
-            log.info( "User %s cannot create new account"+ bankClient.getId());
+            log.info("User %s cannot create new account" + bankClient.getId());
         }
         return account;
     }
@@ -44,7 +44,7 @@ class AccountFactory {
         if (bankClient.getAccountHashMap().containsKey(accountNumber)) {
             bankClient.getAccountHashMap().remove(accountNumber);
             System.out.printf("Your Account %s successfully deleted\n", accountNumber);
-            log.info("Account "+ accountNumber +" deleted by "+ bankClient.getId());
+            log.info("Account " + accountNumber + " deleted by " + bankClient.getId());
         } else {
             System.out.printf("There is no Account #%s\n", accountNumber);
         }
