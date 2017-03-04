@@ -18,15 +18,14 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"dateOfBirth", "role", "accountHashMap"})
+@EqualsAndHashCode(exclude = {"dateOfBirth", "id", "accountHashMap"})
 public class BankClient implements User, Serializable {
     Roles role = Roles.USER;
     private String login;
     private String password;
     private String name;
     private String surname;
-    private int age;
-    private String id;
+    private int id;
     private String dateOfBirth;
     private String seriesOfPassport;
     private String telephoneNumber;

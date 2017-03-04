@@ -9,6 +9,7 @@ import edu.cursor.u21.util.Registration;
 import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import static edu.cursor.u21.util.Utility.getInt;
@@ -26,12 +27,19 @@ public class Menu {
     public void menu() {
         log.info("start app");
         while (true) {
-            System.out.print("\n1. Sign in system U21Bank.\n2.Sign up system U21Bank.\n3.Exit.\nChoose option - >> ");
+            System.out.print("\n1.Sign in system U21Bank.\n2.Sign up system U21Bank.\n3.Exit.\nChoose option - >> ");
             switch (getInt()) {
                 case 1:
-                    BankClient bankClient = login.logIn();
+                    BankClient bankClient = null;
+                    try {
+                        bankClient = login.logIn();
+                    } catch (SQLException e) {
+                        System.out.println("Can't log in User !!");
+                        e.printStackTrace();
+                    }
+                    assert bankClient != null;
                     if (bankClient.getRole().equals(Roles.ADMIN)) {
-                        AdminMenu.adminMenu((HashMap<String, BankClient>) login.getList());
+//                        AdminMenu.adminMenu((HashMap<String, BankClient>) login.getList());
                     } else {
                         AccountMenu.accountMenu(bankClient);
                     }
