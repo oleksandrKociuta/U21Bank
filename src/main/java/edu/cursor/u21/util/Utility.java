@@ -1,12 +1,16 @@
 package edu.cursor.u21.util;
 
-import edu.cursor.u21.users.bankClient.Accounts.*;
 import edu.cursor.u21.users.bankClient.BankClient;
 import org.apache.log4j.Logger;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -65,35 +69,86 @@ public final class Utility implements MagicConstantsInterface {
         }
     }
 
+    public static String nameAndSurnameCheck() {
+        String nameOrSurname;
+        while (true) {
+            nameOrSurname = sc.nextLine();
+            if (nameOrSurname.matches(NAME_SURNAME_REG)) {
+                return nameOrSurname;
+            }
+            System.out.println("Wrong Format!! Repeat!!");
+        }
+
+    }
+
     public static String loginCheck() {
-        Map<String, BankClient> list = WriteAndRead.readBankFile();
         String login;
         while (true) {
             login = sc.nextLine();
-            if (!list.containsKey(login)) {
+            if (login.matches(LOGIN_REG)) {
                 return login;
             }
-            System.out.println("Login is already used !!! Repeat !");
+            System.out.println("Wrong Login Format !!! Repeat !");
         }
     }
 
-    public static int ageCheck() {
-        int age;
-        while (true) {
-            age = getInt();
-            if (age > ADULT_HOOD && age < MagicConstantsInterface.MAX_AGE) {
-                return age;
+    public static boolean isDateValid(String date) {
+        SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy");
+        myFormat.setLenient(false);
+        try {
+            myFormat.parse(date);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    public static void exitProgram(Connection connection, Statement statement) {
+        System.out.println("If you want exit press - > X or x or anything to continue ");
+        String exit = sc.nextLine();
+        if (exit.equals("x") || exit.equals("X")) {
+            try {
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            System.out.println("User must be upper 17 years old !! Or User Enter Wrong Data!  Repeat !");
+            System.exit(0);
+        }
+    }
+
+    public static void exitProgram(Connection connection, Statement statement, ResultSet resultSet) {
+        System.out.println("If you want exit press - > X or x or anything to continue ");
+        String exit = sc.nextLine();
+        if (exit.equals("x") || exit.equals("X")) {
+            try {
+                resultSet.close();
+                statement.close();
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.exit(0);
         }
     }
 
     public static String dateCheck() {
         String dateOfBirth;
+        String arr[];
+        int birthYear;
         while (true) {
             dateOfBirth = sc.nextLine();
-            if (dateOfBirth.matches(DAY_OF_BIRTH_REG)) {
-                return dateOfBirth;
+            if (isDateValid(dateOfBirth)) {
+                arr = dateOfBirth.split("\\.");
+                birthYear = Integer.parseInt(arr[2]);
+                Calendar currentYear = new GregorianCalendar();
+                if (currentYear.get(Calendar.YEAR) - birthYear < ADULTHOOD || currentYear.get(Calendar.YEAR) - birthYear > MAX_AGE) {
+                    System.out.println("Wrong year of birth entered !! Repeat! ");
+                    continue;
+                } else {
+                    return dateOfBirth;
+                }
             }
             System.out.println("Wrong Date Format!! Repeat!");
         }
@@ -101,25 +156,21 @@ public final class Utility implements MagicConstantsInterface {
 
     public static String telephoneNumberCheck() {
         while (true) {
-            Map<String, BankClient> list = WriteAndRead.readBankFile();
             String telephoneNumber = sc.nextLine();
-            if (telephoneNumber.matches(MagicConstantsInterface.TELEPHONE_NUMBER_REG) &&
-                    list.values().stream().noneMatch(e -> e.getTelephoneNumber().equals(telephoneNumber))) {
+            if (telephoneNumber.matches(TELEPHONE_NUMBER_REG)) {
                 return telephoneNumber;
             }
-            System.out.println("Wrong telephone input!! Telephone number in use or not required ! Repeat!");
+            System.out.println("Wrong telephone input!! Telephone number is not required ! Repeat!");
         }
     }
 
     public static String passportCheck() {
-        Map<String, BankClient> list = WriteAndRead.readBankFile();
         while (true) {
             String passport = sc.nextLine();
-            if (passport.matches(MagicConstantsInterface.PASSPORT_REG) &&
-                    list.values().stream().noneMatch(e -> e.getSeriesOfPassport().equals(passport))) {
+            if (passport.matches(MagicConstantsInterface.PASSPORT_REG)) {
                 return passport;
             }
-            System.out.println("Wrong passport input!! Passport Series in use or not required! Repeat!");
+            System.out.println("Wrong passport input!! Passport Series are not required! Repeat!");
         }
     }
 
@@ -140,11 +191,11 @@ public final class Utility implements MagicConstantsInterface {
 
     public static String generateAccountNumber(HashMap<String, BankClient> users, edu.cursor.u21.users.bankClient.Accounts.Currency currency) {
 
-        String number = currency.name()+random.nextInt(8);
+        String number = currency.name() + random.nextInt(8);
 
-        for (BankClient bc: users.values()) {
-            for (String num : bc.getAccountHashMap().keySet()){
-                if(number.equals(num)){
+        for (BankClient bc : users.values()) {
+            for (String num : bc.getAccountHashMap().keySet()) {
+                if (number.equals(num)) {
                     number = generateAccountNumber(users, currency);
                     break;
                 }

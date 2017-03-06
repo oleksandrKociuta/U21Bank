@@ -55,17 +55,17 @@ class AdminMethods implements AdminInterface{
     }
 
     public void filterByAge(int age, HashMap<String, BankClient> listOfUsers) {
-        if (!listOfUsers.isEmpty()) {
-            System.out.println("Name\t\t\tSurname\t\t\tAge");
-            listOfUsers.values().forEach(v -> {
-                if (v.getAge() == age) {
-                    System.out.printf("%s\t\t\t%s\t\t\t%d\n",
-                            v.getName(), v.getSurname(), v.getAge());
-                }
-            });
-        } else {
-            System.out.println("No data to display");
-        }
+//        if (!listOfUsers.isEmpty()) {
+//            System.out.println("Name\t\t\tSurname\t\t\tAge");
+//            listOfUsers.values().forEach(v -> {
+//                if (v.getAge() == age) {
+//                    System.out.printf("%s\t\t\t%s\t\t\t%d\n",
+//                            v.getName(), v.getSurname(), v.getAge());
+//                }
+//            });
+//        } else {
+//            System.out.println("No data to display");
+//        }
     }
 
     public void printBankClientsBySurname(HashMap<String, BankClient> listOfUsers) {

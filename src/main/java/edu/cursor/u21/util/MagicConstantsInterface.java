@@ -9,8 +9,10 @@ public interface MagicConstantsInterface {
     int HASH_BYTE = 16;
     int MIN_LENGTH_PASSWORD = 5;
     int MAX_LENGTH_PASSWORD = 15;
-    int ADULT_HOOD = 17;
-    String DAY_OF_BIRTH_REG = "^\\d{2}-\\d{2}-\\d{4}$";
+    int ADULTHOOD = 18;
+    String LOGIN_REG = "^\\w{3,15}$";
+    String NAME_SURNAME_REG = "^[A-Z]{1}[a-z]{2,15}$";
+    String DAY_OF_BIRTH_REG = "^\\d{2}.\\d{2}.\\d{4}$";
     String TELEPHONE_NUMBER_REG = "^(\\+?\\d{12})|(\\d{10})$";
     String PASSPORT_REG = "^[A-Z]{2}\\d{6}$";
     int MIN_LENGTH_SALT = 8;
@@ -22,6 +24,9 @@ public interface MagicConstantsInterface {
     String BANK_FILE_PATH = "BankAccount.md";
     int ASCII_MAX_NUMBER = 57;
     int ASCII_MIN_NUMBER = 48;
-    int MAX_AGE = 150;
+    int MAX_AGE = 120;
+    String USERNAME = "root";
+    String PASSWORD = "root";
+    String URL = "jdbc:mysql://localhost:3306/u21bankusers?useSSL=false";
 }
 
