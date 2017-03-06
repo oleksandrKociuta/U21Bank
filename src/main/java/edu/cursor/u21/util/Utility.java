@@ -26,9 +26,9 @@ public final class Utility implements MagicConstantsInterface {
         throw new IllegalStateException();
     }
 
-    public static String getPassword(String stringForPassword) {
+    public static String getPassword() {
 
-        String password = stringForPassword;
+        String password = getStringForPassword();
         String salt = "Random$SaltValue#WithSpecialCharacters12@$@4&#%^$*";
         password = password + salt;
         MessageDigest messageDigest = null;
