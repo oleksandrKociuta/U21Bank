@@ -1,11 +1,8 @@
 package edu.cursor.u21.users.Admin;
 
-import edu.cursor.u21.users.bankClient.BankClient;
 import edu.cursor.u21.util.Utility;
 
-import java.util.HashMap;
-
-import static edu.cursor.u21.util.UtilityScanner.scanInt;
+import java.sql.Connection;
 
 /**
  * Created by uiv on 2/12/17.
@@ -15,7 +12,7 @@ public class AdminMenu {
         throw new IllegalStateException();
     }
 
-    public static void adminMenu(HashMap<String, BankClient> listOfUsers) {
+    public static void adminMenu(Connection listOfUsers) {
         AdminMethods adminMethods = new AdminMethods();
         boolean x = true;
         while (x) {
@@ -31,36 +28,36 @@ public class AdminMenu {
             switch (Utility.getInt()) {
                 case 1:
                     System.out.println("BankClients list:");
-                    adminMethods.displayListOfUsers(listOfUsers);
+//                    adminMethods.displayListOfUsers(listOfUsers);
                     break;
                 case 2:
                     System.out.printf("List of user operations. \n " +
                             "Enter User age to filter by:");
-                    adminMethods.filterByAge(scanInt(), listOfUsers);
+//                    adminMethods.filterByAge(scanInt(), listOfUsers);
                     break;
                 case 3:
                     System.out.println("Bank Clients Phone Numbers");
-                    adminMethods.displayUsersPhoneNumbers(listOfUsers);
+//                    adminMethods.displayUsersPhoneNumbers(listOfUsers);
                     break;
                 case 4:
                     System.out.println("Bank Clients date of birth");
-                    adminMethods.displayUsersDateOfBirth(listOfUsers);
+//                    adminMethods.displayUsersDateOfBirth(listOfUsers);
                     break;
                 case 5:
                     System.out.println("Bank Clients Account Numbers");
-                    adminMethods.displayUsersAccountNumbers(listOfUsers);
+//                    adminMethods.displayUsersAccountNumbers(listOfUsers);
                     break;
                 case 7:
                     System.out.println("Bank Clients Deposit Account");
-                    adminMethods.displayUsersAccounts(listOfUsers);
+//                    adminMethods.displayUsersAccounts(listOfUsers);
                     break;
                 case 10:
                     System.out.println("Print Bank Clients list sorted by username");
-                    adminMethods.printBankClientsBySurname(listOfUsers);
+//                    adminMethods.printBankClientsBySurname(listOfUsers);
                     break;
                 case 11:
                     System.out.println("Display detail Bank Clients accounts");
-                    adminMethods.displayDetailUsersAccounts(listOfUsers);
+//                    adminMethods.displayDetailUsersAccounts(listOfUsers);
                     break;
                 case 12:
                     x = false;

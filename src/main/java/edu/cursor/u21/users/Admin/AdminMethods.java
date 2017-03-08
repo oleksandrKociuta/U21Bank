@@ -1,119 +1,74 @@
 package edu.cursor.u21.users.Admin;
 
-import edu.cursor.u21.users.bankClient.Accounts.AccountType;
+import edu.cursor.u21.jdbcConnector.JDBCConnector;
+import edu.cursor.u21.users.bankClient.Accounts.Currency;
 import edu.cursor.u21.users.bankClient.BankClient;
-import edu.cursor.u21.util.UtilityScanner;
+import edu.cursor.u21.util.MagicConstantsInterface;
 import lombok.NoArgsConstructor;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.stream.Collectors;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
 
 @NoArgsConstructor
-class AdminMethods implements AdminInterface{
+class AdminMethods implements AdminInterface {
 
-    private static void displayBankClientAccounts(BankClient bankClient) {
-        if (!(bankClient == null)) {
-            System.out.println(bankClient.getId() + "\t" + bankClient.toString());
-            bankClient.getAccountHashMap().forEach((t, u) -> System.out.println("AccountInterface ID: " + t + "\t" + u.toString()));
-        } else {
-            System.out.println("No data to display");
+      public void displayListOfUsers() {
+        String sqlQuery = "Select * from users";
+        try (Connection connection = new JDBCConnector().getConnection(
+                MagicConstantsInterface.URL,
+                MagicConstantsInterface.USERNAME,
+                MagicConstantsInterface.PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sqlQuery);) {
+            System.out.println("ID\t\tName\t\t\tSurname\t\tPhone ");
+            while (resultSet.next()) {
+                int ID = resultSet.getInt("id");
+                String name = resultSet.getString("Name");
+                String surname = resultSet.getString("Surname");
+                String phone = resultSet.getString("Telephone number");
+                System.out.printf("%d\t\t%s\t\t\t%s\t\t%s \n", ID, name, surname, phone);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    public void displayListOfUsers(HashMap<String, BankClient> listOfUsers) {
-        if (listOfUsers == null) {
-            System.out.println("No data. List of users is empty");
-        } else {
-            System.out.println("ID\t\t\tName\t\t\tSurname");
-            listOfUsers.forEach((k, v) -> System.out.printf(
-                    "%s\t\t\t%s\t\t\t%s\n",
-                    v.getId(), v.getName(), v.getSurname()));
-        }
+    public void displayAllUsersAccounts() {
+        String sql = "SELECT * FROM u21bankusers.accounts";
+        iterateAccounts(sql);
     }
 
-    public void displayUsersPhoneNumbers(HashMap<String, BankClient> listOfUsers) {
-        if (!listOfUsers.isEmpty()) {
-            System.out.println("Name\t\t\tSurname\t\t\tPhone");
-            listOfUsers.forEach((k, v) -> System.out.printf(
-                    "%s\t\t\t%s\t\t\t%s\n",
-                    v.getName(), v.getSurname(), v.getTelephoneNumber()));
-        } else {
-            System.out.println("No data to display");
-        }
+    public void displayUserAccounts(BankClient bankClient) {
+        String sqlQuery = String.format("SELECT * FROM u21bankusers.accounts WHERE userID =%d", bankClient.getId());
+        iterateAccounts(sqlQuery);
     }
 
-    public void displayUsersDateOfBirth(HashMap<String, BankClient> listOfUsers) {
-        if (!listOfUsers.isEmpty()) {
-            System.out.println("Name\t\t\tSurname\t\t\tDate of Birth");
-            listOfUsers.forEach((k, v) -> System.out.printf(
-                    "%s\t\t\t%s\t\t\t%s\n",
-                    v.getName(), v.getSurname(), v.getDateOfBirth()));
-        } else {
-            System.out.println("No data to display");
-        }
-    }
-
-    public void filterByAge(int age, HashMap<String, BankClient> listOfUsers) {
-//        if (!listOfUsers.isEmpty()) {
-//            System.out.println("Name\t\t\tSurname\t\t\tAge");
-//            listOfUsers.values().forEach(v -> {
-//                if (v.getAge() == age) {
-//                    System.out.printf("%s\t\t\t%s\t\t\t%d\n",
-//                            v.getName(), v.getSurname(), v.getAge());
-//                }
-//            });
-//        } else {
-//            System.out.println("No data to display");
-//        }
-    }
-
-    public void printBankClientsBySurname(HashMap<String, BankClient> listOfUsers) {
-        if (!listOfUsers.isEmpty()) {
-            listOfUsers.values().stream()
-                    .sorted(Comparator.comparing(BankClient::getSurname))
-                    .collect(Collectors.toList())
-                    .forEach(System.out::println);
-        } else {
-            System.out.println("No data to display");
-        }
-    }
-
-    public void displayUsersAccountNumbers(HashMap<String, BankClient> listOfUsers) {
-        if (!listOfUsers.isEmpty()) {
-            System.out.println("ID \t\t\tName \tSurname \tAccount");
-            listOfUsers.values().forEach(v -> System.out.printf(
-                    "%s\t%s\t%s\t%s\n",
-                    v.getId(), v.getName(), v.getSurname(), v.getAccountHashMap()
-                            .keySet()
-                            .toString()
-            ));
-        } else {
-            System.out.println("Not enough data");
-        }
-    }
-
-    public void displayUsersAccounts(HashMap<String, BankClient> listOfUsers) {
-        System.out.println("Enter type of Account: 0 - Credit, 1 - Deposit, 2 - Saving, 3 - Transfer");
-
-        AccountType[] accountTypesArray = AccountType.values();
-        int accountType = UtilityScanner.scanNumberFromZeroToThree();
-
-        if (!listOfUsers.isEmpty()) {
-            listOfUsers.values().forEach(bankClient -> bankClient.getAccountHashMap().values().stream()
-                    .filter(v -> v.getAccountType() == accountTypesArray[accountType]).sorted()
-                    .forEach(z -> System.out.println(bankClient.toString() + "\t" + z.toString())));
-        } else {
-            System.out.println("Not enough data: Account doesn't contains full information.");
-        }
-    }
-
-    public void displayDetailUsersAccounts(HashMap<String, BankClient> listOfUsers) {
-        if (!listOfUsers.isEmpty()) {
-            System.out.println("------------------------------------------------");
-            listOfUsers.values().forEach(AdminMethods::displayBankClientAccounts);
-        } else {
-            System.out.println("Some Account doesn't contain full information.");
+    private void iterateAccounts(String sqlQuery) {
+        try (Connection connection = new JDBCConnector().getConnection(
+                MagicConstantsInterface.URL,
+                MagicConstantsInterface.USERNAME,
+                MagicConstantsInterface.PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sqlQuery)) {
+            System.out.println("userID\t\tAccountNumber\t\taccountType\t\t\tBalance\t\tStatus\t\tCurrency\t\tCreationDate\t\tExpDate\n ");
+            while (resultSet.next()) {
+                int userID = resultSet.getInt("userID");
+                String accountNumber = resultSet.getString("accountNumber");
+                String accountType = resultSet.getString("accountType");
+                String balance = resultSet.getString("balance");
+                String status = resultSet.getString("status");
+                Currency currency = Currency.valueOf(resultSet.getString("currency"));
+                LocalDate creationDate = LocalDate.parse(resultSet.getString("creationDate"));
+                LocalDate expDate = LocalDate.parse(resultSet.getString("expDate"));
+                System.out.printf("%d\t\t\t%s\t\t\t\t%s\t\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n ",
+                        userID, accountNumber, accountType, balance, status, currency, creationDate, expDate);
+            }
+         } catch (SQLException e1) {
+            e1.printStackTrace();
         }
     }
 }
