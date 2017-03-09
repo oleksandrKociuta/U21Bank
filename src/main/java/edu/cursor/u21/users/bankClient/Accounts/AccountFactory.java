@@ -4,14 +4,12 @@ import edu.cursor.u21.jdbcConnector.JDBCConnector;
 import edu.cursor.u21.users.bankClient.BankClient;
 import edu.cursor.u21.util.MagicConstantsInterface;
 import edu.cursor.u21.util.Utility;
+import edu.cursor.u21.util.UtilityScanner;
 import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 
 /**
@@ -21,20 +19,7 @@ import java.time.LocalDate;
 class AccountFactory {
     private Logger log = Logger.getLogger(AccountFactory.class);
 
-    public static void main(String[] args) throws SQLException {
-        new AccountFactory().getNewAccount(
-                new BankClient(),
-                AccountType.TRANSFER,
-                Currency.UAH,
-                new JDBCConnector()
-                        .getConnection(
-                                MagicConstantsInterface.URL,
-                                MagicConstantsInterface.USERNAME,
-                                MagicConstantsInterface.PASSWORD)
-        );
-    }
-
-    Account getNewAccount(BankClient bankClient, AccountType accountType, Currency currency, Connection connection) {
+    Account getNewAccount(BankClient bankClient, AccountType accountType, Currency currency) {
         Account account = new Account();
         account.setCurrency(currency);
         account.setAccountNumber(Utility.getSalt());
@@ -43,22 +28,25 @@ class AccountFactory {
         account.setCreationDate(LocalDate.now());
         account.setExpDate(account.getCreationDate().plusYears(3));
         account.setBalance(BigDecimal.valueOf(0));
-        PreparedStatement prepareInsert = null;
         String sqlQuery = "INSERT INTO  u21bankusers.accounts(" +
                 "accountNumber, accountType, balance, status, currency, " +
                 "creationDate, expDate, userID) VALUES (?,?,?,?,?,?,?,?)";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-             ) {
-
-            if (accountType.equals(AccountType.TRANSFER) && checkIfBankClientHasTransferAccount(bankClient)) {
+        try (Connection connection = new JDBCConnector()
+                .getConnection(
+                        MagicConstantsInterface.URL,
+                        MagicConstantsInterface.USERNAME,
+                        MagicConstantsInterface.PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            if (accountType.equals(AccountType.TRANSFER) && checkIfBankClientHasTransferAccount(bankClient.getId())) {
                 System.out.println("You already have Transfer Account");
-                log.error(accountType + " Transfer Account was not created by " + bankClient.getId() + " because user has one already.");
+                log.error(accountType + " Transfer Account was not created by " +
+                        bankClient.getId() + " because user has one already.");
             } else if (!accountType.equals(AccountType.TRANSFER) ||
-                    (accountType.equals(AccountType.TRANSFER) && !checkIfBankClientHasTransferAccount(bankClient))) {
+                    (accountType.equals(AccountType.TRANSFER) && !checkIfBankClientHasTransferAccount(bankClient.getId()))) {
                 try {
                     preparedStatement.setString(1, account.getAccountNumber());
-                    preparedStatement.setString(2, account.getAccountType().getValue());
+                    preparedStatement.setString(2, account.getAccountType().name());
                     preparedStatement.setString(3, account.getBalance().toString());
                     preparedStatement.setString(4, account.getStatus().name());
                     preparedStatement.setString(5, account.getCurrency().name());
@@ -69,8 +57,8 @@ class AccountFactory {
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
-                System.out.printf("Your %s Account # %s successfully created\n", accountType, account.getAccountNumber());
-                log.info("New " + accountType + " Account created by " + bankClient.getId());
+                System.out.printf("Your %s Account  %s successfully created\n", accountType, account.getAccountNumber());
+                log.info("New " + accountType + " Account №: " + account.getAccountNumber() + " created by " + bankClient.getId());
             } else {
                 System.out.println("Can't create new account. Something went wrong.");
                 log.info("User %s cannot create new account" + bankClient.getId());
@@ -82,17 +70,50 @@ class AccountFactory {
         return account;
     }
 
-    void closeAccount(String accountNumber) {
-//        if () {
-//            System.out.printf("Your Account %s successfully deleted\n", accountNumber);
-//            log.info("Account " + accountNumber + " deleted by ");
-//        } else {
-//            System.out.printf("There is no Account #%s\n", accountNumber);
-//        }
+    void changeAccountStatus(String accountNumber) {
+        String sqlForStatus = "UPDATE u21bankusers.accounts " +
+                "SET status =? " +
+                "WHERE accountNumber= ?";
+        System.out.println("Press 0 - to OPEN account, 1 - to CLOSE, 2 - to SUSPEND, 3 - to EXIT");
+        int i = UtilityScanner.scanNumberFromZeroToThree();
+        if (i == 3) {
+            System.out.println("You pressed 0 - to Exit. Have a nice day!");
+        } else {
+            StatusOfAccount[] accountStatusArray = StatusOfAccount.values();
+            String accountStatusName = accountStatusArray[i].toString();
+
+            try (Connection connection = new JDBCConnector().getConnection(
+                    MagicConstantsInterface.URL,
+                    MagicConstantsInterface.USERNAME,
+                    MagicConstantsInterface.PASSWORD);
+                 PreparedStatement statement = connection.prepareStatement(sqlForStatus);
+            ) {
+                statement.setString(1, accountStatusName);
+                statement.setString(2, accountNumber);
+                int userID = statement.getResultSet().getInt("userID");
+                statement.execute();
+                System.out.printf("Account %s STATUS is set to %s\n", accountNumber, accountStatusName);
+                log.info("User "+userID+" changed Account "+accountNumber+" Status to"+ accountNumber);
+            } catch (SQLException e) {
+                e.getMessage();
+            }
+        }
     }
 
-    private boolean checkIfBankClientHasTransferAccount(BankClient bankClient) {
-        return bankClient.getAccountList().stream().anyMatch(a ->
-                (a.getAccountType()).equals(AccountType.TRANSFER));
+    private boolean checkIfBankClientHasTransferAccount(int userID) {
+        String sqlQuery = "Select * from u21bankusers.accounts " +
+                        "WHERE userID="+userID+" and accountType="+AccountType.TRANSFER.name();
+        boolean typeIs = false;
+        try (Connection connection = new JDBCConnector().getConnection(
+                MagicConstantsInterface.URL,
+                MagicConstantsInterface.USERNAME,
+                MagicConstantsInterface.PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sqlQuery)) {
+            typeIs = resultSet.getString("accountType").equals(AccountType.TRANSFER.name());
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return typeIs;
     }
 }

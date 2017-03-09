@@ -1,5 +1,6 @@
 package edu.cursor.u21.users.bankClient.Accounts;
 
+import edu.cursor.u21.users.Admin.AdminMethods;
 import edu.cursor.u21.users.bankClient.BankClient;
 import edu.cursor.u21.util.Utility;
 import edu.cursor.u21.util.UtilityScanner;
@@ -16,19 +17,15 @@ public class AccountMenu {
 
         boolean x = true;
         while (x) {
-            System.out.println("Enter \n" +
+            System.out.println("Press \n" +
                     "1 - for list of Your accounts\n" +
                     "2 - to create NEW Account\n" +
-                    "6 - to delete account\n" +
+                    "6 - to change Account Status\n" +
                     "9 - for EXIT\n");
             switch (Utility.getInt()) {
                 case 1:
                     System.out.println("Your Accounts:");
-                    if (bankClient.getAccountHashMap().isEmpty()) {
-                        System.out.println("You don't have any accounts(deposit, credit, saving or transfer)");
-                    } else {
-                        bankClient.getAccountHashMap().forEach((k, v) -> System.out.println(v.toString()));
-                    }
+                   new AdminMethods().displayUserAccounts(bankClient.getId());
                     break;
                 case 2:
                     System.out.println("Enter currency for your Account: 0 - EUR, 1 - USD, 2 - PLN, 3 - UAH");
@@ -39,11 +36,11 @@ public class AccountMenu {
                     AccountType[] accountTypesArray = AccountType.values();
                     int accountType = UtilityScanner.scanNumberFromZeroToThree();
 
-//                    new AccountFactory().getNewAccount(bankClient, accountTypesArray[accountType], currencies[currency]);
+                    new AccountFactory().getNewAccount(bankClient, accountTypesArray[accountType], currencies[currency]);
                     break;
                 case 6:
-                    System.out.println("Enter the Account Number without spaces to Delete account\n");
-//                    new AccountFactory().deleteAccount(bankClient, Utility.sc.nextLine());
+                    System.out.println("Enter the Account Number without spaces to Change Account STATUS\n");
+                    new AccountFactory().changeAccountStatus(UtilityScanner.sc.nextLine());
                     break;
                 case 9:
                     x = false;

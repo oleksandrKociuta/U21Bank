@@ -1,6 +1,5 @@
 package edu.cursor.u21.util;
 
-import edu.cursor.u21.users.bankClient.BankClient;
 import org.apache.log4j.Logger;
 
 import java.math.BigInteger;
@@ -11,7 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * Created by Саша on 09.02.2017.
@@ -189,18 +191,18 @@ public final class Utility implements MagicConstantsInterface {
         return new String(saltCh);
     }
 
-    public static String generateAccountNumber(HashMap<String, BankClient> users, edu.cursor.u21.users.bankClient.Accounts.Currency currency) {
-
-        String number = currency.name() + random.nextInt(8);
-
-        for (BankClient bc : users.values()) {
-            for (String num : bc.getAccountHashMap().keySet()) {
-                if (number.equals(num)) {
-                    number = generateAccountNumber(users, currency);
-                    break;
-                }
-            }
-        }
-        return number;
-    }
+//    public static String generateAccountNumber(HashMap<String, BankClient> users, edu.cursor.u21.users.bankClient.Accounts.Currency currency) {
+//
+//        String number = currency.name() + random.nextInt(8);
+//
+//        for (BankClient bc : users.values()) {
+//            for (String num : bc.getAccountHashMap().keySet()) {
+//                if (number.equals(num)) {
+//                    number = generateAccountNumber(users, currency);
+//                    break;
+//                }
+//            }
+//        }
+//        return number;
+//    }
 }

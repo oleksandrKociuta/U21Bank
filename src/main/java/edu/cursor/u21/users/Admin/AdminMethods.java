@@ -2,7 +2,6 @@ package edu.cursor.u21.users.Admin;
 
 import edu.cursor.u21.jdbcConnector.JDBCConnector;
 import edu.cursor.u21.users.bankClient.Accounts.Currency;
-import edu.cursor.u21.users.bankClient.BankClient;
 import edu.cursor.u21.util.MagicConstantsInterface;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +12,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 
 @NoArgsConstructor
-class AdminMethods implements AdminInterface {
+public class AdminMethods implements AdminInterface {
 
       public void displayListOfUsers() {
         String sqlQuery = "Select * from users";
@@ -26,9 +25,9 @@ class AdminMethods implements AdminInterface {
             System.out.println("ID\t\tName\t\t\tSurname\t\tPhone ");
             while (resultSet.next()) {
                 int ID = resultSet.getInt("id");
-                String name = resultSet.getString("Name");
-                String surname = resultSet.getString("Surname");
-                String phone = resultSet.getString("Telephone number");
+                String name = resultSet.getString("name");
+                String surname = resultSet.getString("surname");
+                String phone = resultSet.getString("telephone number");
                 System.out.printf("%d\t\t%s\t\t\t%s\t\t%s \n", ID, name, surname, phone);
             }
         } catch (SQLException e) {
@@ -42,8 +41,8 @@ class AdminMethods implements AdminInterface {
         iterateAccounts(sql);
     }
 
-    public void displayUserAccounts(BankClient bankClient) {
-        String sqlQuery = String.format("SELECT * FROM u21bankusers.accounts WHERE userID =%d", bankClient.getId());
+    public void displayUserAccounts(int userId) {
+        String sqlQuery = String.format("SELECT * FROM u21bankusers.accounts WHERE userID =%d", userId);
         iterateAccounts(sqlQuery);
     }
 
