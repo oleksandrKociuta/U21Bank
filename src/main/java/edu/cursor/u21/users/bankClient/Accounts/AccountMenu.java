@@ -40,7 +40,7 @@ public class AccountMenu {
                     break;
                 case 6:
                     System.out.println("Enter the Account Number without spaces to Change Account STATUS\n");
-                    new AccountFactory().changeAccountStatus(UtilityScanner.sc.nextLine());
+                    new AccountFactory().changeAccountStatus(bankClient.getId(), UtilityScanner.sc.nextLine());
                     break;
                 case 9:
                     x = false;

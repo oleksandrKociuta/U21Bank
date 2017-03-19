@@ -70,10 +70,11 @@ class AccountFactory {
         return account;
     }
 
-    void changeAccountStatus(String accountNumber) {
+    void changeAccountStatus(int userID, String accountNumber) {
         String sqlForStatus = "UPDATE u21bankusers.accounts " +
                 "SET status =? " +
-                "WHERE accountNumber= ?";
+                "WHERE accountNumber= ?" +
+                "AND userID= ?";
         System.out.println("Press 0 - to OPEN account, 1 - to CLOSE, 2 - to SUSPEND, 3 - to EXIT");
         int i = UtilityScanner.scanNumberFromZeroToThree();
         if (i == 3) {
@@ -90,10 +91,12 @@ class AccountFactory {
             ) {
                 statement.setString(1, accountStatusName);
                 statement.setString(2, accountNumber);
-                int userID = statement.getResultSet().getInt("userID");
-                statement.execute();
-                System.out.printf("Account %s STATUS is set to %s\n", accountNumber, accountStatusName);
-                log.info("User "+userID+" changed Account "+accountNumber+" Status to"+ accountNumber);
+                statement.setInt(3, userID);
+                if (statement.execute()) {
+                    System.out.printf("Account %s STATUS is set to %s\n", accountNumber, accountStatusName);
+                    log.info("User " + userID + " changed Account " + accountNumber + " Status to" + accountNumber);
+                } else
+                    System.out.println("You do not have account with number" + accountNumber);
             } catch (SQLException e) {
                 e.getMessage();
             }
@@ -102,15 +105,19 @@ class AccountFactory {
 
     private boolean checkIfBankClientHasTransferAccount(int userID) {
         String sqlQuery = "Select * from u21bankusers.accounts " +
-                        "WHERE userID="+userID+" and accountType="+AccountType.TRANSFER.name();
+                "WHERE userID=" + userID + " and accountType=" + AccountType.TRANSFER.name();
+
         boolean typeIs = false;
+
         try (Connection connection = new JDBCConnector().getConnection(
                 MagicConstantsInterface.URL,
                 MagicConstantsInterface.USERNAME,
                 MagicConstantsInterface.PASSWORD);
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sqlQuery)) {
+
             typeIs = resultSet.getString("accountType").equals(AccountType.TRANSFER.name());
+
         } catch (SQLException e) {
             e.getMessage();
         }

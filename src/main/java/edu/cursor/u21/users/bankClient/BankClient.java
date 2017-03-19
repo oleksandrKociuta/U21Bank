@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"dateOfBirth", "id", "accountHashMap"})
+@EqualsAndHashCode(exclude = {"dateOfBirth"})
 public class BankClient implements User, Serializable {
     Roles role = Roles.USER;
     private String login;
