@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -13,7 +14,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
 public class Account implements AccountInterface {
+
     private String accountNumber;
     private AccountType accountType;
     private BigDecimal balance;

@@ -10,7 +10,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by Kermit The Frog on 12.02.2017.
@@ -18,7 +18,7 @@ import java.util.Map;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"dateOfBirth", "id", "accountHashMap"})
+@EqualsAndHashCode(exclude = {"dateOfBirth"})
 public class BankClient implements User, Serializable {
     Roles role = Roles.USER;
     private String login;
@@ -29,7 +29,7 @@ public class BankClient implements User, Serializable {
     private String dateOfBirth;
     private String seriesOfPassport;
     private String telephoneNumber;
-    private Map<String, AccountInterface> accountHashMap = new HashMap<>();
+    private List<AccountInterface> accountList;
 
     @Override
     public void startSession(HashMap<String, BankClient> usersList) {

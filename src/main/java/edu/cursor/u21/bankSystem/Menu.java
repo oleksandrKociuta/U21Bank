@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 
 import static edu.cursor.u21.util.Utility.getInt;
 
@@ -20,9 +19,9 @@ import static edu.cursor.u21.util.Utility.getInt;
  */
 @NoArgsConstructor
 public class Menu {
+    private static Logger log = Logger.getLogger(Menu.class);
     private Login login = new Login();
     private Registration registration = new Registration();
-    private static Logger log = Logger.getLogger(Menu.class);
 
     public void menu() {
         log.info("start app");
@@ -39,7 +38,7 @@ public class Menu {
                     }
                     assert bankClient != null;
                     if (bankClient.getRole().equals(Roles.ADMIN)) {
-//                        AdminMenu.adminMenu((HashMap<String, BankClient>) login.getList());
+                        new AdminMenu().adminMenu();
                     } else {
                         AccountMenu.accountMenu(bankClient);
                     }
