@@ -25,7 +25,7 @@ public class AccountMenu {
             switch (Utility.getInt()) {
                 case 1:
                     System.out.println("Your Accounts:");
-                   new AdminMethods().displayUserAccounts(bankClient.getId());
+                    new AdminMethods().displayUserAccounts(bankClient.getId());
                     break;
                 case 2:
                     System.out.println("Enter currency for your Account: 0 - EUR, 1 - USD, 2 - PLN, 3 - UAH");

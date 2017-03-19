@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class AdminMethods implements AdminInterface {
 
-      public void displayListOfUsers() {
+    public void displayListOfUsers() {
         String sqlQuery = "Select * from users";
         try (Connection connection = new JDBCConnector().getConnection(
                 MagicConstantsInterface.URL,
@@ -66,7 +66,7 @@ public class AdminMethods implements AdminInterface {
                 System.out.printf("%d\t\t\t%s\t\t\t\t%s\t\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n ",
                         userID, accountNumber, accountType, balance, status, currency, creationDate, expDate);
             }
-         } catch (SQLException e1) {
+        } catch (SQLException e1) {
             e1.printStackTrace();
         }
     }

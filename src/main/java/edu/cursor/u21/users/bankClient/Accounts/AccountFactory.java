@@ -104,23 +104,22 @@ class AccountFactory {
     }
 
     private boolean checkIfBankClientHasTransferAccount(int userID) {
-        String sqlQuery = "Select * from u21bankusers.accounts " +
-                "WHERE userID=" + userID + " and accountType=" + AccountType.TRANSFER.name();
-
-        boolean typeIs = false;
-
+        String sqlQuery = "Select * from u21bankusers.accounts WHERE userID=" + userID;
+        int counter = 0;
         try (Connection connection = new JDBCConnector().getConnection(
                 MagicConstantsInterface.URL,
                 MagicConstantsInterface.USERNAME,
                 MagicConstantsInterface.PASSWORD);
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sqlQuery)) {
-
-            typeIs = resultSet.getString("accountType").equals(AccountType.TRANSFER.name());
-
+            while (resultSet.next()) {
+                if (resultSet.getString("accountType").equals(AccountType.TRANSFER.name())) {
+                    counter++;
+                }
+            }
         } catch (SQLException e) {
             e.getMessage();
         }
-        return typeIs;
+        return counter > 1;
     }
 }

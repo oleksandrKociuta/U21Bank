@@ -21,7 +21,7 @@ public class AdminMenu {
                     "5 - for list of Users Account\n" +
 //                    "7 - for list of Users Accounts\n" +
 //                    "10 - Print Bank Clients list sorted by username\n" +
-                    "11 - Display detail Bank Clients accounts\n Enter UserID: \n"+
+                    "11 - Display detail Bank Clients accounts\n Enter UserID: \n" +
                     "12 - for EXIT\n");
             switch (Utility.getInt()) {
                 case 1:

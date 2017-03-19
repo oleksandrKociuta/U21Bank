@@ -19,9 +19,9 @@ import static edu.cursor.u21.util.Utility.getInt;
  */
 @NoArgsConstructor
 public class Menu {
+    private static Logger log = Logger.getLogger(Menu.class);
     private Login login = new Login();
     private Registration registration = new Registration();
-    private static Logger log = Logger.getLogger(Menu.class);
 
     public void menu() {
         log.info("start app");
