@@ -1,39 +1,22 @@
 package edu.cursor.u21.users.Admin;
 
-import edu.cursor.u21.jdbcConnector.JDBCConnector;
-import edu.cursor.u21.users.bankClient.Accounts.Currency;
-import edu.cursor.u21.util.MagicConstantsInterface;
+import edu.cursor.u21.dao.SessionFactory;
 import lombok.NoArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
+import java.util.List;
 
 @NoArgsConstructor
 public class AdminMethods implements AdminInterface {
 
     public void displayListOfUsers() {
-        String sqlQuery = "Select * from users";
-        try (Connection connection = new JDBCConnector().getConnection(
-                MagicConstantsInterface.URL,
-                MagicConstantsInterface.USERNAME,
-                MagicConstantsInterface.PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sqlQuery);) {
-            System.out.println("ID\t\tName\t\t\tSurname\t\tPhone ");
-            while (resultSet.next()) {
-                int ID = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String surname = resultSet.getString("surname");
-                String phone = resultSet.getString("telephone number");
-                System.out.printf("%d\t\t%s\t\t\t%s\t\t%s \n", ID, name, surname, phone);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
+        Session session = SessionFactory.currentSession();
+        Transaction transaction = session.beginTransaction();
+        List<?> listOfUsers = session.createQuery("from BankClient").list();
+        System.out.println(listOfUsers.iterator().next().toString());
+        transaction.commit();
+        SessionFactory.closeSession();
     }
 
     public void displayAllUsersAccounts() {
@@ -47,27 +30,11 @@ public class AdminMethods implements AdminInterface {
     }
 
     private void iterateAccounts(String sqlQuery) {
-        try (Connection connection = new JDBCConnector().getConnection(
-                MagicConstantsInterface.URL,
-                MagicConstantsInterface.USERNAME,
-                MagicConstantsInterface.PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sqlQuery)) {
-            System.out.println("userID\t\tAccountNumber\t\taccountType\t\t\tBalance\t\tStatus\t\tCurrency\t\tCreationDate\t\tExpDate\n ");
-            while (resultSet.next()) {
-                int userID = resultSet.getInt("userID");
-                String accountNumber = resultSet.getString("accountNumber");
-                String accountType = resultSet.getString("accountType");
-                String balance = resultSet.getString("balance");
-                String status = resultSet.getString("status");
-                Currency currency = Currency.valueOf(resultSet.getString("currency"));
-                LocalDate creationDate = LocalDate.parse(resultSet.getString("creationDate"));
-                LocalDate expDate = LocalDate.parse(resultSet.getString("expDate"));
-                System.out.printf("%d\t\t\t%s\t\t\t\t%s\t\t\t%s\t\t%s\t\t%s\t\t%s\t\t%s\n ",
-                        userID, accountNumber, accountType, balance, status, currency, creationDate, expDate);
-            }
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-        }
+        Session session = SessionFactory.currentSession();
+        Transaction transaction = session.beginTransaction();
+        List<?> listOfAccounts = session.createQuery("from Account").list();
+        session.createFilter(listOfAccounts, sqlQuery);
+        transaction.commit();
+        SessionFactory.closeSession();
     }
 }

@@ -1,6 +1,6 @@
 package edu.cursor.u21.util;
 
-import edu.cursor.u21.jdbcConnector.JDBCConnector;
+import edu.cursor.u21.dao.jdbcConnector.JDBCConnector;
 import edu.cursor.u21.users.Roles;
 import edu.cursor.u21.users.bankClient.BankClient;
 import lombok.NoArgsConstructor;
@@ -14,9 +14,6 @@ import java.util.List;
 
 import static edu.cursor.u21.util.MagicConstantsInterface.*;
 import static edu.cursor.u21.util.Utility.exitProgram;
-
-;
-
 
 /**
  * Created by alexandrmanikhin on 13.02.17.

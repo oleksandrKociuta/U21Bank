@@ -1,15 +1,15 @@
 package edu.cursor.u21.users.bankClient.Accounts;
 
-import edu.cursor.u21.jdbcConnector.JDBCConnector;
+import edu.cursor.u21.dao.SessionFactory;
 import edu.cursor.u21.users.bankClient.BankClient;
-import edu.cursor.u21.util.MagicConstantsInterface;
 import edu.cursor.u21.util.Utility;
 import edu.cursor.u21.util.UtilityScanner;
 import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
-import java.sql.*;
 import java.time.LocalDate;
 
 /**
@@ -20,53 +20,33 @@ class AccountFactory {
     private Logger log = Logger.getLogger(AccountFactory.class);
 
     Account getNewAccount(BankClient bankClient, AccountType accountType, Currency currency) {
+        Session session = SessionFactory.currentSession();
+        Transaction transaction = session.beginTransaction();
         Account account = new Account();
         account.setCurrency(currency);
         account.setAccountNumber(Utility.getSalt());
         account.setAccountType(accountType);
-        account.setStatus(StatusOfAccount.OPEN);
+        account.setStatus(AccountStatus.OPEN);
         account.setCreationDate(LocalDate.now());
         account.setExpDate(account.getCreationDate().plusYears(3));
         account.setBalance(BigDecimal.valueOf(0));
-        String sqlQuery = "INSERT INTO  u21bankusers.accounts(" +
-                "accountNumber, accountType, balance, status, currency, " +
-                "creationDate, expDate, userID) VALUES (?,?,?,?,?,?,?,?)";
 
-        try (Connection connection = new JDBCConnector()
-                .getConnection(
-                        MagicConstantsInterface.URL,
-                        MagicConstantsInterface.USERNAME,
-                        MagicConstantsInterface.PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            if (accountType.equals(AccountType.TRANSFER) && checkIfBankClientHasTransferAccount(bankClient.getId())) {
-                System.out.println("You already have Transfer Account");
-                log.error(accountType + " Transfer Account was not created by " +
-                        bankClient.getId() + " because user has one already.");
-            } else if (!accountType.equals(AccountType.TRANSFER) ||
-                    (accountType.equals(AccountType.TRANSFER) && !checkIfBankClientHasTransferAccount(bankClient.getId()))) {
-                try {
-                    preparedStatement.setString(1, account.getAccountNumber());
-                    preparedStatement.setString(2, account.getAccountType().name());
-                    preparedStatement.setString(3, account.getBalance().toString());
-                    preparedStatement.setString(4, account.getStatus().name());
-                    preparedStatement.setString(5, account.getCurrency().name());
-                    preparedStatement.setDate(6, Date.valueOf(account.getCreationDate()));
-                    preparedStatement.setDate(7, Date.valueOf(account.getExpDate()));
-                    preparedStatement.setString(8, String.valueOf(bankClient.getId()));
-                    preparedStatement.execute();
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
-                }
-                System.out.printf("Your %s Account  %s successfully created\n", accountType, account.getAccountNumber());
-                log.info("New " + accountType + " Account №: " + account.getAccountNumber() + " created by " + bankClient.getId());
-            } else {
-                System.out.println("Can't create new account. Something went wrong.");
-                log.info("User %s cannot create new account" + bankClient.getId());
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+        if (accountType.equals(AccountType.TRANSFER) && checkIfBankClientHasTransferAccount(bankClient.getId())) {
+            System.out.println("You already have Transfer Account");
+            log.error(accountType + " Transfer Account was not created by " +
+                    bankClient.getId() + " because user has one already.");
+        } else if (!accountType.equals(AccountType.TRANSFER) ||
+                (accountType.equals(AccountType.TRANSFER) &&
+                        !checkIfBankClientHasTransferAccount(bankClient.getId()))) {
+            transaction.commit();
+            SessionFactory.closeSession();
+            System.out.printf("Your %s Account  %s successfully created\n", accountType, account.getAccountNumber());
+            log.info("New " + accountType + " Account №: " + account.getAccountNumber() + " created by " + bankClient.getId());
+        } else {
+            System.out.println("Can't create new account. Something went wrong.");
+            log.info("User %s cannot create new account" + bankClient.getId());
         }
+
         return account;
     }
 
@@ -80,46 +60,52 @@ class AccountFactory {
         if (i == 3) {
             System.out.println("You pressed 0 - to Exit. Have a nice day!");
         } else {
-            StatusOfAccount[] accountStatusArray = StatusOfAccount.values();
+            AccountStatus[] accountStatusArray = AccountStatus.values();
             String accountStatusName = accountStatusArray[i].toString();
 
-            try (Connection connection = new JDBCConnector().getConnection(
-                    MagicConstantsInterface.URL,
-                    MagicConstantsInterface.USERNAME,
-                    MagicConstantsInterface.PASSWORD);
-                 PreparedStatement statement = connection.prepareStatement(sqlForStatus);
-            ) {
-                statement.setString(1, accountStatusName);
-                statement.setString(2, accountNumber);
-                statement.setInt(3, userID);
-                if (statement.execute()) {
-                    System.out.printf("Account %s STATUS is set to %s\n", accountNumber, accountStatusName);
-                    log.info("User " + userID + " changed Account " + accountNumber + " Status to" + accountNumber);
-                } else
-                    System.out.println("You do not have account with number" + accountNumber);
-            } catch (SQLException e) {
-                e.getMessage();
-            }
+            System.out.printf("Account %s STATUS is set to %s\n", accountNumber, accountStatusName);
+            log.info("User " + userID + " changed Account " + accountNumber + " Status to" + accountNumber);
         }
     }
 
     private boolean checkIfBankClientHasTransferAccount(int userID) {
-        String sqlQuery = "Select * from u21bankusers.accounts WHERE userID=" + userID;
-        int counter = 0;
-        try (Connection connection = new JDBCConnector().getConnection(
-                MagicConstantsInterface.URL,
-                MagicConstantsInterface.USERNAME,
-                MagicConstantsInterface.PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sqlQuery)) {
-            while (resultSet.next()) {
-                if (resultSet.getString("accountType").equals(AccountType.TRANSFER.name())) {
-                    counter++;
-                }
-            }
-        } catch (SQLException e) {
-            e.getMessage();
+        Session session = SessionFactory.currentSession();
+        Transaction transaction = session.beginTransaction();
+        BankClient dbBankClient = (BankClient) session.get(BankClient.class, userID);
+        transaction.commit();
+        SessionFactory.closeSession();
+        return dbBankClient.getAccountList().stream()
+                .anyMatch(account -> account.getAccountType().equals(AccountType.TRANSFER));
+    }
+
+    private void increaseAccountBalance(Account account, BigDecimal bigDecimal) {
+        Session session = SessionFactory.currentSession();
+        Transaction transaction = session.beginTransaction();
+        Account dbAccount = (Account) session.get(Account.class, account.getAccountNumber());
+        AccountStatus accountStatus = dbAccount.getStatus();
+
+        if (!(accountStatus.equals(AccountStatus.CLOSED) ||
+                accountStatus.equals(AccountStatus.SUSPENDED))) {
+            dbAccount.setBalance(dbAccount.getBalance().add(bigDecimal));
+        } else {
+            System.out.println("You cannot increase balance, this account is closed or suspended. Call the police.");
         }
-        return counter > 1;
+        session.flush();
+        transaction.commit();
+        SessionFactory.closeSession();
+    }
+
+    private void decreaseAccountBalance(Account account, BigDecimal bigDecimal) {
+        Session session = SessionFactory.currentSession();
+        Transaction transaction = session.beginTransaction();
+        Account dbAccount = (Account) session.get(Account.class, account.getAccountNumber());
+        AccountStatus accountStatus = dbAccount.getStatus();
+
+        if (!(accountStatus.equals(AccountStatus.CLOSED) ||
+                accountStatus.equals(AccountStatus.SUSPENDED))) {
+            dbAccount.setBalance(dbAccount.getBalance().subtract(bigDecimal));
+        } else {
+            System.out.println("You cannot withdraw, because this account is closed");
+        }
     }
 }
