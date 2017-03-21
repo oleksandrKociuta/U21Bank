@@ -198,3 +198,43 @@
 2017-03-04 22:24:21 INFO  Menu:28 - start app
 2017-03-04 22:31:58 INFO  Menu:50 - exit
 2017-03-04 22:53:32 INFO  Menu:28 - start app
+2017-03-08 19:32:49 INFO  AccountFactory:69 - New TRANSFER Account created by 0
+2017-03-08 19:34:20 INFO  AccountFactory:71 - New TRANSFER Account created by 123123
+2017-03-08 21:02:50 INFO  AccountFactory:71 - New TRANSFER Account №: l*m]L?O-N4hVeUA29 created by 123123
+2017-03-08 21:40:19 INFO  AccountFactory:71 - New TRANSFER Account №: (s2qq)w/8Gbe?[ created by 123123
+2017-03-08 21:40:33 INFO  AccountFactory:71 - New TRANSFER Account №: fBL38n.PP created by 123123
+2017-03-08 21:40:38 INFO  AccountFactory:71 - New TRANSFER Account №: /qs[7"3glZ created by 123123
+2017-03-08 21:42:40 INFO  AccountFactory:71 - New TRANSFER Account №: ;hgPq<V"NRGIc created by 123123
+2017-03-08 21:43:51 INFO  AccountFactory:71 - New TRANSFER Account №: zQ|BC}.n=:A] created by 123123
+2017-03-08 21:45:26 INFO  AccountFactory:71 - New TRANSFER Account №: 6PQT"CYr%U:9Jp created by 123123
+2017-03-08 21:46:40 INFO  AccountFactory:71 - New TRANSFER Account №: \_j8_jC5:XV created by 123123
+2017-03-09 15:44:54 INFO  Menu:28 - start app
+2017-03-09 15:48:44 INFO  Menu:28 - start app
+2017-03-09 15:50:26 INFO  AccountFactory:72 - New DEPOSIT Account №: QZ$onABXSVc created by 123124
+2017-03-09 15:50:45 INFO  AccountFactory:72 - New TRANSFER Account №: ?jZJZF90UO7 created by 123124
+2017-03-09 16:12:23 INFO  Menu:27 - start app
+2017-03-09 16:23:17 INFO  Menu:27 - start app
+2017-03-19 13:58:53 INFO  Menu:27 - start app
+2017-03-19 14:03:17 INFO  AccountFactory:61 - New DEPOSIT Account №: $h1wZk5f|p] created by 123125
+2017-03-19 14:11:36 INFO  Menu:27 - start app
+2017-03-19 14:21:22 INFO  Menu:27 - start app
+2017-03-19 14:26:10 INFO  Menu:27 - start app
+2017-03-19 14:26:30 INFO  Menu:27 - start app
+2017-03-19 14:27:06 INFO  AccountFactory:97 - User 123125 changed Account $h1wZk5f|p] Status to$h1wZk5f|p]
+2017-03-19 14:27:21 INFO  AccountFactory:97 - User 123125 changed Account $h1wZk5f|p] Status to$h1wZk5f|p]
+2017-03-19 14:27:54 INFO  AccountFactory:97 - User 123125 changed Account [BatQR{. Status to[BatQR{.
+2017-03-19 14:28:21 INFO  AccountFactory:97 - User 123125 changed Account [BatQR{. Status to[BatQR{.
+2017-03-19 14:30:02 INFO  Menu:27 - start app
+2017-03-19 14:33:50 INFO  XmlBeanDefinitionReader:163 - Loading XML bean definitions from class path resource [appconfig.xml]
+2017-03-19 14:46:05 INFO  Menu:27 - start app
+2017-03-19 14:46:30 INFO  AccountFactory:61 - New TRANSFER Account №: X!msPx7#R~`"pg.`1E created by 123125
+2017-03-19 14:47:03 INFO  AccountFactory:61 - New TRANSFER Account №: &}{`|lSU created by 123125
+2017-03-19 14:48:14 INFO  Menu:27 - start app
+2017-03-19 14:48:36 INFO  AccountFactory:61 - New TRANSFER Account №: I%.xbV|"se3nYEE created by 123125
+2017-03-19 16:30:24 INFO  Menu:27 - start app
+2017-03-19 16:30:56 ERROR AccountFactory:43 - TRANSFER Transfer Account was not created by 123125 because user has one already.
+2017-03-19 16:32:39 INFO  Menu:27 - start app
+2017-03-19 16:34:06 INFO  AccountFactory:61 - New TRANSFER Account №: F#<Bhg<$HjIV" created by 123124
+2017-03-19 16:34:13 ERROR AccountFactory:43 - TRANSFER Transfer Account was not created by 123124 because user has one already.
+2017-03-20 15:56:56 INFO  Menu:27 - start app
+2017-03-20 16:02:58 INFO  Menu:27 - start app

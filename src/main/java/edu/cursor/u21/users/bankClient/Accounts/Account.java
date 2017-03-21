@@ -1,10 +1,15 @@
 package edu.cursor.u21.users.bankClient.Accounts;
 
+import edu.cursor.u21.users.bankClient.BankClient;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -13,34 +18,27 @@ import java.time.LocalDate;
  */
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
-public class Account implements AccountInterface {
-
+@EqualsAndHashCode(exclude = {"expDate", "status", "balance", "accountType"})
+public class Account implements AccountInterface, Serializable {
+    @Id
+    @Column(unique = true, nullable = false)
     private String accountNumber;
+    @Column(nullable = false)
     private AccountType accountType;
+    @Column(nullable = false)
     private BigDecimal balance;
-    private StatusOfAccount status;
+    @Column(nullable = false)
+    private AccountStatus status;
+    @Column(nullable = false)
     private Currency currency;
+    @Column(nullable = false)
     private LocalDate creationDate;
     private LocalDate expDate;
+    @ManyToOne
+    private BankClient userId;
 
-    @Override
-    public void increaseBalance(BigDecimal bigDecimal) {
-        if (!this.status.equals(StatusOfAccount.CLOSED)) {
-            this.setBalance(this.balance.add(bigDecimal));
-        } else {
-            System.out.println("You cannot increase, this account is closed");
-        }
-    }
-
-    @Override
-    public void decreaseBalance(BigDecimal bigDecimal) {
-        if (!this.status.equals(StatusOfAccount.CLOSED)) {
-            this.setBalance(this.balance.subtract(bigDecimal));
-        } else {
-            System.out.println("You cannot withdraw, because this account is closed");
-        }
+    public Account() {
     }
 
     @Override

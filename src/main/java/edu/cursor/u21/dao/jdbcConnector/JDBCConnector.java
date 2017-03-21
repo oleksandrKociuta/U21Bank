@@ -1,4 +1,4 @@
-package edu.cursor.u21.jdbcConnector;
+package edu.cursor.u21.dao.jdbcConnector;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,4 +21,3 @@ public class JDBCConnector {
         return DriverManager.getConnection(URL, user, password);
     }
 }
-
