@@ -2,34 +2,49 @@ package edu.cursor.u21.users.bankClient;
 
 import edu.cursor.u21.users.Roles;
 import edu.cursor.u21.users.User;
-import edu.cursor.u21.users.bankClient.Accounts.AccountInterface;
+import edu.cursor.u21.users.bankClient.Accounts.Account;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Kermit The Frog on 12.02.2017.
  */
 @Getter
 @Setter
-@NoArgsConstructor
-@EqualsAndHashCode(exclude = {"dateOfBirth", "id", "accountHashMap"})
+@Entity
+@RequestMapping("/registration")
+@EqualsAndHashCode(exclude = {"dateOfBirth", "name", "surname"})
 public class BankClient implements User, Serializable {
     Roles role = Roles.USER;
-    private String login;
-    private String password;
-    private String name;
-    private String surname;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(unique = true, nullable = false)
+    private String login;
+    @Column(unique = true, nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private String name;
+    @Column(nullable = false)
+    private String surname;
+    @Column(nullable = false)
     private String dateOfBirth;
+    @Column(unique = true, nullable = false)
     private String seriesOfPassport;
+    @Column(unique = true, nullable = false)
     private String telephoneNumber;
-    private Map<String, AccountInterface> accountHashMap = new HashMap<>();
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
+    private Set<Account> accountList;
+
+    public BankClient() {
+    }
 
     @Override
     public void startSession(HashMap<String, BankClient> usersList) {
@@ -37,6 +52,6 @@ public class BankClient implements User, Serializable {
     }
 
     public String toString() {
-        return getSurname() + " " + getName();
+        return getId() + "\t" + getSurname() + " " + getName();
     }
 }

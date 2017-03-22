@@ -1,6 +1,6 @@
 package edu.cursor.u21.util;
 
-import edu.cursor.u21.jdbcConnector.JDBCConnector;
+import edu.cursor.u21.dao.jdbcConnector.JDBCConnector;
 import edu.cursor.u21.users.bankClient.BankClient;
 
 import java.sql.Connection;

@@ -7,13 +7,8 @@ import lombok.Getter;
  */
 @Getter
 public enum AccountType {
-    CREDIT("Credit"),
-    DEPOSIT("Deposit"),
-    SAVING("Saving"),
-    TRANSFER("Transfer");
-    private String value;
-
-    AccountType(String value) {
-        this.value = value;
-    }
+    CREDIT,
+    DEPOSIT,
+    SAVING,
+    TRANSFER;
 }
