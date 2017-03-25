@@ -5,12 +5,14 @@ import edu.cursor.u21.users.User;
 import edu.cursor.u21.users.bankClient.Accounts.Account;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,33 +20,34 @@ import java.util.Set;
  */
 @Getter
 @Setter
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"accounts"})
 @Entity
-@RequestMapping("/registration")
-@EqualsAndHashCode(exclude = {"dateOfBirth", "name", "surname"})
+@Table(name = "bank_client")
 public class BankClient implements User, Serializable {
-    Roles role = Roles.USER;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column(unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long id;
+    @Column(name = "role", length = 10, nullable = false)
+    @Enumerated(EnumType.STRING)
+    Roles role = Roles.USER;
+    @Column(name = "login", length = 15, nullable = false, unique = true)
     private String login;
-    @Column(unique = true, nullable = false)
+    @Column(name = "password", length = 32, nullable = false)
     private String password;
-    @Column(nullable = false)
+    @Column(name = "name", length = 15, nullable = false)
     private String name;
-    @Column(nullable = false)
+    @Column(name = "surname", length = 15, nullable = false)
     private String surname;
-    @Column(nullable = false)
+    @Column(name = "date_of_birth", length = 10, nullable = false)
     private String dateOfBirth;
-    @Column(unique = true, nullable = false)
+    @Column(name = "series_of_passport", length = 8, nullable = false, unique = true)
     private String seriesOfPassport;
-    @Column(unique = true, nullable = false)
+    @Column(name = "telephone_number", length = 13, nullable = false, unique = true)
     private String telephoneNumber;
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
-    private Set<Account> accountList;
-
-    public BankClient() {
-    }
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Account> accounts = new HashSet<>();
 
     @Override
     public void startSession(HashMap<String, BankClient> usersList) {
