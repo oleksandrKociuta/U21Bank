@@ -1,15 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <!DOCTYPE html>
-<html lang="en">
+ <html lang="en">
   <head>
+      <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/" />
     <!-- Basic Page Needs
     ================================================== -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>U21-Payments - Sign In</title>
+    <title>U21-Payments - Main</title>
     <meta name="description" content="Your Description Here">
     <meta name="keywords" content="bootstrap themes, portfolio, responsive theme">
     <meta name="author" content="ThemeForces.Com">
-    
+
     <!-- Favicons
     ================================================== -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -20,6 +25,8 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css"  href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
+
+    <!-- <script type="text/javascript" src="js/modernizr.custom.js"></script> -->
 
     <!-- Stylesheet
     ================================================== -->
@@ -32,6 +39,7 @@
   <body>
     <div id="tf-home">
         <div class="overlay">
+            <div id="sticky-anchor"></div>
             <nav id="tf-menu" class="navbar navbar-default">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -42,55 +50,90 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                       </button>
-                      <a class="navbar-brand logo" href="index.html">CURSOR Education</a>
+                      <a class="navbar-brand logo" href="index.jsp">CURSOR Education</a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                       <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#tf-home">Home</a></li>
                         <li><a href="#tf-service">Services</a></li>
                       </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-        </div>
-    </div>
 
-
-
-    <div id="tf-contact">
-        <div class="container">
-            <div class="section-title">
-                <h3>Sign In</h3>
-                <p>One Step Closer</p>
-                <hr>
-            </div>
-
-            <div class="space"></div>
-
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <form id="contact">
-                      <div class="form-group">
-                        <input type="text" class="form-control" maxlength="20" placeholder="Enter Login" required>
-                      </div>
-                      <div class="form-group">
-                        <input type="password" class="form-control" maxlength="15" placeholder="Enter Password" required>
-                      </div>
-                    <button type="submit" class="btn btn-primary my-btn dark">Submit</button>
-                    </form>
+            <div class="container">
+                <div class="content">
+                    <h3>Your living Internet-bank</h3>
+                    <h1>CURSOR PAYMENTS</h1>
+                    <br>
+                    <a href="signIn.html" class="btn btn-primary my-btn">Sign In</a>
+                    <a href="signUp.html" class="btn btn-primary my-btn2">Sign Up</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <nav id="tf-footer">
+    <div id="tf-service">
+        <div class="container">
+
+            <div class="col-md-4">
+
+                <div class="media">
+                  <div class="media-left media-middle">
+                    <i class="fa fa-motorcycle"></i>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">Java</h4>
+                    <p>Space for future information.</p>
+                  </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="media">
+                  <div class="media-left media-middle">
+                    <i class="fa fa-gears"></i>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">Java</h4>
+                    <p>Space for future information.</p>
+                  </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="media">
+                  <div class="media-left media-middle">
+                    <i class="fa fa-heartbeat"></i>
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">Java</h4>
+                    <p>Space for future information.</p>
+                  </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+<nav id="tf-footer">
         <div class="container">
              <div class="pull-left">
                 <p>School programming CURSOR.EDUCATION. Future comes. Rule it.</p>
+                      <h1>Title : ${title}</h1>
+                  <section>
+                     <h1>Message : ${message}</h1>
+                 </section>
+                 <div>Get <a href="protected">protected</a> resource for admin.</div>
             </div>
-            <div class="pull-right"> 
+            <div class="pull-right">
                 <ul class="social-media list-inline">
                     <li><a href="https://www.facebook.com/andrew.petryk"><span class="fa fa-facebook"></span></a></li>
                     <li><a href="#"><span class="fa fa-twitter"></span></a></li>
@@ -101,12 +144,12 @@
                 </ul>
             </div>
         </div>
+    </nav>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script type="text/javascript" src="js/bootstrap.js"></script>
-        
-    </nav>
-</body>
+
+  </body>
 </html>
