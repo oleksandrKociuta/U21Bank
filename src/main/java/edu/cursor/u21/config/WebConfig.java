@@ -20,7 +20,7 @@ public class WebConfig implements WebApplicationInitializer {
         rootContext.register(
                 WebMvcConfig.class,
                 SecurityConfig.class,
-                ContextConfig.class);
+                DBConfigurator.class);
         servletContext.addListener(new ContextLoaderListener(rootContext));
 
         rootContext.setServletContext(servletContext);
