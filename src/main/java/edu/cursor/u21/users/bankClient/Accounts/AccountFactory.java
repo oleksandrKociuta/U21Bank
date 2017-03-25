@@ -5,7 +5,7 @@ import edu.cursor.u21.users.bankClient.BankClient;
 import edu.cursor.u21.util.Utility;
 import edu.cursor.u21.util.UtilityScanner;
 import lombok.NoArgsConstructor;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -16,8 +16,8 @@ import java.time.LocalDate;
  * Created by vk on 2/16/17.
  */
 @NoArgsConstructor
-class AccountFactory {
-    private Logger log = Logger.getLogger(AccountFactory.class);
+@Log4j
+public class AccountFactory {
 
     Account getNewAccount(BankClient bankClient, AccountType accountType, Currency currency) {
         Session session = SessionFactory.currentSession();
